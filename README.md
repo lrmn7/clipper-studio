@@ -174,12 +174,3 @@ Contributions, feedback, and feature suggestions are welcome!
 - For security disclosures, please follow [SECURITY.md](SECURITY.md).
 
 ---
-
-## License
-
-[MIT](LICENSE) © ClipperStudio
-
-### Attribution
-
-ClipperStudio is built upon and inspired by the original work at:
-[https://github.com/ultramenid/clipward](https://github.com/ultramenid/clipward)
