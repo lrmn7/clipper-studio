@@ -10,6 +10,7 @@ static RUN_IN_BACKGROUND: AtomicBool = AtomicBool::new(true);
 pub fn update_window_state(window: &Window, on_top: bool, in_background: bool) {
     if let Some(hwnd) = get_hwnd(window) {
         MAIN_HWND.store(hwnd, Ordering::SeqCst);
+        set_window_icon(hwnd);
     }
     ALWAYS_ON_TOP.store(on_top, Ordering::SeqCst);
     RUN_IN_BACKGROUND.store(in_background, Ordering::SeqCst);
@@ -30,6 +31,104 @@ pub fn get_hwnd(window: &Window) -> Option<isize> {
     #[cfg(not(target_os = "windows"))]
     let _ = window;
     None
+}
+
+/// Create an HICON from the application PNG icon.
+#[cfg(target_os = "windows")]
+pub fn create_app_icon(size: i32) -> Option<windows::Win32::UI::WindowsAndMessaging::HICON> {
+    use windows::Win32::UI::WindowsAndMessaging::CreateIconFromResourceEx;
+    static ICON_PNG: &[u8] = include_bytes!("../icons/icon.png");
+    unsafe {
+        let icon = CreateIconFromResourceEx(
+            ICON_PNG,
+            true,
+            0x00030000,
+            size,
+            size,
+            Default::default(),
+        ).ok()?;
+        if icon.is_invalid() {
+            None
+        } else {
+            Some(icon)
+        }
+    }
+}
+
+/// Set window taskbar and title icon.
+pub fn set_window_icon(hwnd_raw: isize) {
+    #[cfg(target_os = "windows")]
+    {
+        use windows::Win32::Foundation::{HWND, LPARAM, WPARAM};
+        use windows::Win32::UI::WindowsAndMessaging::{
+            SendMessageW, ICON_BIG, ICON_SMALL, WM_SETICON,
+        };
+        if hwnd_raw != 0 {
+            let hwnd = HWND(hwnd_raw as _);
+            if let Some(hicon_big) = create_app_icon(256) {
+                unsafe {
+                    let _ = SendMessageW(hwnd, WM_SETICON, WPARAM(ICON_BIG as _), LPARAM(hicon_big.0 as _));
+                }
+            }
+            if let Some(hicon_sm) = create_app_icon(32) {
+                unsafe {
+                    let _ = SendMessageW(hwnd, WM_SETICON, WPARAM(ICON_SMALL as _), LPARAM(hicon_sm.0 as _));
+                }
+            }
+        }
+    }
+    #[cfg(not(target_os = "windows"))]
+    let _ = hwnd_raw;
+}
+
+/// Check if window is maximized (Win32 IsZoomed on Windows).
+pub fn is_window_maximized(window: &Window) -> bool {
+    #[cfg(target_os = "windows")]
+    {
+        use windows::Win32::Foundation::HWND;
+        use windows::Win32::UI::WindowsAndMessaging::IsZoomed;
+        if let Some(hwnd) = get_hwnd(window) {
+            unsafe {
+                return IsZoomed(HWND(hwnd as _)).as_bool();
+            }
+        }
+    }
+    window.is_maximized()
+}
+
+/// Toggle maximize / restore.
+pub fn toggle_maximize(window: &Window) {
+    #[cfg(target_os = "windows")]
+    {
+        use windows::Win32::Foundation::HWND;
+        use windows::Win32::UI::WindowsAndMessaging::{
+            IsZoomed, ShowWindow, SW_MAXIMIZE, SW_RESTORE,
+        };
+        if let Some(hwnd_raw) = get_hwnd(window) {
+            unsafe {
+                let hwnd = HWND(hwnd_raw as _);
+                if IsZoomed(hwnd).as_bool() {
+                    let _ = ShowWindow(hwnd, SW_RESTORE);
+                } else {
+                    let _ = ShowWindow(hwnd, SW_MAXIMIZE);
+                }
+                return;
+            }
+        }
+    }
+    window.zoom_window();
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    #[cfg(target_os = "windows")]
+    fn test_create_app_icon() {
+        let icon_sm = super::create_app_icon(32);
+        assert!(icon_sm.is_some(), "create_app_icon(32) returned None!");
+        let icon_lg = super::create_app_icon(256);
+        assert!(icon_lg.is_some(), "create_app_icon(256) returned None!");
+    }
 }
 
 /// Set window to be always on top of other windows.
@@ -239,7 +338,7 @@ fn run_tray_loop() {
             _ => return,
         };
 
-        let icon = LoadIconW(None, IDI_APPLICATION).unwrap_or_default();
+        let icon = create_app_icon(32).unwrap_or_else(|| LoadIconW(None, IDI_APPLICATION).unwrap_or_default());
         let mut nid = NOTIFYICONDATAW {
             cbSize: std::mem::size_of::<NOTIFYICONDATAW>() as u32,
             hWnd: tray_hwnd,

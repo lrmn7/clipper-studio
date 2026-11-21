@@ -464,7 +464,7 @@ impl Workspace {
             .as_ref()
             .map(|s| s.always_on_top)
             .unwrap_or(false);
-        let is_maximized = window.is_maximized();
+        let is_maximized = crate::tray::is_window_maximized(window);
 
         drag_strip()
             .flex()
@@ -575,7 +575,7 @@ impl Workspace {
                             .tooltip(if is_maximized { tip("Restore") } else { tip("Maximize") })
                             .child(ui::icon(if is_maximized { "copy" } else { "square" }).size(u(12.)))
                             .on_click(|_, window, _| {
-                                window.zoom_window();
+                                crate::tray::toggle_maximize(window);
                             }),
                     )
                     .child(
@@ -615,7 +615,7 @@ fn drag_strip() -> Div {
     div()
         .on_mouse_down(MouseButton::Left, |event, window, _| {
             if event.click_count == 2 {
-                window.titlebar_double_click();
+                crate::tray::toggle_maximize(window);
             } else {
                 window.start_window_move();
             }

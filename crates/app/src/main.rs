@@ -234,6 +234,9 @@ fn main() {
             // which would hide window glass. The workspace paints its own backdrop
             // (translucent over glass), so the root stays clear.
             let _ = handle.update(cx, |_, window, cx| {
+                if let Some(hwnd) = tray::get_hwnd(window) {
+                    tray::set_window_icon(hwnd);
+                }
                 base::Root::update(window, cx, |root, _, _| {
                     root.style().background = Some(transparent_black().into());
                 });
