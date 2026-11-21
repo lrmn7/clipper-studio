@@ -307,7 +307,7 @@ fn run_tray_loop() {
 
     unsafe {
         let hinstance = GetModuleHandleW(None).unwrap_or_default();
-        let class_name = w!("ClipwardTrayWindowClass");
+        let class_name = w!("ClipperStudioTrayWindowClass");
         let wc = WNDCLASSW {
             lpfnWndProc: Some(tray_wnd_proc),
             hInstance: hinstance.into(),
@@ -319,7 +319,7 @@ fn run_tray_loop() {
         let tray_hwnd = match CreateWindowExW(
             WINDOW_EX_STYLE(0),
             class_name,
-            w!("ClipwardTray"),
+            w!("ClipperStudioTray"),
             WS_POPUP,
             0,
             0,

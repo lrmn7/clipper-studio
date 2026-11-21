@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="300 362 424 300" role="img" aria-label="Clipward">
-  <title>Clipward</title>
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="300 362 424 300" role="img" aria-label="ClipperStudio">
+  <title>ClipperStudio</title>
   <defs>
     <clipPath id="mark-left"><polygon points="0,0 542,0 446,1024 0,1024"/></clipPath>
     <clipPath id="mark-right"><polygon points="578,0 1024,0 1024,1024 482,1024"/></clipPath>

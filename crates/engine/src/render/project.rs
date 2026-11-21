@@ -1662,7 +1662,7 @@ impl Renderer {
             args.extend([s("-t"), format!("{}", IMAGE_MS / 1000)]);
             Some(IMAGE_MS as f64 / 1000.0)
         } else {
-            let probed = probe_untrusted(&self.ffprobe, file, cancel).await.map_err(|_| render_error("Clipward can't read that video"))?;
+            let probed = probe_untrusted(&self.ffprobe, file, cancel).await.map_err(|_| render_error("ClipperStudio can't read that video"))?;
             args.extend([s("-format_whitelist"), s("mov,matroska,webm,avi"), s("-t"), format!("{}", MAX_MEDIA_MS / 1000)]);
             let has_audio = probed["streams"].as_array().is_some_and(|all| all.iter().any(|st| st["codec_type"] == "audio"));
             let seconds = probed["format"]["duration"].as_str().and_then(|d| d.parse::<f64>().ok()).filter(|d| *d > 0.0);
@@ -1685,14 +1685,14 @@ impl Renderer {
             render_error(message)
         };
         if !out.success() {
-            return Err(fail(if image { "Clipward can't read that image" } else { "Clipward can't read that video" }));
+            return Err(fail(if image { "ClipperStudio can't read that image" } else { "ClipperStudio can't read that video" }));
         }
-        let probed = probe_untrusted(&self.ffprobe, dest, cancel).await.map_err(|_| fail("Clipward can't read that video"))?;
+        let probed = probe_untrusted(&self.ffprobe, dest, cancel).await.map_err(|_| fail("ClipperStudio can't read that video"))?;
         let video = probed["streams"].as_array().and_then(|all| all.iter().find(|st| st["codec_type"] == "video").cloned()).unwrap_or_default();
         let (w, h) = (video["width"].as_u64().unwrap_or(0) as u32, video["height"].as_u64().unwrap_or(0) as u32);
         let seconds = probed["format"]["duration"].as_str().and_then(|d| d.parse::<f64>().ok()).unwrap_or(0.0);
         if w == 0 || h == 0 || seconds <= 0.0 {
-            return Err(fail("Clipward can't read that video"));
+            return Err(fail("ClipperStudio can't read that video"));
         }
         Ok((w, h, (seconds * 1000.0).round() as i64, image))
     }
@@ -1720,13 +1720,13 @@ pub async fn import_audio(ffmpeg: &Path, ffprobe: &Path, file: &Path, dest: &Pat
     let out = run_bounded(ffmpeg, &args, AUDIO_IMPORT_TIMEOUT, MAX_TOOL_OUTPUT_BYTES, cancel).await?;
     if !out.status.success() {
         let _ = std::fs::remove_file(dest);
-        return Err(render_error("That file has no sound Clipward can read"));
+        return Err(render_error("That file has no sound ClipperStudio can read"));
     }
     let probed = probe_untrusted(ffprobe, dest, cancel).await?;
     let seconds = probed["format"]["duration"].as_str().and_then(|d| d.parse::<f64>().ok()).unwrap_or(0.0);
     if seconds <= 0.0 {
         let _ = std::fs::remove_file(dest);
-        return Err(render_error("That file has no sound Clipward can read"));
+        return Err(render_error("That file has no sound ClipperStudio can read"));
     }
     Ok((seconds * 1000.0).round() as i64)
 }

@@ -122,7 +122,7 @@ pub const WIZARD_STEPS: [WizardStepInfo; 6] = [
 
 /// Header text for the Clips step in manual mode.
 pub const MANUAL_CLIPS_TITLE: &str = "Clips to cut";
-pub const MANUAL_CLIPS_DESCRIPTION: &str = "Type the moments you want. Clipward transcribes, frames, captions and renders each one; no AI provider is used.";
+pub const MANUAL_CLIPS_DESCRIPTION: &str = "Type the moments you want. ClipperStudio transcribes, frames, captions and renders each one; no AI provider is used.";
 
 /// ai: the planner picks the moments; manual: the user types them (no AI provider).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]

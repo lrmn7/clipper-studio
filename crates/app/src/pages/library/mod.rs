@@ -1,4 +1,4 @@
-//! The Library (LibraryPage.tsx): every completed run as a card, newest first,
+﻿//! The Library (LibraryPage.tsx): every completed run as a card, newest first,
 //! searchable by title. A run opens as a `ClipList` in place of the grid.
 //!
 //! `clip_list`, `clip_card`, `run_stats` and `thumbnails` are shared with the Jobs
@@ -16,10 +16,10 @@ use crate::ui::{self, CalloutTone, TypeScale, u};
 use crate::workspace::{self, Page};
 use clip_card::media_chip;
 use clip_list::{ClipList, ClipListBack, auto_grid, error_message};
-use clipward_core::file_manager::JobHistoryEntry;
-use clipward_core::format::{format_relative_date, format_usd};
-use clipward_core::job_view::parse_job_output;
-use clipward_core::library::{
+use clipperstudio_core::file_manager::JobHistoryEntry;
+use clipperstudio_core::format::{format_relative_date, format_usd};
+use clipperstudio_core::job_view::parse_job_output;
+use clipperstudio_core::library::{
     best_clip, clip_file_path, filter_runs, library_summary, thumbnail_seek,
 };
 use gpui_kit::component::WindowExt as _;
@@ -257,7 +257,7 @@ impl LibraryPage {
         window: &mut Window,
         cx: &mut Context<Self>,
     ) {
-        let body: SharedString = clipward_core::jobs_page::delete_body(&title, false).into();
+        let body: SharedString = clipperstudio_core::jobs_page::delete_body(&title, false).into();
         let page = cx.entity().downgrade();
         let width = u(420.).to_pixels(window.rem_size());
         window.open_dialog(cx, move |dialog, _, cx| {

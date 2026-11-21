@@ -10,8 +10,8 @@ use crate::shell::{self, Filter};
 use crate::state as app;
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{self, CalloutTone, TypeScale, back_link, u};
-use clipward_core::clip_engine::render::project::{AUDIO_IMPORT_EXTENSIONS, IMAGE_EXTENSIONS, VIDEO_IMPORT_EXTENSIONS};
-use clipward_core::format::format_clock;
+use clipperstudio_core::clip_engine::render::project::{AUDIO_IMPORT_EXTENSIONS, IMAGE_EXTENSIONS, VIDEO_IMPORT_EXTENSIONS};
+use clipperstudio_core::format::format_clock;
 use gpui_kit::component::{input::{Redo, Undo}, tooltip::Tooltip};
 use gpui_kit::prelude::FluentBuilder as _;
 use gpui_kit::*;
@@ -259,7 +259,7 @@ impl EditorPage {
             return;
         }
         self.arming = true;
-        let path = std::env::temp_dir().join(format!("clipward-voiceover-{}.m4a", std::process::id()));
+        let path = std::env::temp_dir().join(format!("clipperstudio-voiceover-{}.m4a", std::process::id()));
         cx.spawn(async move |this, cx| {
             let started = Recorder::start(path).await;
             let _ = this.update(cx, |this, cx| {
@@ -269,7 +269,7 @@ impl EditorPage {
                     Err(message) => {
                         return this.fail(
                             message,
-                            "Could not use the microphone. Allow Clipward to use it in System Settings → Privacy & Security → Microphone.",
+                            "Could not use the microphone. Allow ClipperStudio to use it in System Settings → Privacy & Security → Microphone.",
                             cx,
                         );
                     }

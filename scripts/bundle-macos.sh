@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# Build Clipward's GPUI app (crates/app) and assemble target/bundle/Clipward.app,
+# Build ClipperStudio's GPUI app (crates/app) and assemble target/bundle/ClipperStudio.app,
 # the macOS app bundle.
 #
 #   scripts/bundle-macos.sh [--debug] [--no-build] [--features <list>] [--dmg] [--no-sign]
 #
-#   --debug           bundle target/debug/clipward-app instead of a release build
+#   --debug           bundle target/debug/clipperstudio-app instead of a release build
 #   --no-build        package the binary already in target/<profile>/ (no cargo run)
 #   --features <list> passed to cargo build (e.g. snapshot for a headless check)
-#   --dmg             also write target/bundle/Clipward_<version>_<arch>.dmg
+#   --dmg             also write target/bundle/ClipperStudio_<version>_<arch>.dmg
 #   --no-sign         leave the bundle unsigned
 #
 # Signing and notarization read:
@@ -18,7 +18,7 @@
 #                           Set with a signing identity: notarize and staple.
 #
 # Bundle layout (what AppPaths resolves at runtime):
-#   Contents/MacOS/clipward
+#   Contents/MacOS/clipperstudio
 #   Contents/Info.plist                    crates/app/macos/Info.plist
 #   Contents/Resources/icon.icns           crates/app/icons/icon.icns
 #   Contents/Resources/engine-bin/         engine-bin/ (ffmpeg, ffprobe, yt-dlp, dylibs)
@@ -49,11 +49,11 @@ done
 [[ "$(uname -s)" == "Darwin" ]] || { echo "bundle-macos.sh runs on macOS only" >&2; exit 1; }
 
 target_dir="${CARGO_TARGET_DIR:-$root/target}"
-binary="$target_dir/$profile/clipward-app"
+binary="$target_dir/$profile/clipperstudio-app"
 out_dir="$target_dir/bundle"
-app="$out_dir/Clipward.app"
+app="$out_dir/ClipperStudio.app"
 macos_dir="$root/crates/app/macos"
-exe_name=clipward
+exe_name=clipperstudio
 
 version="$(awk '
   /^\[/ { in_package = ($0 == "[package]") }
@@ -63,7 +63,7 @@ version="$(awk '
 
 # ---- Build -------------------------------------------------------------------
 if [[ "$build" == 1 ]]; then
-  cargo_args=(build -p clipward_app --bin clipward-app)
+  cargo_args=(build -p clipperstudio_app --bin clipperstudio-app)
   [[ "$profile" == release ]] && cargo_args+=(--release)
   [[ -n "$features" ]] && cargo_args+=(--features "$features")
   echo "==> cargo ${cargo_args[*]}"
@@ -181,7 +181,7 @@ notarize() { # <file to submit> <file to staple>
 can_notarize=0
 if [[ "$sign" == 1 && -n "$identity" && ${#notary_args[@]} -gt 0 ]]; then
   can_notarize=1
-  zip="$out_dir/Clipward-notarize.zip"
+  zip="$out_dir/ClipperStudio-notarize.zip"
   rm -f "$zip"
   ditto -c -k --keepParent "$app" "$zip"
   notarize "$zip" "$app"
@@ -195,14 +195,14 @@ if [[ "$make_dmg" == 1 ]]; then
   arch="$(lipo -archs "$binary" | tr ' ' '_')"
   [[ "$arch" == arm64 ]] && arch=aarch64
   [[ "$arch" == x86_64 ]] && arch=x64
-  dmg="$out_dir/Clipward_${version}_${arch}.dmg"
+  dmg="$out_dir/ClipperStudio_${version}_${arch}.dmg"
   staging="$(mktemp -d)"
   trap 'rm -rf "$staging"' EXIT
-  ditto "$app" "$staging/Clipward.app"
+  ditto "$app" "$staging/ClipperStudio.app"
   ln -s /Applications "$staging/Applications"
   rm -f "$dmg"
   echo "==> Writing $dmg"
-  hdiutil create -quiet -volname Clipward -srcfolder "$staging" -fs HFS+ -format UDZO -ov "$dmg"
+  hdiutil create -quiet -volname ClipperStudio -srcfolder "$staging" -fs HFS+ -format UDZO -ov "$dmg"
   if [[ "$sign" == 1 && -n "$identity" ]]; then
     sign_code --timestamp --sign "$identity" "$dmg"
     [[ "$can_notarize" == 1 ]] && notarize "$dmg" "$dmg"

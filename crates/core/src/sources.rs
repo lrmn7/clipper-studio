@@ -103,7 +103,7 @@ mod tests {
 
     #[test]
     fn sweep_deletes_only_kept_sources_of_finished_runs() {
-        let base = std::env::temp_dir().join(format!("clipward-sources-{}", uuid::Uuid::new_v4()));
+        let base = std::env::temp_dir().join(format!("clipperstudio-sources-{}", uuid::Uuid::new_v4()));
         struct Cleanup<'a>(&'a Path);
         impl Drop for Cleanup<'_> {
             fn drop(&mut self) {

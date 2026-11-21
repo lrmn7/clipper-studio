@@ -73,7 +73,7 @@ const MAX_YTDLP_STDOUT: usize = 64 * 1024 * 1024;
 const MAX_STDERR_TAIL: usize = 16 * 1024;
 const MAX_STDERR_LINE: usize = 64 * 1024;
 const FREE_SPACE_CHECK_BYTES: u64 = 64 * 1024 * 1024;
-const PROGRESS_MARKER: &str = "clipward-progress ";
+const PROGRESS_MARKER: &str = "clipperstudio-progress ";
 const PROGRESS_START: f64 = 5.0;
 const PROGRESS_SPAN: f64 = 10.0;
 
@@ -1169,7 +1169,7 @@ impl<'a> DownloadMonitor<'a> {
         Self { work_dir, output, progress, downloaded: 0, total: 0, last_percent: None, step: "Downloading video...", background: false }
     }
 
-    /// `clipward-progress <downloaded> <total> <estimate>`; unknown fields print "NA".
+    /// `clipperstudio-progress <downloaded> <total> <estimate>`; unknown fields print "NA".
     fn on_progress_line(&mut self, fields: &str) -> Result<()> {
         let mut parts = fields.split_whitespace().map(|p| {
             p.parse::<f64>().ok().filter(|v| v.is_finite() && *v >= 0.0).map(|v| v as u64)
@@ -1787,8 +1787,8 @@ mod tests {
     #[test]
     fn download_line_splitter_and_progress() {
         let mut splitter = LineSplitter::default();
-        assert_eq!(splitter.push(b"a\nclipward-pro"), ["a"]);
-        assert_eq!(splitter.push(b"gress 5 10 NA\r\n"), ["clipward-progress 5 10 NA"]);
+        assert_eq!(splitter.push(b"a\nclipperstudio-pro"), ["a"]);
+        assert_eq!(splitter.push(b"gress 5 10 NA\r\n"), ["clipperstudio-progress 5 10 NA"]);
         assert_eq!(splitter.finish(), None);
 
         let dir = tempfile::tempdir().unwrap();
@@ -1931,7 +1931,7 @@ mod tests {
         use fake_tools::*;
         let fx = fixture(
             &saved_info(),
-            "printf partial > source.mp4.part\necho 'clipward-progress 7 NA NA' >&2\nprintf media > source.mp4\nrm -f source.mp4.part\n",
+            "printf partial > source.mp4.part\necho 'clipperstudio-progress 7 NA NA' >&2\nprintf media > source.mp4\nrm -f source.mp4.part\n",
         );
         std::env::set_var("OPENROUTER_API_KEY", "dummy-test-secret");
         std::env::set_var("HTTPS_PROXY", "http://proxy.invalid");
@@ -1981,7 +1981,7 @@ mod tests {
         for line in [format!("{} NA NA", MAX_SOURCE_BYTES + 1), format!("1 NA {}", MAX_SOURCE_BYTES + 1)] {
             let fx = fixture(
                 &saved_info(),
-                &format!("printf partial > source.mp4.part\necho 'clipward-progress {line}' >&2\nsleep 5\nprintf media > source.mp4\n"),
+                &format!("printf partial > source.mp4.part\necho 'clipperstudio-progress {line}' >&2\nsleep 5\nprintf media > source.mp4\n"),
             );
             let started = std::time::Instant::now();
             let err = run(&fx, Source::Twitch(URL.into())).await.unwrap_err();
@@ -2104,7 +2104,7 @@ mod tests {
         // The audio run writes the stream alone; the video run needs that very file (yt-dlp
         // reuses it), merges and deletes it.
         let body = "case \"$*\" in *'--fixup never'*) printf audio > source.f251.webm; exit 0;; esac\n\
-                    [ -f source.f251.webm ] || exit 1\necho 'clipward-progress 5 10 NA'\n\
+                    [ -f source.f251.webm ] || exit 1\necho 'clipperstudio-progress 5 10 NA'\n\
                     printf media > source.mp4\nrm source.f251.webm\n";
         let fx = fixture(&picked_info(), body);
         let (tx, rx) = oneshot::channel();

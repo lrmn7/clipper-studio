@@ -66,8 +66,6 @@ pub fn is_active_job_status(status: &str) -> bool {
 pub const REPO_URL: &str = "https://github.com/lrmn7/clipper-studio";
 pub const ISSUES_URL: &str = "https://github.com/lrmn7/clipper-studio/issues";
 pub const TRUSTED_EXTERNAL_URLS: &[&str] = &[
-    "https://www.clipward.ai",
-    "https://www.clipward.ai/discord",
     ISSUES_URL,
     REPO_URL,
     "https://openrouter.ai/keys",

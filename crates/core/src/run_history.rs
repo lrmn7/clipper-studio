@@ -264,7 +264,7 @@ mod tests {
 
     #[test]
     fn round_trips_records() {
-        let base = std::env::temp_dir().join(format!("clipward-runs-{}", uuid::Uuid::new_v4()));
+        let base = std::env::temp_dir().join(format!("clipperstudio-runs-{}", uuid::Uuid::new_v4()));
         std::fs::create_dir_all(&base).unwrap();
         let id = uuid::Uuid::new_v4().to_string();
         create_run_record(&base, &id, "/x/y.mp4").unwrap();

@@ -1,11 +1,11 @@
-//! The run at a glance (RunStats.tsx): clips, processing time, API cost, created.
+﻿//! The run at a glance (RunStats.tsx): clips, processing time, API cost, created.
 //! Cells fade in one after another and their numbers count up, easing out, once;
 //! GPUI's animations render their last frame when the OS asks for reduced motion.
 use crate::theme::Tokens;
 use crate::ui::{self, Hue, Truncate, TypeScale, u};
-use clipward_core::format::{cost_parts, format_duration, format_timecode, format_usd};
-use clipward_core::job_view::{ApiCosts, JobOutput, is_manual_run};
-use clipward_core::library::{count_up, created_labels};
+use clipperstudio_core::format::{cost_parts, format_duration, format_timecode, format_usd};
+use clipperstudio_core::job_view::{ApiCosts, JobOutput, is_manual_run};
+use clipperstudio_core::library::{count_up, created_labels};
 use gpui_kit::prelude::FluentBuilder;
 use gpui_kit::*;
 use std::ops::Range;

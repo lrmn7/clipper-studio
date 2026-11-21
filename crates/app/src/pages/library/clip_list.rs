@@ -1,4 +1,4 @@
-//! A finished run's clips (ClipList.tsx), shared by the Library and Jobs pages.
+﻿//! A finished run's clips (ClipList.tsx), shared by the Library and Jobs pages.
 //!
 //! ```ignore
 //! let list = cx.new(|cx| ClipList::new(output_dir, output, "All jobs", window, cx));
@@ -16,11 +16,11 @@ use crate::shell;
 use crate::state;
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{self, CalloutTone, Truncate, TypeScale, u};
-use clipward_core::file_manager::ExportClip;
-use clipward_core::job_view::{
+use clipperstudio_core::file_manager::ExportClip;
+use clipperstudio_core::job_view::{
     JobOutput, framing_problem, is_manual_run, parse_job_output, read_costs, source_analysis_notice,
 };
-use clipward_core::library::{
+use clipperstudio_core::library::{
     ClipSort, clip_file_path, clip_title, export_outcome, is_vertical, select_all_state,
     sorted_clips, thumbnail_seek, top_pick, video_speed,
 };
@@ -403,7 +403,7 @@ impl ClipList {
         } else {
             &self.output.source_video_title
         };
-        let body: SharedString = clipward_core::jobs_page::delete_body(title, false).into();
+        let body: SharedString = clipperstudio_core::jobs_page::delete_body(title, false).into();
         let list = cx.entity().downgrade();
         let width = u(420.).to_pixels(window.rem_size());
         window.open_dialog(cx, move |dialog, _, cx| {

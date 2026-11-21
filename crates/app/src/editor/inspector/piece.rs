@@ -1,21 +1,21 @@
-//! The piece inspector (the "Selected piece" section of EditorPage.tsx's `<aside>`)
+﻿//! The piece inspector (the "Selected piece" section of EditorPage.tsx's `<aside>`)
 //! with ColorPanel.tsx: framing, split panels, the whole-frame background, crop zoom
 //! and keyframes, colour, speed, the transition in, volume, fades and detaching audio.
 use super::{Inspector, Pick, hint, label, section};
 use crate::editor::state::{EditorState, TRANSITIONS};
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{self, Btn, TypeScale, u};
-use clipward_core::clip_engine::render::project::{
+use clipperstudio_core::clip_engine::render::project::{
     Crop, MAX_CROP_ZOOM, PIECE_SPEED_RANGE, Project, VideoItem, split_panels,
 };
-use clipward_core::inspector::{
+use clipperstudio_core::inspector::{
     self as logic, ColorSlider, LOOKS, backdrop_mode, framing_choice, key_here, piece_local,
 };
-use clipward_core::timeline::{crop_at, item_length, update_item};
+use clipperstudio_core::timeline::{crop_at, item_length, update_item};
 use gpui_kit::prelude::FluentBuilder;
 use gpui_kit::*;
 
-pub(super) use clipward_core::inspector::TRANSITION_STYLES;
+pub(super) use clipperstudio_core::inspector::TRANSITION_STYLES;
 
 /// Change piece `index` (one undo step, or the drag's).
 fn edit_piece(e: &mut EditorState, index: usize, patch: impl FnOnce(&mut VideoItem), cx: &mut Context<EditorState>) {
@@ -136,7 +136,7 @@ impl Inspector {
         let volume = self.slider(
             "piece-volume",
             "Volume",
-            clipward_core::timeline::js_round(piece.volume * 100.),
+            clipperstudio_core::timeline::js_round(piece.volume * 100.),
             (0., 200., 5.),
             logic::volume_label(piece.volume),
             move |e, v, cx| edit_piece(e, index, |item| item.volume = v / 100., cx),
@@ -321,7 +321,7 @@ impl Inspector {
     }
 
     /// ColorPanel.tsx: a piece's colour, picked from a look and then tuned.
-    fn color_panel(&mut self, index: usize, color: Option<clipward_core::clip_engine::render::project::ColorAdjust>, window: &mut Window, cx: &mut Context<Self>) -> Div {
+    fn color_panel(&mut self, index: usize, color: Option<clipperstudio_core::clip_engine::render::project::ColorAdjust>, window: &mut Window, cx: &mut Context<Self>) -> Div {
         let t = *cx.tokens();
         let now = color.unwrap_or(logic::AS_SHOT);
         let looks: Vec<_> = LOOKS.iter().enumerate().map(|(i, &(name, look))| {

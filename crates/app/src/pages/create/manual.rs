@@ -1,11 +1,11 @@
-//! Manual clip mode's editable list (ManualClipList.tsx): start, end and an
+﻿//! Manual clip mode's editable list (ManualClipList.tsx): start, end and an
 //! optional title per clip. Times take seconds, m:ss or h:mm:ss. Enter moves to
 //! the next clip (adding one at the end), so a list can be typed without the mouse.
 use super::{CreatePage, edit};
 use crate::theme::ActiveTokens;
 use crate::ui::{Btn, TypeScale, u};
-use clipward_core::job_form::{ClipDraft, MAX_MANUAL_CLIPS};
-use clipward_core::manual_clips::{
+use clipperstudio_core::job_form::{ClipDraft, MAX_MANUAL_CLIPS};
+use clipperstudio_core::manual_clips::{
     ManualClipRow, ManualClipsCheck, RowField, format_clip_length, insert_row, list_summary,
     remove_row,
 };

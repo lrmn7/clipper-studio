@@ -1,10 +1,10 @@
-//! The custom accent picker (ColorSwatches.tsx ColorPicker): a saturation and
+﻿//! The custom accent picker (ColorSwatches.tsx ColorPicker): a saturation and
 //! brightness square, a hue strip and a hex field. Drag either, or focus one and
 //! use the arrow keys. Ported from MonoCode's ColorPickerPopover (MIT, see
 //! THIRD_PARTY_NOTICES.md).
 use crate::theme::ActiveTokens;
 use crate::ui::{TypeScale, u};
-use clipward_core::color::{Hsv, hex_to_hsv, hsv_to_hex, normalize_hex};
+use clipperstudio_core::color::{Hsv, hex_to_hsv, hsv_to_hex, normalize_hex};
 use gpui_kit::component::input::{Input, InputEvent, InputState};
 use gpui_kit::component::{Sizable, Size};
 use gpui_kit::*;

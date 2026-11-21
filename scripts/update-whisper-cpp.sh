@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Points vendor/whisper-rs-sys at a whisper.cpp release (the latest by default).
 # whisper-rs-sys on crates.io lags upstream, so the workspace patches it with this
-# copy; see vendor/whisper-rs-sys/CLIPWARD_PATCH.md. Bindings are generated at
+# copy; see vendor/whisper-rs-sys/CLIPPERSTUDIO_PATCH.md. Bindings are generated at
 # build time, so a version bump is just new sources plus a rebuild.
 set -euo pipefail
 
@@ -11,7 +11,7 @@ tag="${1:-$(curl -fsSL https://api.github.com/repos/ggml-org/whisper.cpp/release
 
 root="$(cd "$(dirname "$0")/.." && pwd)"
 dest="$root/vendor/whisper-rs-sys/whisper.cpp"
-work="$(mktemp -d -t clipward-whisper)"
+work="$(mktemp -d -t clipperstudio-whisper)"
 trap 'rm -rf "$work"' EXIT
 
 curl -fsSL "https://github.com/ggml-org/whisper.cpp/archive/refs/tags/${tag}.tar.gz" | tar xz -C "$work"

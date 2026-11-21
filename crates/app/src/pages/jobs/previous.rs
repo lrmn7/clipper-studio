@@ -1,4 +1,4 @@
-//! The Previous panel (JobsList in JobsPage.tsx): every earlier run, with status
+﻿//! The Previous panel (JobsList in JobsPage.tsx): every earlier run, with status
 //! filters and search, or the empty state before the first job. Its own entity,
 //! so the active rows' timers don't redraw a long history every second.
 use super::measured::Measured;
@@ -6,9 +6,9 @@ use super::{JobsPage, divided, tooltip};
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{self, Btn, Tone, Truncate, TypeScale, u};
 use crate::workspace::{self, Page};
-use clipward_core::file_manager::JobHistoryEntry;
-use clipward_core::format::{format_date, format_duration, format_relative_date, format_usd};
-use clipward_core::jobs_page::{self as logic, FILTERS};
+use clipperstudio_core::file_manager::JobHistoryEntry;
+use clipperstudio_core::format::{format_date, format_duration, format_relative_date, format_usd};
+use clipperstudio_core::jobs_page::{self as logic, FILTERS};
 use gpui_kit::component::Sizable as _;
 use gpui_kit::component::input::{Input, InputEvent, InputState};
 use gpui_kit::prelude::FluentBuilder as _;

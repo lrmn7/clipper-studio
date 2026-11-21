@@ -1,17 +1,17 @@
-//! The text, focus, overlay, picture-in-picture and sound inspectors and the overlays list
+﻿//! The text, focus, overlay, picture-in-picture and sound inspectors and the overlays list
 //! (TextPanels.tsx TextInspector, OverlayPanels.tsx, SoundPanels.tsx).
 use super::{Inspector, Pick, header, hint, label, section};
 use crate::editor::state::{EditorState, OVERLAY_SCALE_MAX, OVERLAY_SCALE_MIN, Selection};
 use crate::theme::ActiveTokens;
 use crate::ui::{self, Btn, TypeScale, u};
 use crate::{shell, state};
-use clipward_core::clip_engine::render::project::{
+use clipperstudio_core::clip_engine::render::project::{
     AudioItem, MAX_CROP_ZOOM, OverlayBox, PIP_WIDTH_RANGE, PipItem, Project, TEXT_SIZE_RANGE, TextLayer,
 };
-use clipward_core::clip_engine::render::service::{MAX_LOGO_SIZE, MIN_LOGO_SIZE};
-use clipward_core::inspector::{fade_label, fade_max, volume_label, zoom_label, zoom_to_slider};
-use clipward_core::overlays::{OverlayKey, OverlayView};
-use clipward_core::timeline::js_round;
+use clipperstudio_core::clip_engine::render::service::{MAX_LOGO_SIZE, MIN_LOGO_SIZE};
+use clipperstudio_core::inspector::{fade_label, fade_max, volume_label, zoom_label, zoom_to_slider};
+use clipperstudio_core::overlays::{OverlayKey, OverlayView};
+use clipperstudio_core::timeline::js_round;
 use gpui_kit::component::input::{Input, Textarea};
 use gpui_kit::component::{Sizable, Size};
 use gpui_kit::prelude::FluentBuilder;
@@ -437,7 +437,7 @@ impl Inspector {
         cx.notify();
         let dir = self.editor.read(cx).output_dir.clone();
         cx.spawn(async move |this, cx| {
-            let filters = [shell::Filter("Images", clipward_core::shared::LOGO_EXTENSIONS)];
+            let filters = [shell::Filter("Images", clipperstudio_core::shared::LOGO_EXTENSIONS)];
             let path = shell::pick_file("Choose a Logo", &filters).await;
             let _ = this.update(cx, |this, cx| {
                 this.adding_logo = false;

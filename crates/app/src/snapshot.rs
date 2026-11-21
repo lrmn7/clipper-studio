@@ -1,21 +1,29 @@
-//! Development only (`--features snapshot`): with `CLIPWARD_SNAPSHOT=<dir>` set,
+//! Development only (`--features snapshot`): with `CLIPPERSTUDIO_SNAPSHOT=<dir>` set,
 //! visit each page, save the window as `<dir>/<page>.png`, then quit.
 //!
-//! `CLIPWARD_SNAPSHOT_EDITOR=<run folder>` instead opens the clip editor on that run
+//! `CLIPPERSTUDIO_SNAPSHOT_EDITOR=<run folder>` instead opens the clip editor on that run
 //! (see `editor_probe`); nothing is edited or saved.
 use crate::workspace::{Page, Workspace};
 use gpui_kit::*;
 use std::path::PathBuf;
 use std::time::Duration;
 
+fn snap_env_os(suffix: &str) -> Option<std::ffi::OsString> {
+    std::env::var_os(format!("CLIPPERSTUDIO_{suffix}"))
+}
+
+fn snap_env(suffix: &str) -> Option<String> {
+    std::env::var(format!("CLIPPERSTUDIO_{suffix}")).ok()
+}
+
 pub fn tour(workspace: Entity<Workspace>, window: &mut Window, cx: &mut App) {
-    let Some(dir) = std::env::var_os("CLIPWARD_SNAPSHOT").map(PathBuf::from) else {
+    let Some(dir) = snap_env_os("SNAPSHOT").map(PathBuf::from) else {
         return;
     };
     let _ = std::fs::create_dir_all(&dir);
     // Show the sidebar's update row, which a dev build never gets from GitHub.
     crate::models::Updater::global(cx).update(cx, |u, _| {
-        u.state = crate::models::UpdateState::Available(clipward_core::updater::Update {
+        u.state = crate::models::UpdateState::Available(clipperstudio_core::updater::Update {
             version: "9.9.9".into(),
             page_url: String::new(),
             asset_name: String::new(),
@@ -55,12 +63,12 @@ pub fn tour(workspace: Entity<Workspace>, window: &mut Window, cx: &mut App) {
     .detach();
 }
 
-/// `CLIPWARD_VIDEO_PROBE=<file>`: play the file in a hidden window and save
+/// `CLIPPERSTUDIO_VIDEO_PROBE=<file>`: play the file in a hidden window and save
 /// `<dir>/video.png` after two seconds, with the frames drawn so far, then quit.
 pub fn video_probe(cx: &mut App) -> bool {
     let (Some(dir), Some(file)) = (
-        std::env::var_os("CLIPWARD_SNAPSHOT").map(PathBuf::from),
-        std::env::var_os("CLIPWARD_VIDEO_PROBE").map(PathBuf::from),
+        snap_env_os("SNAPSHOT").map(PathBuf::from),
+        snap_env_os("VIDEO_PROBE").map(PathBuf::from),
     ) else {
         return false;
     };
@@ -82,8 +90,7 @@ pub fn video_probe(cx: &mut App) -> bool {
         .expect("open the probe window");
     cx.spawn(async move |cx| {
         // Hidden windows get no display link: tick at 60 Hz instead.
-        let seconds: u32 = std::env::var("CLIPWARD_VIDEO_PROBE_SECS")
-            .ok()
+        let seconds: u32 = snap_env("VIDEO_PROBE_SECS")
             .and_then(|s| s.parse().ok())
             .unwrap_or(2);
         for _ in 0..seconds * 60 {
@@ -142,33 +149,33 @@ impl Render for VideoProbe {
     }
 }
 
-/// `CLIPWARD_SNAPSHOT_EDITOR=<run folder>`: open the editor on a clip in a hidden
+/// `CLIPPERSTUDIO_SNAPSHOT_EDITOR=<run folder>`: open the editor on a clip in a hidden
 /// 1280×800 window and save `<dir>/editor.png`, then quit. Options:
-/// `CLIPWARD_SNAPSHOT_CLIP=<index>` (0), `CLIPWARD_SNAPSHOT_SELECT=piece:0 | text:<id>
+/// `CLIPPERSTUDIO_SNAPSHOT_CLIP=<index>` (0), `CLIPPERSTUDIO_SNAPSHOT_SELECT=piece:0 | text:<id>
 /// | sound:<id> | pip:<id> | overlay:title | overlay:banner | overlay:logo:<n>`,
-/// `CLIPWARD_SNAPSHOT_AT=<ms>` (playhead), `CLIPWARD_SNAPSHOT_WIDTH=<px>` (1280), `CLIPWARD_SNAPSHOT_SECS=<n>` (3: time to
-/// load and draw), `CLIPWARD_SNAPSHOT_WARMUP=1` (keep the loading screen),
-/// `CLIPWARD_SNAPSHOT_PLAY=1` (play once loaded; prints how far the playhead got and
+/// `CLIPPERSTUDIO_SNAPSHOT_AT=<ms>` (playhead), `CLIPPERSTUDIO_SNAPSHOT_WIDTH=<px>` (1280), `CLIPPERSTUDIO_SNAPSHOT_SECS=<n>` (3: time to
+/// load and draw), `CLIPPERSTUDIO_SNAPSHOT_WARMUP=1` (keep the loading screen),
+/// `CLIPPERSTUDIO_SNAPSHOT_PLAY=1` (play once loaded; prints how far the playhead got and
 /// how long the frames took to draw; `full` redraws every view each frame).
 pub fn editor_probe(cx: &mut App) -> bool {
     use crate::editor::state::Selection;
-    use clipward_core::overlays::OverlayKey;
+    use clipperstudio_core::overlays::OverlayKey;
     let (Some(dir), Some(run)) = (
-        std::env::var_os("CLIPWARD_SNAPSHOT").map(PathBuf::from),
-        std::env::var("CLIPWARD_SNAPSHOT_EDITOR").ok(),
+        snap_env_os("SNAPSHOT").map(PathBuf::from),
+        snap_env("SNAPSHOT_EDITOR"),
     ) else {
         return false;
     };
     let _ = std::fs::create_dir_all(&dir);
-    let var = |name: &str| std::env::var(name).ok();
-    let clip: u32 = var("CLIPWARD_SNAPSHOT_CLIP").and_then(|s| s.parse().ok()).unwrap_or(0);
-    let seconds: u32 = var("CLIPWARD_SNAPSHOT_SECS").and_then(|s| s.parse().ok()).unwrap_or(3);
-    let at: Option<f64> = var("CLIPWARD_SNAPSHOT_AT").and_then(|s| s.parse().ok());
-    let warmup = var("CLIPWARD_SNAPSHOT_WARMUP").as_deref() == Some("1");
-    let play = var("CLIPWARD_SNAPSHOT_PLAY").is_some_and(|v| v == "1" || v == "full");
+    let var = |name: &str| snap_env(name);
+    let clip: u32 = var("SNAPSHOT_CLIP").and_then(|s| s.parse().ok()).unwrap_or(0);
+    let seconds: u32 = var("SNAPSHOT_SECS").and_then(|s| s.parse().ok()).unwrap_or(3);
+    let at: Option<f64> = var("SNAPSHOT_AT").and_then(|s| s.parse().ok());
+    let warmup = var("SNAPSHOT_WARMUP").as_deref() == Some("1");
+    let play = var("SNAPSHOT_PLAY").is_some_and(|v| v == "1" || v == "full");
     // `full`: time frames that redraw every view (the worst case), not just what changed.
-    let full = var("CLIPWARD_SNAPSHOT_PLAY").as_deref() == Some("full");
-    let selection = var("CLIPWARD_SNAPSHOT_SELECT").and_then(|s| {
+    let full = var("SNAPSHOT_PLAY").as_deref() == Some("full");
+    let selection = var("SNAPSHOT_SELECT").and_then(|s| {
         let (kind, rest) = s.split_once(':')?;
         Some(match (kind, rest) {
             ("piece", i) => Selection::Piece(i.parse().ok()?),
@@ -182,7 +189,7 @@ pub fn editor_probe(cx: &mut App) -> bool {
             _ => return None,
         })
     });
-    let width: f32 = var("CLIPWARD_SNAPSHOT_WIDTH").and_then(|s| s.parse().ok()).unwrap_or(1280.);
+    let width: f32 = var("SNAPSHOT_WIDTH").and_then(|s| s.parse().ok()).unwrap_or(1280.);
     let options = WindowOptions {
         window_bounds: Some(WindowBounds::centered(size(px(width), px(800.)), cx)),
         show: false,

@@ -1,4 +1,4 @@
-//! Pick who plans the clips: a coding CLI the user is already logged in to (billed
+﻿//! Pick who plans the clips: a coding CLI the user is already logged in to (billed
 //! to that plan), their own API key, or a model on their own server (Local AI).
 //! Ports ProviderSetup.tsx, LocalAiSetup.tsx, ApiKeyInput.tsx and
 //! use-api-key-drafts.ts. Transcription never uses this; it runs offline.
@@ -10,13 +10,13 @@ use crate::models::Settings;
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{self, Btn, Hue, TypeScale, Truncate, u};
 use crate::{shell, state};
-use clipward_core::ai_providers::{LocalModelsResult, ProviderTestResult};
-use clipward_core::clip_engine::llm::{EFFORT_LEVELS, ModelChoice, effort_levels};
-use clipward_core::provider_catalog::{
+use clipperstudio_core::ai_providers::{LocalModelsResult, ProviderTestResult};
+use clipperstudio_core::clip_engine::llm::{EFFORT_LEVELS, ModelChoice, effort_levels};
+use clipperstudio_core::provider_catalog::{
     self as catalog, API_PROVIDERS, LOCAL_DEFAULT_BASE_URL, LOCAL_EXAMPLE_MODEL, LOCAL_ID, LOCAL_KEY,
 };
-use clipward_core::settings::PublicSettings;
-use clipward_core::shared::AI_CLIS;
+use clipperstudio_core::settings::PublicSettings;
+use clipperstudio_core::shared::AI_CLIS;
 use gpui_kit::component::input::{Input, InputEvent, InputState};
 use gpui_kit::component::searchable_list::SearchableVec;
 use gpui_kit::component::select::{Select, SelectEvent, SelectState};

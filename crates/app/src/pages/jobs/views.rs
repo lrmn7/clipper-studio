@@ -1,15 +1,15 @@
-//! One job in detail (JobProgress, JobFailure in JobProgress.tsx; JobCancelled in
+﻿//! One job in detail (JobProgress, JobFailure in JobProgress.tsx; JobCancelled in
 //! JobsPage.tsx), and a finished run's clips.
 use super::arcade::Arcade;
 use super::progress::{ProgressCore, Stepper};
 use super::{JobsPage, Progress, tooltip};
 use crate::theme::Tokens;
 use crate::ui::{self, Btn, Hue, Truncate, TypeScale, u};
-use clipward_core::format::source_label;
-use clipward_core::job_view::JobOutput;
-use clipward_core::jobs::JobSnapshot;
-use clipward_core::jobs_page as logic;
-use clipward_core::shared::{ISSUES_URL, is_active_job_status};
+use clipperstudio_core::format::source_label;
+use clipperstudio_core::job_view::JobOutput;
+use clipperstudio_core::jobs::JobSnapshot;
+use clipperstudio_core::jobs_page as logic;
+use clipperstudio_core::shared::{ISSUES_URL, is_active_job_status};
 use gpui_kit::prelude::FluentBuilder as _;
 use gpui_kit::*;
 

@@ -97,12 +97,12 @@ jobs:
       - name: Bundle (Windows, Linux)
         if: matrix.os != 'macos'
         run: |
-          cargo build --release -p clipward_app
+          cargo build --release -p clipperstudio_app
           bash scripts/bundle.sh ${{ matrix.os }}
 
       - uses: actions/upload-artifact@v4
         with:
-          name: clipward-${{ matrix.os }}
+          name: clipperstudio-${{ matrix.os }}
           path: |
             target/bundle/*.dmg
             target/bundle/*.zip

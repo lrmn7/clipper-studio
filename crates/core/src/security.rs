@@ -159,7 +159,7 @@ mod tests {
 
     #[test]
     fn media_paths_are_confined() {
-        let root = std::env::temp_dir().join(format!("clipward-sec-{}", uuid::Uuid::new_v4()));
+        let root = std::env::temp_dir().join(format!("clipperstudio-sec-{}", uuid::Uuid::new_v4()));
         let library = root.join("library");
         std::fs::create_dir_all(&library).unwrap();
         let inside = library.join("a.mp4");

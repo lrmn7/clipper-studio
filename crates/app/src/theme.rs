@@ -1,10 +1,10 @@
-//! Clipward's colours: the design tokens (see DESIGN.md),
+//! ClipperStudio's colours: the design tokens (see DESIGN.md),
 //! computed from Settings → Appearance and the resolved colour scheme.
 //!
 //! Every fill, border and hover is the content colour at a low strength over the
 //! base; only status earns a hue. The same values are projected onto gpui-kit's
 //! theme so its components (inputs, selects, sliders, dialogs) match.
-use clipward_core::appearance::{Appearance, ThemePreference};
+use clipperstudio_core::appearance::{Appearance, ThemePreference};
 use gpui_kit::component::{Theme as KitTheme, ThemeMode};
 use gpui_kit::{App, Global, Hsla, WindowAppearance, hsla};
 

@@ -1,4 +1,4 @@
-//! The main window: sidebar on the left; on the right a 40px title bar over the
+﻿//! The main window: sidebar on the left; on the right a 40px title bar over the
 //! page, which scrolls on its own. Ports App.tsx, Layout.tsx and Sidebar.tsx.
 //!
 //! The window has a transparent title bar, so both top strips drag the window and
@@ -6,7 +6,7 @@
 use crate::models::{Jobs, Settings, SettingsChanged, UpdateState, Updater};
 use crate::theme::{self, ActiveTokens, Tokens};
 use crate::ui::{self, Tone, TypeScale, Truncate, u};
-use clipward_core::jobs::JobSnapshot;
+use clipperstudio_core::jobs::JobSnapshot;
 use gpui_kit::component::button::{Button, ButtonVariants};
 use gpui_kit::component::tooltip::Tooltip;
 use gpui_kit::prelude::FluentBuilder as _;
@@ -75,7 +75,7 @@ pub fn go(page: Page, window: &mut Window, cx: &mut App) {
 }
 
 /// Human labels for job stages (JobProgress.tsx STAGE_LABELS).
-pub use clipward_core::jobs_page::stage_label;
+pub use clipperstudio_core::jobs_page::stage_label;
 
 pub struct Workspace {
     page: Page,
@@ -306,7 +306,7 @@ impl Workspace {
             None => format!("{} running", running.len()),
         };
         let subtitle = single
-            .map(|job| clipward_core::format::source_label(&job.request.video_url))
+            .map(|job| clipperstudio_core::format::source_label(&job.request.video_url))
             .unwrap_or_else(|| "View all jobs".into());
         ui::tile(t, false)
             .id("active-jobs")

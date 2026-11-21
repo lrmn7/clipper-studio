@@ -1001,13 +1001,13 @@ mod tests {
 
     #[test]
     fn keyterms_enforce_limits() {
-        let terms: Vec<String> = ["  Clipward  ", "clipward", "one two three four five six", "bad<chars>", &"x".repeat(80), ""]
+        let terms: Vec<String> = ["  ClipperStudio  ", "clipperstudio", "one two three four five six", "bad<chars>", &"x".repeat(80), ""]
             .iter()
             .map(|s| s.to_string())
             .collect();
         let cleaned = normalize_keyterms(&terms);
-        assert_eq!(cleaned[0], "Clipward");
-        assert!(!cleaned.iter().any(|t| t == "clipward"));
+        assert_eq!(cleaned[0], "ClipperStudio");
+        assert!(!cleaned.iter().any(|t| t == "clipperstudio"));
         assert!(!cleaned.iter().any(|t| t.contains("six") || t.contains('<')));
         assert!(cleaned.iter().all(|t| t.chars().count() < 50));
         assert_eq!(cleaned.len(), 2);

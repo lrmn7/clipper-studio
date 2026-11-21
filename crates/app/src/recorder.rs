@@ -30,7 +30,7 @@ mod mac {
     const SAMPLE_RATE: f64 = 48_000.0;
     const BIT_RATE: i32 = 128_000;
     /// What `start` says when the microphone is off-limits.
-    const DENIED: &str = "Could not use the microphone. Allow Clipward to use it in System Settings → Privacy & Security → Microphone.";
+    const DENIED: &str = "Could not use the microphone. Allow ClipperStudio to use it in System Settings → Privacy & Security → Microphone.";
 
     /// A microphone take in progress, written to `path` as AAC in an .m4a file.
     pub struct Recorder {
@@ -181,11 +181,11 @@ mod mac {
         }
 
         /// Records two seconds from the real microphone, so it needs mic permission
-        /// for the terminal: `cargo test -p clipward_app recorder -- --ignored`.
+        /// for the terminal: `cargo test -p clipperstudio_app recorder -- --ignored`.
         #[test]
         #[ignore]
         fn records_two_seconds_of_aac() {
-            let path = std::env::temp_dir().join("clipward-recorder-test.m4a");
+            let path = std::env::temp_dir().join("clipperstudio-recorder-test.m4a");
             let _ = std::fs::remove_file(&path);
             eprintln!("microphone access: {:?}", unsafe {
                 AVCaptureDevice::authorizationStatusForMediaType(AVMediaTypeAudio.unwrap())

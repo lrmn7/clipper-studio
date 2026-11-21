@@ -1,8 +1,8 @@
-# Clipward patch to tract-core 0.23.8
+# ClipperStudio patch to tract-core 0.23.8
 
 This directory is the crates.io `tract-core` 0.23.8 source, used through
 `[patch.crates-io]` in the workspace `Cargo.toml`, with one change in
-`src/ops/cnn/conv/depth_wise.rs`. Each changed spot is marked `CLIPWARD PATCH`.
+`src/ops/cnn/conv/depth_wise.rs`. Each changed spot is marked `CLIPPERSTUDIO PATCH`.
 Licensing is unchanged (MIT or Apache-2.0, see `LICENSE*`). The crates.io
 registry metadata files (`.cargo_vcs_info.json`, `Cargo.lock`,
 `Cargo.toml.orig`) were dropped; everything else is as published.
@@ -21,7 +21,7 @@ The patch:
    arms in `process_zone_*`).
 2. In `process_zone_n`, for more than 4 taps on rows that are contiguous in
    both input and output, computes blocks of 32, then 8, then 1 outputs with
-   a plain Rust helper (`clipward_row_block`) that LLVM vectorises (NEON on
+   a plain Rust helper (`clipperstudio_row_block`) that LLVM vectorises (NEON on
    aarch64, SSE on x86_64). Wide blocks keep several independent add chains
    in flight. Other strides use the code that was already there.
 
@@ -37,7 +37,7 @@ existing fallbacks they can still reach on other strides sum in the same
 order too (one multiplies `x * k` instead of `k * x`, which gives the same
 bits).
 
-Checked on Clipward's YuNet face detector (face_detection_yunet_2023mar.onnx):
+Checked on ClipperStudio's YuNet face detector (face_detection_yunet_2023mar.onnx):
 all 12 raw output tensors compared with `f32::to_bits` against unpatched
 0.23.8 on 320 real frames at 640x360 (padded 640x384) and 40 frames at
 640x1138 (portrait, which takes the non-contiguous path): identical. The

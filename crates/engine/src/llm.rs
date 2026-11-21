@@ -2063,7 +2063,7 @@ async fn cli_chat(
     let system = req.system.as_deref().filter(|_| own_system);
     let prompt = prompt_text(req, !own_system);
     let work = tempfile::Builder::new()
-        .prefix("clipward-cli-")
+        .prefix("clipperstudio-cli-")
         .tempdir()
         .map_err(|_| LlmError::fatal(format!("{label} CLI could not be started")))?;
     let (cmd, stdin) = cli_command(

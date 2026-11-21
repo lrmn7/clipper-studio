@@ -1,15 +1,15 @@
-//! The wizard's stepper, step panel, footer and each step's body (JobForm.tsx).
+﻿//! The wizard's stepper, step panel, footer and each step's body (JobForm.tsx).
 use super::{CreatePage, edit};
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{self, Btn, Hue, Truncate, TypeScale, u};
-use clipward_core::job_form::{
+use clipperstudio_core::job_form::{
     self, AUTO_DURATION_RANGE, ClipDraft, ClipMode, DURATION_OPTIONS, FORMATS, FormCheck,
     LAYOUT_STYLES, LOGO_POSITION_OPTIONS, LOGO_SIZES, MANUAL_CLIPS_DESCRIPTION, MANUAL_CLIPS_TITLE,
     MAX_BANNER_CHARS, MAX_CLIPS, MAX_LOGOS, MAX_REQUIREMENTS_CHARS, StartedJob,
     VIDEO_SPEED_OPTIONS, WizardStep,
 };
-use clipward_core::manual_clips::{format_clip_length, format_clip_time};
-use clipward_core::shared::{MAX_PARALLEL_JOBS, is_active_job_status};
+use clipperstudio_core::manual_clips::{format_clip_length, format_clip_time};
+use clipperstudio_core::shared::{MAX_PARALLEL_JOBS, is_active_job_status};
 use gpui_kit::component::input::{Input, Textarea};
 use gpui_kit::prelude::FluentBuilder as _;
 use gpui_kit::*;
@@ -881,12 +881,12 @@ impl CreatePage {
     /// Channel link and logos stamped on every clip.
     fn render_branding_step(&self, draft: &ClipDraft, cx: &mut Context<Self>) -> AnyElement {
         let t = *cx.tokens();
-        let too_long = clipward_core::format::js_trim(&draft.banner_url)
+        let too_long = clipperstudio_core::format::js_trim(&draft.banner_url)
             .chars()
             .count()
             > MAX_BANNER_CHARS;
         let logos = draft.logos.iter().enumerate().map(|(i, logo)| {
-            let name = clipward_core::format::basename(&logo.path).to_string();
+            let name = clipperstudio_core::format::basename(&logo.path).to_string();
             let d = self.draft.clone();
             let position = ui::segmented(
                 ("logo-position", i),
@@ -1064,9 +1064,9 @@ impl CreatePage {
             .as_ref()
             .map(|s| {
                 // "sonnet · Low effort" (Antigravity's effort is already in its model id).
-                let effort = clipward_core::clip_engine::llm::effort_levels(&s.ai_provider)
+                let effort = clipperstudio_core::clip_engine::llm::effort_levels(&s.ai_provider)
                     .contains(&s.ai_effort.as_str())
-                    .then(|| format!("{} effort", clipward_core::provider_catalog::effort_label(&s.ai_effort)));
+                    .then(|| format!("{} effort", clipperstudio_core::provider_catalog::effort_label(&s.ai_effort)));
                 let model = [Some(s.ai_model.clone()).filter(|m| !m.is_empty()), effort];
                 (s.ai_provider.clone(), model.into_iter().flatten().collect::<Vec<_>>().join(" · "))
             })
@@ -1080,7 +1080,7 @@ impl CreatePage {
             let running = active.clone().filter(|j| j.status != "queued").count();
             (active.count(), running)
         };
-        let provider_label = clipward_core::provider_catalog::provider_label(&provider);
+        let provider_label = clipperstudio_core::provider_catalog::provider_label(&provider);
         let context = job_form::ReviewContext {
             caption_name: crate::captions::preset_name(&draft.caption_preset),
             provider_label: &provider_label,
@@ -1184,7 +1184,7 @@ impl CreatePage {
                     .one_line()
                     .text_body()
                     .text_color(t.ink_secondary)
-                    .child(clipward_core::format::source_label(&started.source)),
+                    .child(clipperstudio_core::format::source_label(&started.source)),
             )
             .child(
                 div()
@@ -1262,7 +1262,7 @@ fn manual_summary(draft: &ClipDraft, check: &FormCheck, t: &Tokens) -> impl Into
         .zip(&check.manual_check.rows)
         .enumerate()
         .map(|(i, (row, rc))| {
-            let title = match clipward_core::format::js_trim(&row.title) {
+            let title = match clipperstudio_core::format::js_trim(&row.title) {
                 "" => format!("Clip {}", i + 1),
                 title => title.to_string(),
             };

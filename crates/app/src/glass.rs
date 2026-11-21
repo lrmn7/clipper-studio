@@ -1,4 +1,4 @@
-//! Window glass on macOS: the desktop blurred behind the window by a chosen radius
+﻿//! Window glass on macOS: the desktop blurred behind the window by a chosen radius
 //! (Settings → Appearance → Blur radius).
 //!
 //! GPUI's `Blurred` background adds an `NSVisualEffectView` with a fixed material.
@@ -9,7 +9,7 @@
 //! its material does the blurring.
 #![cfg(target_os = "macos")]
 
-use clipward_core::appearance::BLUR_RADIUS;
+use clipperstudio_core::appearance::BLUR_RADIUS;
 use gpui_kit::Window;
 use objc2::msg_send;
 use objc2::runtime::AnyObject;

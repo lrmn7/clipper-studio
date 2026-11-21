@@ -1,4 +1,4 @@
-//! Settings → Appearance (SettingsPage.tsx AppearanceSettings, from MonoCode's
+﻿//! Settings → Appearance (SettingsPage.tsx AppearanceSettings, from MonoCode's
 //! appearance page, MIT): theme and accent, the tint of the neutral chrome, window
 //! glass, and layout. Every change shows at once: `Settings::set_appearance` saves
 //! and re-themes the window. Slider and picker drags update their value on every
@@ -7,7 +7,7 @@ use super::SettingsPage;
 use super::widgets::more_toggle;
 use crate::theme::Tokens;
 use crate::ui::{self, Btn, Hue, TypeScale, u};
-use clipward_core::appearance::{
+use clipperstudio_core::appearance::{
     self as look, ACCENT_COLOR_LABELS, ACCENT_COLOR_PRESETS, Appearance, ThemePreference,
 };
 use gpui_kit::component::slider::{Slider, SliderEvent, SliderState};

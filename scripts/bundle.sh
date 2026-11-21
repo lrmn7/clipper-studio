@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # Package the release build for Windows (.zip) or Linux (.tar.gz); macOS uses
-# bundle-macos.sh. Run after `cargo build --release -p clipward_app` and
+# bundle-macos.sh. Run after `cargo build --release -p clipperstudio_app` and
 # scripts/stage-tools.sh.
 #
 #   scripts/bundle.sh <windows|linux>
 #
 # Layout (what bundle_resources() in crates/app/src/main.rs looks for):
-#   Clipward/clipward[.exe]
-#   Clipward/resources/engine-bin/      ffmpeg, ffprobe, yt-dlp and their notices
-#   Clipward/resources/assets/{fonts,models}/
-#   Clipward/LICENSE, THIRD_PARTY_NOTICES.md
+#   ClipperStudio/clipperstudio[.exe]
+#   ClipperStudio/resources/engine-bin/      ffmpeg, ffprobe, yt-dlp and their notices
+#   ClipperStudio/resources/assets/{fonts,models}/
+#   ClipperStudio/LICENSE, THIRD_PARTY_NOTICES.md
 set -euo pipefail
 
 os="${1:?usage: bundle.sh <windows|linux>}"
@@ -31,21 +31,21 @@ for tool in "ffmpeg$exe" "ffprobe$exe" "yt-dlp$exe"; do
 done
 
 out="$target_dir/bundle"
-app="$out/Clipward"
+app="$out/ClipperStudio"
 rm -rf "$app"
 mkdir -p "$app/resources/assets"
-cp "$target_dir/release/clipward-app$exe" "$app/clipward$exe"
+cp "$target_dir/release/clipperstudio-app$exe" "$app/clipperstudio$exe"
 cp -R "$root/engine-bin" "$app/resources/engine-bin"
 cp -R "$root/crates/engine/assets/fonts" "$root/crates/engine/assets/models" "$app/resources/assets/"
 cp "$root/LICENSE" "$root/THIRD_PARTY_NOTICES.md" "$app/"
 
-name="Clipward_${version}_${os}_${arch}"
+name="ClipperStudio_${version}_${os}_${arch}"
 cd "$out"
 if [[ "$os" == windows ]]; then
   rm -f "$name.zip"
-  7z a -tzip -bso0 "$name.zip" Clipward
+  7z a -tzip -bso0 "$name.zip" ClipperStudio
   echo "==> $out/$name.zip"
 else
-  tar czf "$name.tar.gz" Clipward
+  tar czf "$name.tar.gz" ClipperStudio
   echo "==> $out/$name.tar.gz"
 fi

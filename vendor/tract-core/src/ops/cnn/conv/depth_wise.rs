@@ -86,13 +86,13 @@ impl TypedOp for DepthWise {
     as_op!();
 }
 
-// CLIPWARD PATCH (see CLIPWARD_PATCH.md): `B` consecutive outputs of one contiguous row.
+// CLIPPERSTUDIO PATCH (see CLIPPERSTUDIO_PATCH.md): `B` consecutive outputs of one contiguous row.
 // Each output sums bias + k[0]*x[0] + k[1]*x[1] + ... in tap order with a separate multiply
 // and add, exactly like `inner_loop_*`, so results are bit-identical; LLVM vectorises across
 // the `B` outputs, and a wide `B` keeps several independent add chains in flight.
 #[inline(always)]
 #[allow(clippy::too_many_arguments)]
-unsafe fn clipward_row_block<T: Copy, const N: usize, const B: usize>(
+unsafe fn clipperstudio_row_block<T: Copy, const N: usize, const B: usize>(
     iptr: *const T,
     optr: *mut T,
     ioffset: &[isize; N],
@@ -191,8 +191,8 @@ macro_rules! impl_eval {
                     4 => [<process_zone_n_ $suffix>]::<T, 4, 4>(
                         dw, zone, c_stride_i, c_stride_o, k_stride_i, iptr, kptr, bias, optr, add, mul,
                     ),
-                    // CLIPWARD PATCH: 3x3 kernels too, centre (9 taps) and padded edges (6).
-                    // See CLIPWARD_PATCH.md.
+                    // CLIPPERSTUDIO PATCH: 3x3 kernels too, centre (9 taps) and padded edges (6).
+                    // See CLIPPERSTUDIO_PATCH.md.
                     6 => [<process_zone_n_ $suffix>]::<T, 6, 4>(
                         dw, zone, c_stride_i, c_stride_o, k_stride_i, iptr, kptr, bias, optr, add, mul,
                     ),
@@ -248,7 +248,7 @@ macro_rules! impl_eval {
                     while !visitor.done {
                         let iptr = iptr.offset(visitor.input_center_offset);
                         let optr = optr.offset(visitor.output_offset);
-                        // CLIPWARD PATCH (see CLIPWARD_PATCH.md): contiguous rows with more than
+                        // CLIPPERSTUDIO PATCH (see CLIPPERSTUDIO_PATCH.md): contiguous rows with more than
                         // 4 taps, bit-identical to `inner_loop_*`. (`ker` below only vectorises
                         // up to 4 taps, with fused multiply-add.)
                         if N > 4
@@ -258,15 +258,15 @@ macro_rules! impl_eval {
                             let len = visitor.inner_loop_len;
                             let mut i = 0;
                             while i + 32 <= len {
-                                clipward_row_block::<T, N, 32>(iptr.add(i), optr.add(i), &ioffset, &k, bias, &add, &mul);
+                                clipperstudio_row_block::<T, N, 32>(iptr.add(i), optr.add(i), &ioffset, &k, bias, &add, &mul);
                                 i += 32;
                             }
                             while i + 8 <= len {
-                                clipward_row_block::<T, N, 8>(iptr.add(i), optr.add(i), &ioffset, &k, bias, &add, &mul);
+                                clipperstudio_row_block::<T, N, 8>(iptr.add(i), optr.add(i), &ioffset, &k, bias, &add, &mul);
                                 i += 8;
                             }
                             while i < len {
-                                clipward_row_block::<T, N, 1>(iptr.add(i), optr.add(i), &ioffset, &k, bias, &add, &mul);
+                                clipperstudio_row_block::<T, N, 1>(iptr.add(i), optr.add(i), &ioffset, &k, bias, &add, &mul);
                                 i += 1;
                             }
                             visitor.next_non_inner_axis();

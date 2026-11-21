@@ -1,6 +1,6 @@
-//! Where Clipward keeps its files. Mirrors Electron's app.getPath('userData' | 'logs' |
+//! Where ClipperStudio keeps its files. Mirrors Electron's app.getPath('userData' | 'logs' |
 //! 'home') and process.resourcesPath, plus the development-only isolation used by
-//! end-to-end tests (CLIPWARD_USER_DATA_DIR).
+//! end-to-end tests (CLIPPERSTUDIO_USER_DATA_DIR).
 use std::path::{Path, PathBuf};
 
 #[derive(Debug, Clone)]
@@ -19,7 +19,7 @@ pub struct AppPaths {
 }
 
 /// The bundle identifier: app data and logs live in folders named after it.
-pub const APP_ID: &str = "com.clipward.desktop";
+pub const APP_ID: &str = "com.clipperstudio.desktop";
 
 impl AppPaths {
     /// The same folders Tauri's path resolver gives for `APP_ID`, so every shell shares
@@ -29,7 +29,8 @@ impl AppPaths {
         let home = dirs::home_dir().unwrap_or_else(std::env::temp_dir);
         let mut user_data = dirs::data_dir()
             .map(|dir| dir.join(APP_ID))
-            .unwrap_or_else(|| home.join(".clipward"));
+            .unwrap_or_else(|| home.join(".clipperstudio"));
+
         let mut logs = if cfg!(target_os = "macos") {
             home.join("Library").join("Logs").join(APP_ID)
         } else {
@@ -37,13 +38,16 @@ impl AppPaths {
                 .map(|dir| dir.join(APP_ID).join("logs"))
                 .unwrap_or_else(|| user_data.join("logs"))
         };
-        let mut legacy_user_data = dirs::config_dir().map(|dir| dir.join("Clipward"));
+        let mut legacy_user_data = dirs::config_dir()
+            .map(|dir| dir.join("ClipperStudio"))
+            .filter(|p| p.exists());
         let mut home = home;
 
         // Development-only: isolated settings for end-to-end tests, so a test run
         // never touches the developer's real app data.
         if !packaged {
-            if let Some(isolated) = std::env::var_os("CLIPWARD_USER_DATA_DIR").map(PathBuf::from) {
+            let isolated_var = std::env::var_os("CLIPPERSTUDIO_USER_DATA_DIR");
+            if let Some(isolated) = isolated_var.map(PathBuf::from) {
                 if isolated.is_absolute() {
                     home = isolated.join("isolated-home");
                     let _ = std::fs::create_dir_all(&home);

@@ -1,4 +1,4 @@
-//! The editor's shared state (EditorPage.tsx's hooks and use-editor-store.ts): the
+﻿//! The editor's shared state (EditorPage.tsx's hooks and use-editor-store.ts): the
 //! project with undo history, the selection, timeline zoom, and every edit the
 //! player, timeline and inspector make.
 //!
@@ -6,15 +6,15 @@
 //! while playing, and only the player, the clock and the playhead line follow it,
 //! so the tracks re-render on edits only.
 use crate::state;
-use clipward_core::clip_engine::TranscriptSegment;
-use clipward_core::clip_engine::render::project::{
+use clipperstudio_core::clip_engine::TranscriptSegment;
+use clipperstudio_core::clip_engine::render::project::{
     AudioItem, Crop, FocusLayer, MAX_FOCUS_LAYERS, MediaFile, OverlayBox, OverlayPreview, PipItem, Project, TextLayer,
     VideoItem,
 };
-use clipward_core::edit_history::EditHistory;
-use clipward_core::editor::EditorProject;
-use clipward_core::overlays::{self, LogoAspects, OverlayKey, OverlayView};
-use clipward_core::timeline;
+use clipperstudio_core::edit_history::EditHistory;
+use clipperstudio_core::editor::EditorProject;
+use clipperstudio_core::overlays::{self, LogoAspects, OverlayKey, OverlayView};
+use clipperstudio_core::timeline;
 use gpui_kit::*;
 use std::path::PathBuf;
 use std::time::Duration;
@@ -316,7 +316,7 @@ impl EditorState {
 
     /// Resize from a corner drag: a logo's width, or the title's or banner's scale.
     pub fn resize_overlay(&mut self, key: OverlayKey, factor: f64, base: f64, cx: &mut Context<Self>) {
-        use clipward_core::clip_engine::render::service::{MAX_LOGO_SIZE, MIN_LOGO_SIZE};
+        use clipperstudio_core::clip_engine::render::service::{MAX_LOGO_SIZE, MIN_LOGO_SIZE};
         if let Some(logo) = key.logo_index() {
             let size = (timeline::js_round((base * factor).clamp(MIN_LOGO_SIZE, MAX_LOGO_SIZE) * 1000.) / 1000.).max(MIN_LOGO_SIZE);
             self.change(
@@ -547,7 +547,7 @@ impl EditorState {
                         src_in_ms: 0,
                         src_out_ms: len,
                         framing: "crop".into(),
-                        crop: Some(clipward_core::clip_engine::render::project::Crop { x: 0.5, y: 0.5, zoom: 1.0 }),
+                        crop: Some(clipperstudio_core::clip_engine::render::project::Crop { x: 0.5, y: 0.5, zoom: 1.0 }),
                         media: Some(file.file.clone()),
                         volume: 1.0,
                         effect: "fade".into(),
@@ -594,7 +594,7 @@ impl EditorState {
     }
 
     /// Add imported music or a sound effect at the playhead.
-    pub fn add_sound(&mut self, imported: clipward_core::ImportedAudio, cx: &mut Context<Self>) {
+    pub fn add_sound(&mut self, imported: clipperstudio_core::ImportedAudio, cx: &mut Context<Self>) {
         let Some(project) = self.project() else { return };
         let total = self.total() as i64;
         let start = (self.time(cx) as i64).min((total - timeline::MIN_ITEM_MS).max(0));
@@ -620,7 +620,7 @@ impl EditorState {
 
     /// A recorded voiceover from `start`: recording over an earlier take replaces
     /// that part of it.
-    pub fn add_voiceover(&mut self, take: clipward_core::ImportedAudio, start: i64, cx: &mut Context<Self>) {
+    pub fn add_voiceover(&mut self, take: clipperstudio_core::ImportedAudio, start: i64, cx: &mut Context<Self>) {
         let total = self.total() as i64;
         let len = take.duration_ms.min(total - start).max(timeline::MIN_ITEM_MS);
         let mut id = String::new();
@@ -656,7 +656,7 @@ impl EditorState {
             |p| {
                 index = p.logos.len();
                 let mut logos = p.logos.clone();
-                logos.push(clipward_core::clip_engine::render::project::LogoLayer {
+                logos.push(clipperstudio_core::clip_engine::render::project::LogoLayer {
                     path: name.clone(),
                     position: "top-right".into(),
                     size: 0.15,
@@ -868,5 +868,5 @@ fn load_track_height(cx: &App) -> f32 {
 fn save_track_height(height: f32, cx: &App) {
     let bytes = serde_json::to_vec(&serde_json::json!({ "trackHeight": height })).unwrap_or_default();
     // Not saved: the next open starts at the default.
-    let _ = clipward_core::paths::write_atomic(&track_file(cx), &bytes);
+    let _ = clipperstudio_core::paths::write_atomic(&track_file(cx), &bytes);
 }

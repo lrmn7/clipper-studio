@@ -1,4 +1,4 @@
-//! The video step's source picker: a drop zone with the link field and Browse,
+﻿//! The video step's source picker: a drop zone with the link field and Browse,
 //! then a preview card for the chosen source (SourcePicker.tsx).
 //!
 //! Unlike the webview, GPUI hands us the dropped file's real path, so a dropped
@@ -8,9 +8,9 @@ use super::{CreatePage, edit};
 use crate::state;
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{self, Btn, Hue, Truncate, TypeScale, u};
-use clipward_core::format::{format_timecode, is_url};
-use clipward_core::job_form::{ClipDraft, SourceDuration};
-use clipward_core::video_source::{
+use clipperstudio_core::format::{format_timecode, is_url};
+use clipperstudio_core::job_form::{ClipDraft, SourceDuration};
+use clipperstudio_core::video_source::{
     SourceKind, display_source, is_valid_source_link, is_video_file, local_duration,
     normalize_video_source, source_link_error, twitch_source_error,
 };
@@ -83,7 +83,7 @@ impl CreatePage {
 
     /// A YouTube link's thumbnail, downloaded by the core (other links have none).
     fn load_youtube_thumbnail(&mut self, source: &str, cx: &mut Context<Self>) {
-        let Some(id) = clipward_core::format::youtube_id(source) else {
+        let Some(id) = clipperstudio_core::format::youtube_id(source) else {
             return;
         };
         let core = state::core(cx);

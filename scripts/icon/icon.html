@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Clipward app icon</title>
+    <title>ClipperStudio app icon</title>
     <style>
       * { box-sizing: border-box; }
       body { margin: 0; padding: 48px; background: #09090b; color: #fafafa; font: 15px system-ui, sans-serif; }
@@ -20,9 +20,9 @@
   </head>
   <body>
     <main>
-      <h1>Clipward app icon</h1>
+      <h1>ClipperStudio app icon</h1>
       <p>A clip cut on a slant, in one colour on a charcoal tile. Vector master from build-logo.py, with transparent outer padding.</p>
-      <img class="hero" src="../../resources/clipward-icon.svg" alt="Clipward app icon" />
+      <img class="hero" src="../../resources/clipperstudio-icon.svg" alt="ClipperStudio app icon" />
       <div class="sizes" aria-label="Icon sizes on a dark surface"></div>
       <div class="sizes light" aria-label="Icon sizes on a light surface"></div>
     </main>
@@ -31,9 +31,9 @@
         for (const size of [16, 24, 32, 48, 64, 128]) {
           const figure = document.createElement('figure')
           const img = document.createElement('img')
-          img.src = size <= 64 ? '../../resources/clipward-icon-small.svg' : '../../resources/clipward-icon.svg'
+          img.src = size <= 64 ? '../../resources/clipperstudio-icon-small.svg' : '../../resources/clipperstudio-icon.svg'
           img.width = img.height = size
-          img.alt = `Clipward at ${size} pixels`
+          img.alt = `ClipperStudio at ${size} pixels`
           const caption = document.createElement('figcaption')
           caption.textContent = `${size}px`
           figure.append(img, caption)

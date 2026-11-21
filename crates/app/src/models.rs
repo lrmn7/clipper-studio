@@ -4,18 +4,18 @@
 //! Settings calls are synchronous (a cached struct and a small JSON write), so
 //! they run on the UI thread in order; the TS store's save queue isn't needed.
 use crate::state;
-use clipward_core::ToolStatus;
-use clipward_core::ai_providers::DetectedCli;
-use clipward_core::appearance::Appearance;
-use clipward_core::jobs::JobSnapshot;
-use clipward_core::settings::{EditableSettings, PublicSettings};
-use clipward_core::job_list::JobList;
-use clipward_core::readiness;
-use clipward_core::updater::{self, Update};
-use clipward_core::whisper::WhisperModelStatus;
+use clipperstudio_core::ToolStatus;
+use clipperstudio_core::ai_providers::DetectedCli;
+use clipperstudio_core::appearance::Appearance;
+use clipperstudio_core::jobs::JobSnapshot;
+use clipperstudio_core::settings::{EditableSettings, PublicSettings};
+use clipperstudio_core::job_list::JobList;
+use clipperstudio_core::readiness;
+use clipperstudio_core::updater::{self, Update};
+use clipperstudio_core::whisper::WhisperModelStatus;
 use gpui_kit::{App, AppContext, Context, Entity, EventEmitter, Global, Task};
 
-pub use clipward_core::readiness::{LOCAL_PROVIDER, SetupState, setup_blocked_reason};
+pub use clipperstudio_core::readiness::{LOCAL_PROVIDER, SetupState, setup_blocked_reason};
 
 pub struct Settings {
     pub value: Option<PublicSettings>,
@@ -283,7 +283,7 @@ impl Jobs {
 
 const UPDATE_RECHECK: std::time::Duration = std::time::Duration::from_secs(6 * 60 * 60);
 
-/// Where an app update stands (`clipward_core::updater`).
+/// Where an app update stands (`clipperstudio_core::updater`).
 #[derive(Clone, Debug, Default)]
 pub enum UpdateState {
     #[default]
@@ -386,7 +386,7 @@ impl Updater {
                     } else {
                         // Installed, just not restarted.
                         this.state = UpdateState::Failed {
-                            message: format!("Updated to {}. Quit and reopen Clipward to use it.", update.version),
+                            message: format!("Updated to {}. Quit and reopen ClipperStudio to use it.", update.version),
                             update: None,
                         };
                     }

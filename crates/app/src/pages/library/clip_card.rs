@@ -1,4 +1,4 @@
-//! One clip in a clip list (ClipCard.tsx): thumbnail, chips, hover actions,
+﻿//! One clip in a clip list (ClipCard.tsx): thumbnail, chips, hover actions,
 //! selection, and the badges for unexported edits and render fallbacks.
 use super::clip_list::ClipList;
 use super::run_stats::tnum;
@@ -6,9 +6,9 @@ use super::thumbnails::Thumb;
 use crate::shell;
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{self, Truncate, TypeScale, u};
-use clipward_core::format::format_timecode;
-use clipward_core::job_view::ClipArtifact;
-use clipward_core::library::{clip_file_path, clip_title, fallback_label, layout_label};
+use clipperstudio_core::format::format_timecode;
+use clipperstudio_core::job_view::ClipArtifact;
+use clipperstudio_core::library::{clip_file_path, clip_title, fallback_label, layout_label};
 use gpui_kit::component::WindowExt as _;
 use gpui_kit::component::tooltip::Tooltip;
 use gpui_kit::prelude::FluentBuilder;

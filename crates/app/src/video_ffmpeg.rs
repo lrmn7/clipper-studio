@@ -1,4 +1,4 @@
-//! Media playback for the editor's preview on Windows and Linux (and on macOS with
+﻿//! Media playback for the editor's preview on Windows and Linux (and on macOS with
 //! `--features portable-video`): the bundled ffmpeg decodes, GPUI draws the frames
 //! as images and rodio plays the sound. Same API as the AVFoundation player (video.rs).
 //!
@@ -9,8 +9,8 @@
 //! ponytail: wall clock, not audio-driven; drive it from samples played if drift shows.
 //! Must be used on the main thread.
 
-use clipward_core::AppPaths;
-use clipward_core::tools::{Tool, resolve_binary};
+use clipperstudio_core::AppPaths;
+use clipperstudio_core::tools::{Tool, resolve_binary};
 use gpui_kit::*;
 use std::cell::RefCell;
 use std::io::Read;

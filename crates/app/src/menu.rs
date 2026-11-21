@@ -1,8 +1,8 @@
 //! The menu bar: app, File, Edit, View, Help. The
 //! webview-only Reload and Developer Tools items are gone.
 use crate::models::Settings;
-use clipward_core::appearance::{zoom_in_ui_scale, zoom_out_ui_scale, UI_SCALE};
-use clipward_core::shared::{ISSUES_URL, REPO_URL};
+use clipperstudio_core::appearance::{zoom_in_ui_scale, zoom_out_ui_scale, UI_SCALE};
+use clipperstudio_core::shared::{ISSUES_URL, REPO_URL};
 use gpui_kit::component::input::{Copy, Cut, Paste, Redo, SelectAll, Undo};
 use gpui_kit::*;
 
@@ -124,7 +124,7 @@ fn set_scale(next: fn(f64) -> f64, cx: &mut App) {
 
 /// The standard macOS About panel: name, version and icon from the bundle.
 /// Outside an app bundle (`cargo run`) macOS shows a generic executable in the Dock
-/// and the About panel; give it Clipward's icon. A bundle names its own icon.icns.
+/// and the About panel; give it ClipperStudio's icon. A bundle names its own icon.icns.
 pub fn set_unbundled_icon() {
     #[cfg(target_os = "macos")]
     unsafe {

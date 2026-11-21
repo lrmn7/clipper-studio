@@ -94,7 +94,7 @@ pub fn hsv_to_hex(h: f64, s: f64, v: f64) -> String {
     format!("#{:02x}{:02x}{:02x}", byte(r), byte(g), byte(b))
 }
 
-/// `#rrggbb` as the space-separated channels Clipward's colour tokens use.
+/// `#rrggbb` as the space-separated channels ClipperStudio's colour tokens use.
 pub fn hex_to_channels(hex: &str) -> String {
     let [r, g, b] = channels(hex);
     format!("{r} {g} {b}")

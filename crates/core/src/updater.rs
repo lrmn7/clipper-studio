@@ -226,10 +226,10 @@ fn install_bundle(dmg: &Path, app: &Path, parent: &Path) -> Result<PathBuf, Stri
     let mount = dmg.with_extension("mount");
     let _ = std::fs::create_dir_all(&mount);
     run(Command::new("hdiutil").arg("attach").args(["-nobrowse", "-readonly", "-noautoopen", "-mountpoint"]).arg(&mount).arg(dmg))?;
-    // The DMG holds Clipward.app; the installed copy may have been renamed.
+    // The DMG holds ClipperStudio.app; the installed copy may have been renamed.
     let staged = parent.join(format!(".{name}.update"));
     let _ = std::fs::remove_dir_all(&staged);
-    let copied = run(Command::new("ditto").arg(mount.join("Clipward.app")).arg(&staged));
+    let copied = run(Command::new("ditto").arg(mount.join("ClipperStudio.app")).arg(&staged));
     let _ = run(Command::new("hdiutil").arg("detach").arg(&mount).arg("-force"));
     let _ = std::fs::remove_dir(&mount);
     copied?;
@@ -247,12 +247,12 @@ fn install_bundle(dmg: &Path, app: &Path, parent: &Path) -> Result<PathBuf, Stri
 }
 
 fn install_folder(archive: &Path, dir: &Path, parent: &Path) -> Result<PathBuf, String> {
-    let staging = parent.join(".clipward-update");
+    let staging = parent.join(".clipperstudio-update");
     let _ = std::fs::remove_dir_all(&staging);
     std::fs::create_dir_all(&staging).map_err(|e| e.to_string())?;
     // bsdtar (Windows 10+) reads zips; GNU tar detects gzip.
     let result = run(Command::new("tar").arg("-xf").arg(archive).arg("-C").arg(&staging))
-        .and_then(|()| replace_tree(&staging.join("Clipward"), dir));
+        .and_then(|()| replace_tree(&staging.join("ClipperStudio"), dir));
     let _ = std::fs::remove_dir_all(&staging);
     result?;
     let exe = std::env::current_exe().map_err(|e| e.to_string())?;
@@ -359,12 +359,12 @@ mod tests {
 
     #[test]
     fn picks_this_platforms_package() {
-        let name = format!("Clipward_0.3.0{}", asset_suffix());
+        let name = format!("ClipperStudio_0.3.0{}", asset_suffix());
         let release = json!({
             "tag_name": "v0.3.0",
             "html_url": "https://github.com/lrmn7/clipper-studio/releases/tag/v0.3.0",
             "assets": [
-                { "name": "Clipward_0.3.0_other.bin", "browser_download_url": "https://x/other", "size": 1 },
+                { "name": "ClipperStudio_0.3.0_other.bin", "browser_download_url": "https://x/other", "size": 1 },
                 { "name": name, "browser_download_url": "https://x/pkg", "size": 42 },
                 { "name": "SHA256SUMS.txt", "browser_download_url": "https://x/sums", "size": 1 },
             ],
@@ -381,9 +381,9 @@ mod tests {
 
     #[test]
     fn reads_sha256sum_lines() {
-        let sums = "abc123  Clipward_0.3.0_aarch64.dmg\ndef456 *Clipward_0.3.0_windows_x64.zip\n";
-        assert_eq!(listed_hash(sums, "Clipward_0.3.0_aarch64.dmg"), Some("abc123"));
-        assert_eq!(listed_hash(sums, "Clipward_0.3.0_windows_x64.zip"), Some("def456"));
+        let sums = "abc123  ClipperStudio_0.3.0_aarch64.dmg\ndef456 *ClipperStudio_0.3.0_windows_x64.zip\n";
+        assert_eq!(listed_hash(sums, "ClipperStudio_0.3.0_aarch64.dmg"), Some("abc123"));
+        assert_eq!(listed_hash(sums, "ClipperStudio_0.3.0_windows_x64.zip"), Some("def456"));
         assert_eq!(listed_hash(sums, "missing"), None);
     }
 
@@ -391,43 +391,43 @@ mod tests {
     #[cfg(target_os = "macos")]
     #[test]
     fn swaps_the_app_bundle_from_a_dmg() {
-        let root = std::env::temp_dir().join(format!("clipward-dmg-test-{}", std::process::id()));
+        let root = std::env::temp_dir().join(format!("clipperstudio-dmg-test-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&root);
         let (src, installed) = (root.join("src"), root.join("Applications"));
         for (base, text) in [(&src, "new"), (&installed, "old")] {
-            std::fs::create_dir_all(base.join("Clipward.app/Contents/MacOS")).unwrap();
-            std::fs::write(base.join("Clipward.app/Contents/MacOS/clipward-app"), text).unwrap();
+            std::fs::create_dir_all(base.join("ClipperStudio.app/Contents/MacOS")).unwrap();
+            std::fs::write(base.join("ClipperStudio.app/Contents/MacOS/clipperstudio-app"), text).unwrap();
         }
-        let dmg = root.join("Clipward_9.9.9_aarch64.dmg");
-        run(Command::new("hdiutil").args(["create", "-quiet", "-volname", "Clipward", "-fs", "HFS+", "-format", "UDZO", "-srcfolder"]).arg(&src).arg(&dmg)).unwrap();
-        let app = installed.join("Clipward.app");
+        let dmg = root.join("ClipperStudio_9.9.9_aarch64.dmg");
+        run(Command::new("hdiutil").args(["create", "-quiet", "-volname", "ClipperStudio", "-fs", "HFS+", "-format", "UDZO", "-srcfolder"]).arg(&src).arg(&dmg)).unwrap();
+        let app = installed.join("ClipperStudio.app");
         assert_eq!(install_bundle(&dmg, &app, &installed).unwrap(), app);
-        assert_eq!(std::fs::read_to_string(app.join("Contents/MacOS/clipward-app")).unwrap(), "new");
-        assert!(!installed.join(".Clipward.app.old").exists() && !installed.join(".Clipward.app.update").exists());
+        assert_eq!(std::fs::read_to_string(app.join("Contents/MacOS/clipperstudio-app")).unwrap(), "new");
+        assert!(!installed.join(".ClipperStudio.app.old").exists() && !installed.join(".ClipperStudio.app.update").exists());
         let _ = std::fs::remove_dir_all(&root);
     }
 
     #[test]
     fn replaces_files_and_rolls_back() {
-        let root = std::env::temp_dir().join(format!("clipward-update-test-{}", std::process::id()));
+        let root = std::env::temp_dir().join(format!("clipperstudio-update-test-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&root);
         let (new, dir) = (root.join("new"), root.join("dir"));
         for (base, text) in [(&new, "new"), (&dir, "old")] {
             std::fs::create_dir_all(base.join("resources")).unwrap();
-            std::fs::write(base.join("clipward"), text).unwrap();
+            std::fs::write(base.join("clipperstudio"), text).unwrap();
             std::fs::write(base.join("resources/a.txt"), text).unwrap();
         }
         std::fs::write(new.join("resources/added.txt"), "new").unwrap();
         replace_tree(&new, &dir).unwrap();
-        assert_eq!(std::fs::read_to_string(dir.join("clipward")).unwrap(), "new");
+        assert_eq!(std::fs::read_to_string(dir.join("clipperstudio")).unwrap(), "new");
         assert_eq!(std::fs::read_to_string(dir.join("resources/a.txt")).unwrap(), "new");
         assert_eq!(std::fs::read_to_string(dir.join("resources/added.txt")).unwrap(), "new");
-        assert_eq!(std::fs::read_to_string(dir.join("clipward.old")).unwrap(), "old");
+        assert_eq!(std::fs::read_to_string(dir.join("clipperstudio.old")).unwrap(), "old");
         // A package without resources/ is refused and nothing moves.
         std::fs::remove_dir_all(&new).unwrap();
         std::fs::create_dir_all(&new).unwrap();
         assert!(replace_tree(&new, &dir).is_err());
-        assert_eq!(std::fs::read_to_string(dir.join("clipward")).unwrap(), "new");
+        assert_eq!(std::fs::read_to_string(dir.join("clipperstudio")).unwrap(), "new");
         let _ = std::fs::remove_dir_all(&root);
     }
 }

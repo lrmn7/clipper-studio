@@ -54,7 +54,7 @@ pub enum ThemePreference {
 #[serde(rename_all = "camelCase")]
 pub struct Appearance {
     pub theme: ThemePreference,
-    /// `#rrggbb`, or None for Clipward's own accent.
+    /// `#rrggbb`, or None for ClipperStudio's own accent.
     pub accent_color: Option<String>,
     /// Hue of the neutral chrome, in degrees.
     pub hue: f64,

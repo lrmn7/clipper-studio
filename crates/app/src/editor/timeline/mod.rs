@@ -1,9 +1,9 @@
-//! The timeline (Timeline.tsx, Filmstrip.tsx, Waveform.tsx). See docs/GPUI_PORT.md.
+﻿//! The timeline (Timeline.tsx, Filmstrip.tsx, Waveform.tsx). See docs/GPUI_PORT.md.
 //!
 //! Two cached views under this one: `Tracks` draws every track and handles every drag
 //! (re-rendering on edits, selection, zoom and scrolling), `Lines` draws the playhead
 //! and hover line and follows the `Playhead`, which changes every frame while playing.
-//! The geometry and drag math live in `clipward_core::timeline_view`.
+//! The geometry and drag math live in `clipperstudio_core::timeline_view`.
 mod lines;
 mod media;
 mod tracks;

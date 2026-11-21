@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Debian/Ubuntu packages for building Clipward: GPUI (Wayland, X11, fonts), rodio
+# Debian/Ubuntu packages for building ClipperStudio: GPUI (Wayland, X11, fonts), rodio
 # (ALSA), the keychain (D-Bus) and whisper.cpp (cmake, clang for bindgen).
 set -euo pipefail
 sudo apt-get update

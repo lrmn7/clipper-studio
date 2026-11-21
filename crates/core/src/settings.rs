@@ -1,6 +1,6 @@
 //! Settings store.
 //!
-//! Clipward is bring-your-own-key: every provider call is made from this machine
+//! ClipperStudio is bring-your-own-key: every provider call is made from this machine
 //! with the user's own keys. Keys never touch settings.json: they live in the OS
 //! keychain (macOS Keychain, Windows Credential Manager, Secret Service on Linux),
 //! as Electron's safeStorage kept them. When no keychain is available, saving a key
@@ -21,7 +21,7 @@ use std::path::{Path, PathBuf};
 use std::sync::{LazyLock, Mutex};
 
 const SETTINGS_VERSION: u32 = 1;
-const KEYCHAIN_SERVICE: &str = "com.clipward.desktop";
+const KEYCHAIN_SERVICE: &str = "com.clipperstudio.desktop";
 
 pub const SECRET_KEYS: [&str; 4] = [
     "openrouterApiKey",
@@ -334,7 +334,7 @@ impl SettingsStore {
                 ai_model: String::new(),
                 ai_effort: String::new(),
                 whisper_model: DEFAULT_WHISPER_MODEL.into(),
-                output_directory: home.join("Clipward").to_string_lossy().into_owned(),
+                output_directory: home.join("ClipperStudio").to_string_lossy().into_owned(),
                 custom_vocabulary: String::new(),
                 window_glass: default_window_glass(),
                 appearance: Appearance::default(),
@@ -707,8 +707,8 @@ fn entry(key: &str) -> Result<keyring::Entry, String> {
 
 fn keychain_get(key: &str) -> Result<String, keyring::Error> {
     match keyring::Entry::new(KEYCHAIN_SERVICE, key)?.get_password() {
-        Ok(value) => Ok(value),
-        Err(keyring::Error::NoEntry) => Ok(String::new()),
+        Ok(value) if !value.is_empty() => Ok(value),
+        Ok(_) | Err(keyring::Error::NoEntry) => Ok(String::new()),
         Err(error) => Err(error),
     }
 }
@@ -733,9 +733,9 @@ mod tests {
     #[test]
     fn vocabulary_is_bounded_and_deduplicated() {
         let terms = vocabulary_terms(
-            "Clipward, clipward\n  Open   AI \n<bad>\none two three four five six",
+            "ClipperStudio, clipperstudio\n  Open   AI \n<bad>\none two three four five six",
         );
-        assert_eq!(terms, vec!["Clipward", "Open AI"]);
+        assert_eq!(terms, vec!["ClipperStudio", "Open AI"]);
     }
 
     #[test]
@@ -746,7 +746,7 @@ mod tests {
         .unwrap();
         assert!(old.window_glass);
 
-        let dir = std::env::temp_dir().join(format!("clipward-glass-{}", uuid::Uuid::new_v4()));
+        let dir = std::env::temp_dir().join(format!("clipperstudio-glass-{}", uuid::Uuid::new_v4()));
         let home = std::env::temp_dir();
         let store = SettingsStore::new(&dir, None, &home);
         assert!(store.load().unwrap().window_glass);
@@ -783,7 +783,7 @@ mod tests {
         assert_eq!(odd.appearance.hue, 360.0);
         assert_eq!(odd.appearance.accent_color.as_deref(), Some("#aabbcc"));
 
-        let dir = std::env::temp_dir().join(format!("clipward-look-{}", uuid::Uuid::new_v4()));
+        let dir = std::env::temp_dir().join(format!("clipperstudio-look-{}", uuid::Uuid::new_v4()));
         let home = std::env::temp_dir();
         let store = SettingsStore::new(&dir, None, &home);
         let next = Appearance {
@@ -816,7 +816,7 @@ mod tests {
         assert_eq!(old.local_base_url, "http://localhost:11434/v1");
         assert!(old.local_model.is_empty() && !old.local_images);
 
-        let dir = std::env::temp_dir().join(format!("clipward-local-{}", uuid::Uuid::new_v4()));
+        let dir = std::env::temp_dir().join(format!("clipperstudio-local-{}", uuid::Uuid::new_v4()));
         let home = std::env::temp_dir();
         let store = SettingsStore::new(&dir, None, &home);
         let current = store.load().unwrap();
@@ -887,7 +887,7 @@ mod tests {
         .unwrap();
         assert_eq!(old.max_source_height, 2160);
 
-        let dir = std::env::temp_dir().join(format!("clipward-quality-{}", uuid::Uuid::new_v4()));
+        let dir = std::env::temp_dir().join(format!("clipperstudio-quality-{}", uuid::Uuid::new_v4()));
         let home = std::env::temp_dir();
         let store = SettingsStore::new(&dir, None, &home);
         assert_eq!(store.set_max_source_height(1080).unwrap().max_source_height, 1080);
@@ -906,7 +906,7 @@ mod tests {
         // Default is not written, so files stay as they were.
         assert!(!serde_json::to_string(&old).unwrap().contains("aiEffort"));
 
-        let dir = std::env::temp_dir().join(format!("clipward-effort-{}", uuid::Uuid::new_v4()));
+        let dir = std::env::temp_dir().join(format!("clipperstudio-effort-{}", uuid::Uuid::new_v4()));
         let home = std::env::temp_dir();
         let store = SettingsStore::new(&dir, None, &home);
         let current = store.load().unwrap();

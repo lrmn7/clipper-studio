@@ -1,6 +1,6 @@
 # Third-party notices
 
-The [MIT license](../../LICENSE) covers Clipward-owned clipping engine source. The following bundled files have separate terms. Keep their license files when redistributing the engine or an app that includes it.
+The [MIT license](../../LICENSE) covers ClipperStudio-owned clipping engine source. The following bundled files have separate terms. Keep their license files when redistributing the engine or an app that includes it.
 
 | Component | Included files | Source and terms |
 | --- | --- | --- |

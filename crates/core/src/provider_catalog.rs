@@ -3,9 +3,9 @@
 //! SettingsPage.tsx), for the GPUI shell.
 use crate::shared::AI_CLIS;
 
-pub const APP_NAME: &str = "Clipper Studio";
+pub const APP_NAME: &str = "ClipperStudio";
 pub const LICENSE_NAME: &str = "MIT";
-pub const CLIPWARD_URL: &str = "https://www.clipward.ai";
+pub const CLIPPERSTUDIO_URL: &str = "https://github.com/lrmn7/clipper-studio";
 
 /// The plan each CLI bills to (AI_CLIS `hint`).
 pub fn cli_hint(id: &str) -> &'static str {
@@ -153,7 +153,7 @@ pub fn whisper_label(id: &str) -> &str {
         .map_or(id, |model| model.label)
 }
 
-/// The note for a repo model Clipward has no curated text for, from its name:
+/// The note for a repo model ClipperStudio has no curated text for, from its name:
 /// `small.en-q5_1` -> "English only. Quantized: smaller and faster, a little less accurate."
 pub fn whisper_note(id: &str) -> String {
     let mut parts = vec![if id.contains(".en") { "English only." } else { "Multilingual." }];

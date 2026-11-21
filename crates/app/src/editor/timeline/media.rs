@@ -1,4 +1,4 @@
-//! Filmstrip thumbnails and loudness peaks (Filmstrip.tsx, Waveform.tsx), kept for the
+﻿//! Filmstrip thumbnails and loudness peaks (Filmstrip.tsx, Waveform.tsx), kept for the
 //! session and shared by every timeline.
 //!
 //! A filmstrip block is one FFmpeg run, so blocks load one at a time, the ones on
@@ -6,7 +6,7 @@
 //! load as asked. A failed read may work later (a file still importing), so it is
 //! retried when a timeline asks again after a while.
 use crate::state;
-use clipward_core::clip_engine::render::project::FILMSTRIP_BLOCK_S;
+use clipperstudio_core::clip_engine::render::project::FILMSTRIP_BLOCK_S;
 use gpui_kit::*;
 use std::collections::{HashMap, VecDeque};
 use std::path::{Path, PathBuf};

@@ -1,4 +1,4 @@
-//! Clipward clipping engine: download -> transcribe -> plan -> layout -> render.
+//! ClipperStudio clipping engine: download -> transcribe -> plan -> layout -> render.
 pub mod error;
 pub mod media;
 pub mod types;

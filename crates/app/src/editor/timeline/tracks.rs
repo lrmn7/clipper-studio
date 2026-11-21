@@ -1,4 +1,4 @@
-//! Every track of the timeline and every drag on it (Timeline.tsx `Tracks`).
+﻿//! Every track of the timeline and every drag on it (Timeline.tsx `Tracks`).
 //!
 //! The main track plays its pieces back to back, CapCut style: drag a piece's edges to
 //! trim it, drag the piece to reorder, click the ruler or a piece to move the playhead.
@@ -8,11 +8,11 @@ use super::media::{self, FileKey, Frames, StripKey, Wants};
 use crate::editor::state::{EditorState, Selection, ZOOM_MAX, ZOOM_MIN};
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{self, Truncate, TypeScale, u};
-use clipward_core::clip_engine::render::project::{AudioItem, FocusLayer, OverlayBox, PipItem, Project, TextLayer, VideoItem};
-use clipward_core::format::{format_ruler, to_fixed};
-use clipward_core::overlays::OverlayKey;
-use clipward_core::timeline::{self, Edge, EditedWord, snap_to_frame, sound_length};
-use clipward_core::timeline_view::{self as view, TrackLayout};
+use clipperstudio_core::clip_engine::render::project::{AudioItem, FocusLayer, OverlayBox, PipItem, Project, TextLayer, VideoItem};
+use clipperstudio_core::format::{format_ruler, to_fixed};
+use clipperstudio_core::overlays::OverlayKey;
+use clipperstudio_core::timeline::{self, Edge, EditedWord, snap_to_frame, sound_length};
+use clipperstudio_core::timeline_view::{self as view, TrackLayout};
 use gpui_kit::component::input::{Enter, Escape, IndentInline, Input, InputEvent, InputState, OutdentInline};
 use gpui_kit::component::tooltip::Tooltip;
 use gpui_kit::prelude::FluentBuilder as _;

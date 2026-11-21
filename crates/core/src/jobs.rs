@@ -539,7 +539,7 @@ async fn run_tracked_job(app: Arc<Core>, id: String) {
         Ok(dir) => dir,
         Err(_) => {
             return report_error(
-                "Clipward could not create a private temporary work folder.".into(),
+                "ClipperStudio could not create a private temporary work folder.".into(),
                 None,
             )
         }

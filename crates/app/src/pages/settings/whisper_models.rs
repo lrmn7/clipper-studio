@@ -1,4 +1,4 @@
-//! Offline transcription models (WhisperModels.tsx). The selected one must be
+﻿//! Offline transcription models (WhisperModels.tsx). The selected one must be
 //! downloaded before a job can start. Downloads run on the core's runtime and feed
 //! `models::Settings`, so they carry on (and keep reporting) after the page closes.
 //!
@@ -11,8 +11,8 @@ use crate::models::Settings;
 use crate::state;
 use crate::theme::ActiveTokens;
 use crate::ui::{self, Btn, TypeScale, Truncate, u};
-use clipward_core::provider_catalog::{WHISPER_MODELS, format_size_mb, whisper_note};
-use clipward_core::whisper::WhisperModelStatus;
+use clipperstudio_core::provider_catalog::{WHISPER_MODELS, format_size_mb, whisper_note};
+use clipperstudio_core::whisper::WhisperModelStatus;
 use gpui_kit::prelude::FluentBuilder;
 use gpui_kit::*;
 

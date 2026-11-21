@@ -1,4 +1,4 @@
-//! The side panel: brief, inspectors, overlays and captions (TextPanels, OverlayPanels,
+﻿//! The side panel: brief, inspectors, overlays and captions (TextPanels, OverlayPanels,
 //! SoundPanels, ColorPanel and the piece inspector in EditorPage.tsx). See docs/GPUI_PORT.md.
 //!
 //! Panel order as the React `<aside>`: Campaign brief, the inspector for the selection
@@ -14,8 +14,8 @@ mod piece;
 use super::state::{EditorState, Selection};
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{Btn, TypeScale, u};
-use clipward_core::clip_engine::render::project::Project;
-use clipward_core::timeline::{self, EditedWord};
+use clipperstudio_core::clip_engine::render::project::Project;
+use clipperstudio_core::timeline::{self, EditedWord};
 use gpui_kit::component::input::{InputEvent, InputState, TextareaState};
 use gpui_kit::component::searchable_list::{SearchableListItem, SearchableVec};
 use gpui_kit::component::select::{Select, SelectEvent, SelectState};
@@ -127,7 +127,7 @@ impl Inspector {
         let text = cx.new(|cx| TextareaState::new(window, cx).rows(3));
         let title = cx.new(|cx| InputState::new(window, cx));
         let word = cx.new(|cx| InputState::new(window, cx));
-        let picker = cx.new(|cx| color_picker::ColorPicker::new(clipward_core::inspector::DEFAULT_BACKDROP, window, cx));
+        let picker = cx.new(|cx| color_picker::ColorPicker::new(clipperstudio_core::inspector::DEFAULT_BACKDROP, window, cx));
         let mut subscriptions = vec![
             cx.observe(&editor, |this, _, cx| {
                 this.sync_words(cx);
@@ -206,9 +206,9 @@ impl Inspector {
         let editor = self.editor.read(cx);
         let (Some(Selection::Piece(i)), Some(p)) = (&editor.selection, editor.project()) else { return None };
         let item = p.video.get(*i).filter(|v| v.framing == "crop")?;
-        let local = clipward_core::inspector::piece_local(&p.video, *i, editor.time(cx));
-        let zoom = clipward_core::timeline::crop_at(item, local).zoom;
-        Some((clipward_core::inspector::key_here(item, local), clipward_core::inspector::zoom_to_slider(zoom) as i64))
+        let local = clipperstudio_core::inspector::piece_local(&p.video, *i, editor.time(cx));
+        let zoom = clipperstudio_core::timeline::crop_at(item, local).zoom;
+        Some((clipperstudio_core::inspector::key_here(item, local), clipperstudio_core::inspector::zoom_to_slider(zoom) as i64))
     }
 
     // ---- sliders --------------------------------------------------------------------
@@ -355,7 +355,7 @@ impl Inspector {
             InputEvent::Change => {
                 let Some(Selection::Text(id)) = self.editor.read(cx).selection.clone() else { return };
                 let text = self.text.read(cx).value().to_string();
-                let text = match clip(&text, clipward_core::clip_engine::render::project::MAX_TEXT_CHARS) {
+                let text = match clip(&text, clipperstudio_core::clip_engine::render::project::MAX_TEXT_CHARS) {
                     Some(short) => {
                         self.text.update(cx, |input, cx| input.set_value(short.clone(), window, cx));
                         short
@@ -368,7 +368,7 @@ impl Inspector {
                         |texts| {
                             texts
                                 .iter()
-                                .map(|t| if t.id == id { clipward_core::clip_engine::render::project::TextLayer { text: text.clone(), ..t.clone() } } else { t.clone() })
+                                .map(|t| if t.id == id { clipperstudio_core::clip_engine::render::project::TextLayer { text: text.clone(), ..t.clone() } } else { t.clone() })
                                 .collect()
                         },
                         record,
@@ -406,7 +406,7 @@ impl Inspector {
         let editor = self.editor.read(cx);
         let (layer, title) = match (&editor.selection, editor.project()) {
             (Some(Selection::Text(id)), Some(p)) => (p.texts.iter().find(|t| &t.id == id).map(|t| (t.id.clone(), t.text.clone())), None),
-            (Some(Selection::Overlay(clipward_core::overlays::OverlayKey::Title)), Some(p)) => (None, p.title.clone()),
+            (Some(Selection::Overlay(clipperstudio_core::overlays::OverlayKey::Title)), Some(p)) => (None, p.title.clone()),
             _ => (None, None),
         };
         if let Some((id, text)) = layer {
@@ -430,7 +430,7 @@ impl Inspector {
     // ---- colour picker ----------------------------------------------------------------
 
     fn on_color(&mut self, event: &color_picker::ColorChanged, cx: &mut Context<Self>) {
-        let Some(color) = clipward_core::inspector::valid_backdrop(&event.color) else { return };
+        let Some(color) = clipperstudio_core::inspector::valid_backdrop(&event.color) else { return };
         let start = event.drag && !self.picking;
         self.picking |= event.drag;
         self.editor.update(cx, |e, cx| {

@@ -1,16 +1,16 @@
 [package]
-name = "clipward_app"
+name = "clipperstudio_app"
 version = "0.2.8"
 edition = "2024"
 license = "MIT"
-description = "Clipper Studio desktop app, drawn with GPUI."
+description = "ClipperStudio desktop app, drawn with GPUI."
 
 [[bin]]
-name = "clipward-app"
+name = "clipperstudio-app"
 path = "src/main.rs"
 
 [dependencies]
-clipward_core = { path = "../core" }
+clipperstudio_core = { path = "../core" }
 gpui-kit = "=0.7.1"
 rfd = "0.16"
 image = { version = "0.25", default-features = false, features = ["jpeg"] }
@@ -58,7 +58,7 @@ gpui-kit = { version = "=0.7.1", features = ["test-support"] }
 portable-video = ["dep:rodio"]
 # Pages switch on by default once all four are ported.
 default = ["all-pages"]
-# Development only: `CLIPWARD_SNAPSHOT=<dir>` saves a PNG of every page, then quits
+# Development only: `CLIPPERSTUDIO_SNAPSHOT=<dir>` saves a PNG of every page, then quits
 # (see snapshot.rs), so the UI can be checked without screen recording rights.
 snapshot = ["gpui-kit/test-support"]
 # The setup card reuses the Settings page's provider and Whisper views.

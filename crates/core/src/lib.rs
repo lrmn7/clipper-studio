@@ -1,4 +1,4 @@
-//! Clipward's app logic, shared by the desktop shells: settings, the job queue, the
+//! ClipperStudio's app logic, shared by the desktop shells: settings, the job queue, the
 //! clip library, the editor's previews and the checks on every path the UI names.
 //!
 //! A shell builds one [`Core`] at startup and calls the methods in `api.rs`; dialogs,

@@ -249,7 +249,7 @@ mod tests {
 
     fn settings(provider: &str) -> AppSettings {
         let store = crate::settings::SettingsStore::new(
-            &std::env::temp_dir().join(format!("clipward-ai-{}", uuid::Uuid::new_v4())),
+            &std::env::temp_dir().join(format!("clipperstudio-ai-{}", uuid::Uuid::new_v4())),
             None,
             &std::env::temp_dir(),
         );

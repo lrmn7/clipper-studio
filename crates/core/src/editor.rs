@@ -232,7 +232,7 @@ mod tests {
     const RUN: &str = "0b7c2a52-6a0e-4a57-9d33-2f3a1c0e7d11";
 
     fn library() -> PathBuf {
-        let base = std::env::temp_dir().join(format!("clipward-editor-{}", uuid::Uuid::new_v4()));
+        let base = std::env::temp_dir().join(format!("clipperstudio-editor-{}", uuid::Uuid::new_v4()));
         std::fs::create_dir_all(base.join(RUN)).unwrap();
         base.canonicalize().unwrap()
     }

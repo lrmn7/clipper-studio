@@ -1,5 +1,5 @@
-//! Drawing a game board as a dot matrix (Arcade.tsx `paint`).
-use clipward_core::jobs_page::arcade::{Draw, Game, Look, Sprite};
+﻿//! Drawing a game board as a dot matrix (Arcade.tsx `paint`).
+use clipperstudio_core::jobs_page::arcade::{Draw, Game, Look, Sprite};
 use gpui_kit::*;
 use std::f32::consts::{PI, TAU};
 

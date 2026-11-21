@@ -15,13 +15,13 @@ use crate::models::{Jobs, Settings, SettingsChanged, UpdateState, Updater};
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{self, Btn, Hue, Tone, TypeScale, Truncate, u};
 use crate::{shell, state};
-use clipward_core::ToolStatus;
-use clipward_core::appearance::Appearance;
-use clipward_core::provider_catalog::{
-    self as catalog, APP_NAME, CLIPWARD_URL, LICENSE_NAME, QUALITY_OPTIONS, RETENTION_OPTIONS,
+use clipperstudio_core::ToolStatus;
+use clipperstudio_core::appearance::Appearance;
+use clipperstudio_core::provider_catalog::{
+    self as catalog, APP_NAME, CLIPPERSTUDIO_URL, LICENSE_NAME, QUALITY_OPTIONS, RETENTION_OPTIONS,
 };
-use clipward_core::shared::{ISSUES_URL, REPO_URL};
-use clipward_core::sources::SourceUsage;
+use clipperstudio_core::shared::{ISSUES_URL, REPO_URL};
+use clipperstudio_core::sources::SourceUsage;
 use gpui_kit::component::input::{Input, InputEvent, InputState, Textarea, TextareaState};
 use gpui_kit::component::searchable_list::SearchableVec;
 use gpui_kit::component::select::{Select, SelectEvent, SelectState};
@@ -135,7 +135,7 @@ impl SettingsPage {
         let quality = cx.new(|cx| SelectState::new(SearchableVec::new(options), selected, window, cx));
         let picker = cx.new(|cx| {
             color_picker::ColorPicker::new(
-                saved.appearance.accent_color.as_deref().unwrap_or(clipward_core::appearance::ACCENT_COLOR_PRESETS[0]),
+                saved.appearance.accent_color.as_deref().unwrap_or(clipperstudio_core::appearance::ACCENT_COLOR_PRESETS[0]),
                 window,
                 cx,
             )
@@ -216,7 +216,7 @@ impl SettingsPage {
         page
     }
 
-    fn saved(&self, cx: &App) -> clipward_core::settings::PublicSettings {
+    fn saved(&self, cx: &App) -> clipperstudio_core::settings::PublicSettings {
         self.settings.read(cx).value.clone().expect("settings are loaded before pages open")
     }
 
@@ -266,7 +266,7 @@ impl SettingsPage {
         cx.notify();
     }
 
-    fn commit(&mut self, edit: impl FnOnce(&mut clipward_core::settings::EditableSettings), cx: &mut Context<Self>) {
+    fn commit(&mut self, edit: impl FnOnce(&mut clipperstudio_core::settings::EditableSettings), cx: &mut Context<Self>) {
         let ok = self.settings.update(cx, |s, cx| s.save(edit, cx));
         self.saved_result(ok, "Could not save settings", cx);
     }
@@ -649,12 +649,12 @@ impl SettingsPage {
 }
 
 impl SettingsPage {
-    fn output_panel(&self, s: &clipward_core::settings::PublicSettings, t: &Tokens, cx: &mut Context<Self>) -> AnyElement {
+    fn output_panel(&self, s: &clipperstudio_core::settings::PublicSettings, t: &Tokens, cx: &mut Context<Self>) -> AnyElement {
         let t = *t;
         let usage_text = match &self.usage {
             Some(usage) => format!(
                 "{} for {} run{}",
-                clipward_core::format::format_bytes(usage.bytes),
+                clipperstudio_core::format::format_bytes(usage.bytes),
                 usage.runs,
                 if usage.runs == 1 { "" } else { "s" }
             ),
@@ -969,8 +969,8 @@ impl SettingsPage {
                             format!(
                                 "Downloading version {}… {} of {}",
                                 update.version,
-                                clipward_core::format::format_bytes(*received),
-                                clipward_core::format::format_bytes(*total)
+                                clipperstudio_core::format::format_bytes(*received),
+                                clipperstudio_core::format::format_bytes(*total)
                             ),
                             t.ink_secondary,
                         ))
@@ -1046,12 +1046,12 @@ impl SettingsPage {
                                     .child(format!("Released under the {LICENSE_NAME} license.\u{a0}"))
                                     .child(
                                         div()
-                                            .id("clipward-link")
+                                            .id("clipperstudio-link")
                                             .text_color(t.accent_fg)
                                             .underline()
                                             .cursor_pointer()
-                                            .on_click(link(CLIPWARD_URL))
-                                            .child("clipward.ai"),
+                                            .on_click(link(CLIPPERSTUDIO_URL))
+                                            .child("ClipperStudio"),
                                     ),
                             ),
                     )
@@ -1259,10 +1259,10 @@ fn tools_summary(status: Option<&ToolStatus>, checking: bool) -> (Option<bool>, 
     }
 }
 
-/// The app icon: the PNG inside resources/clipward-icon-small.svg (the SVG
+/// The app icon: the PNG inside resources/clipperstudio-icon-small.svg (the SVG
 /// renderer doesn't draw embedded images), loaded once.
 fn logo() -> Arc<Image> {
     static LOGO: std::sync::OnceLock<Arc<Image>> = std::sync::OnceLock::new();
-    LOGO.get_or_init(|| Arc::new(Image::from_bytes(ImageFormat::Png, include_bytes!("clipward-icon.png").to_vec())))
+    LOGO.get_or_init(|| Arc::new(Image::from_bytes(ImageFormat::Png, include_bytes!("clipperstudio-icon.png").to_vec())))
         .clone()
 }

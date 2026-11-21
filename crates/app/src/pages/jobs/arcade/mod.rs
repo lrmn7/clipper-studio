@@ -1,4 +1,4 @@
-//! Wait-screen arcade (Arcade.tsx), after MonoCode's empty-session grid: a band
+﻿//! Wait-screen arcade (Arcade.tsx), after MonoCode's empty-session grid: a band
 //! of games that play themselves and slide every 16 s; taking control opens the
 //! current one full screen.
 //!
@@ -15,8 +15,8 @@ use crate::models::Jobs;
 use crate::state;
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::u;
-use clipward_core::jobs_page::arcade::{self, GAMES, Game, Mode};
-use clipward_core::jobs_page::{cubic_bezier, stage_label};
+use clipperstudio_core::jobs_page::arcade::{self, GAMES, Game, Mode};
+use clipperstudio_core::jobs_page::{cubic_bezier, stage_label};
 use gpui_kit::prelude::FluentBuilder as _;
 use gpui_kit::*;
 use paint::Board;

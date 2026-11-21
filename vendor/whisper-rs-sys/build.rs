@@ -381,7 +381,7 @@ fn add_link_search_path(dir: &std::path::Path) -> std::io::Result<()> {
 
 fn get_whisper_cpp_version(whisper_root: &std::path::Path) -> std::io::Result<Option<String>> {
     let cmake_lists = BufReader::new(File::open(whisper_root.join("CMakeLists.txt"))?);
-    // CLIPWARD PATCH: 1.9 declares set(WHISPER_VERSION_MAJOR 1) etc. instead of
+    // CLIPPERSTUDIO PATCH: 1.9 declares set(WHISPER_VERSION_MAJOR 1) etc. instead of
     // project("whisper.cpp" VERSION 1.8.3).
     let mut parts = Vec::new();
 

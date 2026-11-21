@@ -567,7 +567,7 @@ mod tests {
 
     #[test]
     fn prune_keeps_the_newest_files() {
-        let dir = std::env::temp_dir().join(format!("clipward-stills-{}", uuid::Uuid::new_v4()));
+        let dir = std::env::temp_dir().join(format!("clipperstudio-stills-{}", uuid::Uuid::new_v4()));
         std::fs::create_dir_all(&dir).unwrap();
         for (name, secs) in [("old.jpg", 1), ("mid.jpg", 2), ("new.jpg", 3)] {
             std::fs::write(dir.join(name), [0u8]).unwrap();
@@ -597,7 +597,7 @@ mod tests {
 
     #[test]
     fn history_lists_runs() {
-        let base = std::env::temp_dir().join(format!("clipward-hist-{}", uuid::Uuid::new_v4()));
+        let base = std::env::temp_dir().join(format!("clipperstudio-hist-{}", uuid::Uuid::new_v4()));
         std::fs::create_dir_all(&base).unwrap();
         let running = uuid::Uuid::new_v4().to_string();
         crate::run_history::create_run_record(&base, &running, "/v.mp4").unwrap();

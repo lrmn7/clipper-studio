@@ -1,4 +1,4 @@
-//! The caption style picker (CaptionPresetPicker.tsx): 13 looks with live samples.
+﻿//! The caption style picker (CaptionPresetPicker.tsx): 13 looks with live samples.
 //!
 //! The samples mirror the engine's presets closely enough to choose by: typeface
 //! (the engine's own bundled fonts, loaded at first use), colours, stroke, shadow,
@@ -13,7 +13,7 @@ use super::{
 use crate::captions::{PRESETS, SCENE, color, sample};
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{self, Truncate, TypeScale, u};
-use clipward_core::job_form::ClipDraft;
+use clipperstudio_core::job_form::ClipDraft;
 use gpui_kit::prelude::FluentBuilder as _;
 use gpui_kit::*;
 

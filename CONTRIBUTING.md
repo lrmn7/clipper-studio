@@ -1,10 +1,10 @@
-# Contributing to Clipper Studio
+# Contributing to ClipperStudio
 
-Thanks for helping improve Clipper Studio. For a substantial change, open an issue first to discuss the user problem and proposed behavior.
+Thanks for helping improve ClipperStudio. For a substantial change, open an issue first to discuss the user problem and proposed behavior.
 
 ## Set up
 
-Follow the [development instructions](README.md#develop): install the prerequisites, then run `cargo run -p clipward_app`. Keep provider keys in the app's Settings; tests do not need real keys.
+Follow the [development instructions](README.md#develop): install the prerequisites, then run `cargo run -p clipperstudio_app`. Keep provider keys in the app's Settings; tests do not need real keys.
 
 ## Make a change
 

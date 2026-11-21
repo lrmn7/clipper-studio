@@ -1,10 +1,10 @@
-//! The app-wide handle on `clipward_core`, and running its async work.
+//! The app-wide handle on `clipperstudio_core`, and running its async work.
 //!
 //! Core's async methods need tokio; GPUI's executor is its own. `run` hands a
 //! future to the tokio runtime and gives back one the UI can await, so a view
 //! does `let x = state::run(cx, async move { core.history_list().await });`
 //! inside `cx.spawn`.
-use clipward_core::Core;
+use clipperstudio_core::Core;
 use gpui_kit::{App, Global};
 use std::future::Future;
 use std::sync::Arc;
@@ -29,6 +29,6 @@ where
     let task = core(cx).runtime().spawn(future);
     async move {
         task.await
-            .unwrap_or_else(|_| Err("Clipward hit an internal error. Retry the action.".into()))
+            .unwrap_or_else(|_| Err("ClipperStudio hit an internal error. Retry the action.".into()))
     }
 }

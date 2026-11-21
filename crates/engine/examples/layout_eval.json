@@ -22,7 +22,7 @@
     [27, "talking_head", [0.5]],
     [29, "talking_head", [0.52]]
    ],
-   "source": "~/Clipward/1b1dcb85-8686-44d2-a49b-cee4e315bee4/source.mp4 @ 2840s"
+   "source": "~/ClipperStudio/1b1dcb85-8686-44d2-a49b-cee4e315bee4/source.mp4 @ 2840s"
   },
   {
    "name": "kamal collage + groups",
@@ -45,7 +45,7 @@
     [27, "talking_head", [0.5]],
     [29, "two_shot", [0.29, 0.77]]
    ],
-   "source": "~/Clipward/1b1dcb85-8686-44d2-a49b-cee4e315bee4/source.mp4 @ 461s"
+   "source": "~/ClipperStudio/1b1dcb85-8686-44d2-a49b-cee4e315bee4/source.mp4 @ 461s"
   },
   {
    "name": "kamal collage + pairs",
@@ -68,7 +68,7 @@
     [27, "talking_head", [0.42]],
     [29, "talking_head", [0.52]]
    ],
-   "source": "~/Clipward/1b1dcb85-8686-44d2-a49b-cee4e315bee4/source.mp4 @ 1076s"
+   "source": "~/ClipperStudio/1b1dcb85-8686-44d2-a49b-cee4e315bee4/source.mp4 @ 1076s"
   },
   {
    "name": "kamal side-by-side split",
@@ -91,7 +91,7 @@
     [27, "two_shot", [0.24, 0.72]],
     [29, "talking_head", [0.5]]
    ],
-   "source": "~/Clipward/1b1dcb85-8686-44d2-a49b-cee4e315bee4/source.mp4 @ 3113s"
+   "source": "~/ClipperStudio/1b1dcb85-8686-44d2-a49b-cee4e315bee4/source.mp4 @ 3113s"
   },
   {
    "name": "kamal three on chairs",
@@ -112,7 +112,7 @@
     [25, "group", [0.2, 0.45, 0.82]],
     [29, "group", [0.2, 0.45, 0.82]]
    ],
-   "source": "~/Clipward/1b1dcb85-8686-44d2-a49b-cee4e315bee4/source.mp4 @ 3493s"
+   "source": "~/ClipperStudio/1b1dcb85-8686-44d2-a49b-cee4e315bee4/source.mp4 @ 3493s"
   },
   {
    "name": "kamal close-ups + color bars",
@@ -134,7 +134,7 @@
     [25, "talking_head", [0.52]],
     [27, "talking_head", [0.54]]
    ],
-   "source": "~/Clipward/1b1dcb85-8686-44d2-a49b-cee4e315bee4/source.mp4 @ 0s"
+   "source": "~/ClipperStudio/1b1dcb85-8686-44d2-a49b-cee4e315bee4/source.mp4 @ 0s"
   },
   {
    "name": "late show stage of four",
@@ -157,7 +157,7 @@
     [27, "group", [0.12, 0.33, 0.51, 0.72]],
     [29, "group", [0.12, 0.33, 0.51, 0.72]]
    ],
-   "source": "~/Clipward/a0c265ec-bb60-4065-bfdc-41f92d86dd92/source.mp4 @ 147s"
+   "source": "~/ClipperStudio/a0c265ec-bb60-4065-bfdc-41f92d86dd92/source.mp4 @ 147s"
   },
   {
    "name": "late show sofa, left guest talks",
@@ -180,7 +180,7 @@
     [27, "group", [0.2, 0.47, 0.8], 0.2],
     [29, "group", [0.2, 0.47, 0.8], 0.2]
    ],
-   "source": "~/Clipward/a0c265ec-bb60-4065-bfdc-41f92d86dd92/source.mp4 @ 2806s"
+   "source": "~/ClipperStudio/a0c265ec-bb60-4065-bfdc-41f92d86dd92/source.mp4 @ 2806s"
   },
   {
    "name": "late show sofa then host",
@@ -203,7 +203,7 @@
     [27, "talking_head", [0.48]],
     [29, "talking_head", [0.52]]
    ],
-   "source": "~/Clipward/a0c265ec-bb60-4065-bfdc-41f92d86dd92/source.mp4 @ 843s"
+   "source": "~/ClipperStudio/a0c265ec-bb60-4065-bfdc-41f92d86dd92/source.mp4 @ 843s"
   },
   {
    "name": "late show stage + inserted photo",
@@ -226,7 +226,7 @@
     [27, "group", [0.12, 0.33, 0.51, 0.72]],
     [29, "group", [0.12, 0.33, 0.51, 0.72]]
    ],
-   "source": "~/Clipward/84c6c250-d8c7-4f4c-9a48-c13f69b4bb67/source.mp4 @ 98s"
+   "source": "~/ClipperStudio/84c6c250-d8c7-4f4c-9a48-c13f69b4bb67/source.mp4 @ 98s"
   },
   {
    "name": "duo table + close-ups",

@@ -743,12 +743,12 @@ const FAILURES: &[(&[&str], &str, &str)] = &[
     ),
     (
         &["audio extraction failed", "audio duration could not be determined", "transcription audio preparation failed"],
-        "Clipward could not prepare this video's audio for transcription.",
+        "ClipperStudio could not prepare this video's audio for transcription.",
         "Run Settings → System check. If the tools are ready, report this run with its failure code.",
     ),
     (
         &["transcription audio chunk exceeded the size limit"],
-        "The transcription audio exceeded Clipward's size limit.",
+        "The transcription audio exceeded ClipperStudio's size limit.",
         "Set a shorter start and end time, or report this run so the chunk size can be adjusted.",
     ),
     (
@@ -764,7 +764,7 @@ const FAILURES: &[(&[&str], &str, &str)] = &[
     (
         &["http error 403", "sign in to confirm", "blocking this request"],
         "The video service refused the download.",
-        "Update Clipward and retry. If it keeps happening, download the video yourself and clip it as a local file.",
+        "Update ClipperStudio and retry. If it keeps happening, download the video yourself and clip it as a local file.",
     ),
     (
         &["video unavailable", "private video", "members-only", "has been removed", "not available in your country"],
@@ -773,7 +773,7 @@ const FAILURES: &[(&[&str], &str, &str)] = &[
     ),
     (
         &["exceeds maximum allowed duration"],
-        "This video is longer than Clipward can process.",
+        "This video is longer than ClipperStudio can process.",
         "Choose a shorter source video, or trim a downloaded file before adding it.",
     ),
     (
@@ -784,11 +784,11 @@ const FAILURES: &[(&[&str], &str, &str)] = &[
     (
         &["no moments match the campaign brief"],
         "Nothing in this video matches the campaign brief.",
-        "Clipward skips moments that break a brief rule. Check the brief fits this video, or loosen a rule, then retry.",
+        "ClipperStudio skips moments that break a brief rule. Check the brief fits this video, or loosen a rule, then retry.",
     ),
     (
         &["no clip-worthy moments"],
-        "Clipward couldn't find any clips in this video.",
+        "ClipperStudio couldn't find any clips in this video.",
         "No clear spoken or visual moment met the selected clip length. If you set a start and end time, widen it or pick a shorter clip length.",
     ),
     (
@@ -1084,7 +1084,7 @@ mod tests {
         let progress: ProgressFn = std::sync::Arc::new(move |p: Progress| seen.lock().unwrap().push(p.stage));
         let started = std::time::Instant::now();
         let err = run_job(req, cfg, progress, CancellationToken::new()).await.unwrap_err();
-        assert_eq!(describe_failure(&err).0, "Clipward could not prepare this video's audio for transcription.");
+        assert_eq!(describe_failure(&err).0, "ClipperStudio could not prepare this video's audio for transcription.");
         assert!(started.elapsed() < std::time::Duration::from_secs(10), "the video download was not stopped");
         assert!(stages.lock().unwrap().contains(&Stage::Transcribing));
         let left: Vec<_> = std::fs::read_dir(dir.path().join("work")).unwrap().flatten().map(|e| e.file_name()).collect();
@@ -1124,7 +1124,7 @@ mod tests {
         let (m, h) = describe_failure(&EngineError::msg("socks5h://user:secret-pass@10.0.0.1:1 /Users/someone/private.mp4"));
         assert_eq!(m, "The clipping pipeline failed.");
         assert!(!h.contains("secret-pass"));
-        assert_eq!(message("No clip-worthy moments found (the video may have no speech)"), "Clipward couldn't find any clips in this video.");
+        assert_eq!(message("No clip-worthy moments found (the video may have no speech)"), "ClipperStudio couldn't find any clips in this video.");
         assert_eq!(message(crate::planner::NO_CLIPS_MATCH_BRIEF), "Nothing in this video matches the campaign brief.");
         assert_eq!(message("Whisper model is not downloaded"), "The offline transcription model is not downloaded.");
         assert_eq!(message("Local transcription failed"), "Offline transcription failed.");

@@ -9,9 +9,9 @@ old sources are on `master` (`git show master:src/renderer/...`).
 | --- | --- |
 | `crates/engine` | Clipping engine (unchanged). |
 | `crates/core` | App logic: settings, job queue, library, editor previews, path checks. `Core` methods in `api.rs` are the old Tauri commands minus their dialogs. |
-| `crates/app` | GPUI shell (binary `clipward`). |
+| `crates/app` | GPUI shell (binary `clipperstudio`). |
 
-It uses the Tauri shell's folders (`AppPaths::resolve`, bundle id `com.clipward.desktop`),
+It uses the Tauri shell's folders (`AppPaths::resolve`, bundle id `com.clipperstudio.desktop`),
 so settings, models and the library carry over.
 
 ## Decisions
@@ -72,7 +72,7 @@ and compiling but not yet tried by hand (drags, clicks, typing, real devices),
 ### Jobs
 - [x] Active list, previous list, filters, search, 10 s polling, confirm dialog
 - [x] JobProgress, JobFailure, JobCancelled (snapshots with fake jobs:
-      `CLIPWARD_SNAPSHOT_JOB=list|running|queued|failed|cancelled`)
+      `CLIPPERSTUDIO_SNAPSHOT_JOB=list|running|queued|failed|cancelled`)
 - [~] Arcade (3 games): drawn; not played by hand. Pauses when the window is inactive.
 
 ### Library
@@ -112,10 +112,10 @@ and compiling but not yet tried by hand (drags, clicks, typing, real devices),
 
 ### Checking the editor without a window
 
-`cargo build -p clipward_app --features snapshot`, then
-`CLIPWARD_SNAPSHOT=/tmp/snap CLIPWARD_SNAPSHOT_EDITOR=<run folder> ./target/debug/clipward-app`
+`cargo build -p clipperstudio_app --features snapshot`, then
+`CLIPPERSTUDIO_SNAPSHOT=/tmp/snap CLIPPERSTUDIO_SNAPSHOT_EDITOR=<run folder> ./target/debug/clipperstudio-app`
 writes `/tmp/snap/editor.png` (hidden window, nothing saved). Options in
-`snapshot.rs::editor_probe`: `CLIPWARD_SNAPSHOT_CLIP`, `_SELECT=piece:0|text:<id>|…`,
+`snapshot.rs::editor_probe`: `CLIPPERSTUDIO_SNAPSHOT_CLIP`, `_SELECT=piece:0|text:<id>|…`,
 `_AT=<ms>`, `_WIDTH=<px>`, `_SECS`, `_WARMUP=1`, `_PLAY=1|full` (prints playback
 progress and frame times).
 
@@ -138,6 +138,6 @@ progress and frame times).
   Dialogs and opening files: `shell.rs`. Shared state: `models::{Settings, Jobs}`.
   Page switches: `workspace::go(Page::Jobs, window, cx)`.
 - Pure logic goes in `crates/core` with unit tests; views stay thin.
-- Check visually: `cargo build -p clipward_app --no-default-features --features
-  "page-x snapshot"` then `CLIPWARD_SNAPSHOT=/tmp/snap ./target/debug/clipward-app`
+- Check visually: `cargo build -p clipperstudio_app --no-default-features --features
+  "page-x snapshot"` then `CLIPPERSTUDIO_SNAPSHOT=/tmp/snap ./target/debug/clipperstudio-app`
   writes `/tmp/snap/<page>.png`.

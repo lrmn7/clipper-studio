@@ -326,7 +326,7 @@ mod tests {
 
     #[test]
     fn list_adds_repo_models_and_flags_changed_files() {
-        let dir = std::env::temp_dir().join(format!("clipward-whisper-{}", uuid::Uuid::new_v4()));
+        let dir = std::env::temp_dir().join(format!("clipperstudio-whisper-{}", uuid::Uuid::new_v4()));
         let models = WhisperModels::new(&dir);
         std::fs::create_dir_all(&models.dir).unwrap();
         std::fs::write(models.model_path("base"), b"old").unwrap();

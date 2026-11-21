@@ -1,4 +1,4 @@
-//! Clipward's desktop app: GPUI views over `clipward_core`.
+//! ClipperStudio's desktop app: GPUI views over `clipperstudio_core`.
 // Release builds on Windows open no console window.
 #![cfg_attr(all(windows, not(debug_assertions)), windows_subsystem = "windows")]
 mod captions;
@@ -20,7 +20,7 @@ mod ui;
 mod video;
 mod workspace;
 
-use clipward_core::{AppPaths, Core, logger};
+use clipperstudio_core::{AppPaths, Core, logger};
 use gpui_kit::component::button::Button;
 use gpui_kit::*;
 use models::Settings;
@@ -50,7 +50,7 @@ pub const MONO_FONT: &str = if cfg!(target_os = "macos") {
     "DejaVu Sans Mono"
 };
 
-/// A packaged build: inside a macOS `.app` bundle (Contents/MacOS/clipward), whose
+/// A packaged build: inside a macOS `.app` bundle (Contents/MacOS/clipperstudio), whose
 /// engine-bin/ and assets/ sit in Contents/Resources; on Windows and Linux, next to
 /// a `resources/` folder beside the executable (scripts/bundle.sh).
 fn bundle_resources() -> Option<PathBuf> {
@@ -66,9 +66,9 @@ fn bundle_resources() -> Option<PathBuf> {
     }
 }
 
-/// Development only: a `--features snapshot` run with `CLIPWARD_SNAPSHOT` set.
+/// Development only: a `--features snapshot` run with `CLIPPERSTUDIO_SNAPSHOT` set.
 fn snapshotting() -> bool {
-    cfg!(feature = "snapshot") && std::env::var_os("CLIPWARD_SNAPSHOT").is_some()
+    cfg!(feature = "snapshot") && std::env::var_os("CLIPPERSTUDIO_SNAPSHOT").is_some()
 }
 
 /// Settings load first; until then a quiet logo, or the error with Retry.
@@ -137,7 +137,7 @@ impl Render for AppRoot {
                 div()
                     .text_heading()
                     .text_color(t.ink_secondary)
-                    .child("Clipper Studio")
+                    .child("ClipperStudio")
                     .into_any_element()
             })
             .into_any_element()
@@ -156,7 +156,7 @@ fn main() {
     let runtime: &'static tokio::runtime::Runtime = Box::leak(Box::new(
         tokio::runtime::Builder::new_multi_thread()
             .enable_all()
-            .thread_name("clipward-core")
+            .thread_name("clipperstudio-core")
             .build()
             .expect("start the async runtime"),
     ));
@@ -216,7 +216,7 @@ fn main() {
                 window_bounds: Some(WindowBounds::centered(size(px(1280.), px(800.)), cx)),
                 window_min_size: Some(size(px(720.), px(520.))),
                 titlebar: Some(TitlebarOptions {
-                    title: Some("Clipper Studio".into()),
+                    title: Some("ClipperStudio".into()),
                     appears_transparent: true,
                     traffic_light_position: Some(point(px(16.), px(14.))),
                 }),

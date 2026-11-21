@@ -1,4 +1,4 @@
-//! The live parts of JobProgress.tsx: the ring with its stage, step line and
+﻿//! The live parts of JobProgress.tsx: the ring with its stage, step line and
 //! chips, and the stepper. Each is its own entity drawn from the view cache, so
 //! the arcade's frames and the stepper's pulse don't redraw the ring, and the
 //! ring's elapsed timer doesn't redraw the stepper.
@@ -7,9 +7,9 @@ use super::measured::Measured;
 use crate::models::Jobs;
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{self, Truncate, TypeScale, u};
-use clipward_core::format::format_timecode;
-use clipward_core::jobs::JobSnapshot;
-use clipward_core::jobs_page::{self as logic, cubic_bezier};
+use clipperstudio_core::format::format_timecode;
+use clipperstudio_core::jobs::JobSnapshot;
+use clipperstudio_core::jobs_page::{self as logic, cubic_bezier};
 use gpui_kit::prelude::FluentBuilder as _;
 use gpui_kit::*;
 use std::time::{Duration, Instant};

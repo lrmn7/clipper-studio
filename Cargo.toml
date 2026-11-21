@@ -18,9 +18,9 @@ reqwest = { version = "0.12", default-features = false, features = ["rustls-tls"
 opt-level = 3
 
 # tract-core 0.23.8 plus a vectorised 3x3 depthwise path for YuNet, with
-# bit-identical outputs. See vendor/tract-core/CLIPWARD_PATCH.md.
+# bit-identical outputs. See vendor/tract-core/CLIPPERSTUDIO_PATCH.md.
 [patch.crates-io]
 tract-core = { path = "vendor/tract-core" }
 # whisper-rs-sys 0.15.0 rebuilt on the latest whisper.cpp release; crates.io lags
-# upstream. Refresh with scripts/update-whisper-cpp.sh. See vendor/whisper-rs-sys/CLIPWARD_PATCH.md.
+# upstream. Refresh with scripts/update-whisper-cpp.sh. See vendor/whisper-rs-sys/CLIPPERSTUDIO_PATCH.md.
 whisper-rs-sys = { path = "vendor/whisper-rs-sys" }

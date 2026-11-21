@@ -20,12 +20,12 @@ use crate::workspace::{self, Page};
 use arcade::Arcade;
 #[cfg(feature = "page-library")]
 use crate::pages::library::clip_list::ClipList;
-use clipward_core::file_manager::JobHistoryEntry;
-use clipward_core::format::{format_timecode, source_label};
-use clipward_core::job_view::{JobOutput, parse_job_output};
-use clipward_core::jobs::JobSnapshot;
-use clipward_core::jobs_page as logic;
-use clipward_core::shared::{MAX_PARALLEL_JOBS, is_active_job_status};
+use clipperstudio_core::file_manager::JobHistoryEntry;
+use clipperstudio_core::format::{format_timecode, source_label};
+use clipperstudio_core::job_view::{JobOutput, parse_job_output};
+use clipperstudio_core::jobs::JobSnapshot;
+use clipperstudio_core::jobs_page as logic;
+use clipperstudio_core::shared::{MAX_PARALLEL_JOBS, is_active_job_status};
 use gpui_kit::component::WindowExt as _;
 use gpui_kit::component::tooltip::Tooltip;
 use gpui_kit::prelude::FluentBuilder as _;
@@ -728,12 +728,12 @@ impl Render for JobsPage {
     }
 }
 
-/// Development only: `CLIPWARD_SNAPSHOT_JOB=running|queued|failed|cancelled|list`
+/// Development only: `CLIPPERSTUDIO_SNAPSHOT_JOB=running|queued|failed|cancelled|list`
 /// puts made-up jobs in the session's list (in memory; the queue never sees
 /// them), so snapshots can show each state.
 #[cfg(feature = "snapshot")]
 fn snapshot_jobs(jobs: &Entity<Jobs>, cx: &mut Context<JobsPage>) {
-    let Ok(kind) = std::env::var("CLIPWARD_SNAPSHOT_JOB") else { return };
+    let Ok(kind) = std::env::var("CLIPPERSTUDIO_SNAPSHOT_JOB") else { return };
     let now = chrono_like_now();
     let request = |url: &str, speed: f64| {
         serde_json::from_value(serde_json::json!({
@@ -758,7 +758,7 @@ fn snapshot_jobs(jobs: &Entity<Jobs>, cx: &mut Context<JobsPage>) {
         failure_stage: None,
         http_status: None,
         output: None,
-        output_dir: format!("/tmp/clipward-snapshot/{id}"),
+        output_dir: format!("/tmp/clipperstudio-snapshot/{id}"),
         queued_at: now.clone(),
         started_at: (status != "queued").then(|| now.clone()),
         finished_at: None,

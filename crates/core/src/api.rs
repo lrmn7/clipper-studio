@@ -278,13 +278,13 @@ impl Core {
                 json!({ "tool": format!("{tool:?}") }),
             );
             return start_error(if paths.packaged {
-                "Bundled FFmpeg tools are missing.\n\nReinstall Clipward to repair the clipping tools."
+                "Bundled FFmpeg tools are missing.\n\nReinstall ClipperStudio to repair the clipping tools."
             } else {
                 "FFmpeg and FFprobe were not found.\n\nInstall FFmpeg or stage it in engine-bin/, then open Settings → System check."
             });
         }
         if !paths.assets_dir().is_dir() {
-            return start_error("The clipping engine is incomplete. Open Settings → System check, then repair the Clipward installation before starting.");
+            return start_error("The clipping engine is incomplete. Open Settings → System check, then repair the ClipperStudio installation before starting.");
         }
         if request.include_captions && !supports_caption_filter(paths).await {
             return start_error("FFmpeg cannot render captions because its ass filter is missing. Install an FFmpeg build with libass, or turn captions off.");

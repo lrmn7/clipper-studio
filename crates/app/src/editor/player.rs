@@ -1,4 +1,4 @@
-//! The editor's preview (Player.tsx): a hybrid of the exact render and an instant
+﻿//! The editor's preview (Player.tsx): a hybrid of the exact render and an instant
 //! approximation.
 //!
 //! The engine renders the edit in CHUNK_MS chunks through the export's own graph,
@@ -17,12 +17,12 @@ use crate::state;
 use crate::theme::ActiveTokens;
 use crate::ui::{self, TypeScale, u};
 use crate::video::MediaPlayer;
-use clipward_core::clip_engine::render::project::{
+use clipperstudio_core::clip_engine::render::project::{
     Crop, FOCUS_ASPECT_RANGE, FocusLayer, MAX_CROP_ZOOM, PIP_WIDTH_RANGE, Project, TEXT_SIZE_RANGE, VideoItem,
 };
-use clipward_core::overlays::OverlayKey;
-use clipward_core::preview::{CHUNK_MS, SUPERSEDED};
-use clipward_core::timeline::{self, Placement};
+use clipperstudio_core::overlays::OverlayKey;
+use clipperstudio_core::preview::{CHUNK_MS, SUPERSEDED};
+use clipperstudio_core::timeline::{self, Placement};
 use gpui_kit::prelude::FluentBuilder as _;
 use gpui_kit::*;
 use std::cell::Cell;
@@ -597,7 +597,7 @@ impl Player {
                 let window = crop_rect(project, &item, crop);
                 let x = clamp(drag.x - (dx / w) as f64 * window.w);
                 let y = clamp(drag.y - (dy / h) as f64 * window.h);
-                let next = clipward_core::clip_engine::render::project::Crop { x, y, zoom: crop.zoom };
+                let next = clipperstudio_core::clip_engine::render::project::Crop { x, y, zoom: crop.zoom };
                 let index = *index;
                 e.edit_video(
                     |video| {
@@ -681,7 +681,7 @@ impl Player {
 }
 
 /// The crop window of a piece, as fractions of its picture.
-fn crop_rect(project: &Project, item: &VideoItem, crop: clipward_core::clip_engine::render::project::Crop) -> timeline::Rect {
+fn crop_rect(project: &Project, item: &VideoItem, crop: clipperstudio_core::clip_engine::render::project::Crop) -> timeline::Rect {
     let (sw, sh) = project.read_size(item);
     timeline::crop_window((sw as f64, sh as f64), (project.width as f64, project.height as f64), crop)
 }

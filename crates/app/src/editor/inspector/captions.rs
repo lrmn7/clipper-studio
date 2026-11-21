@@ -1,4 +1,4 @@
-//! TextPanels.tsx CaptionsPanel: captions on or off, their style, and the words:
+﻿//! TextPanels.tsx CaptionsPanel: captions on or off, their style, and the words:
 //! click one to fix, delete or colour it.
 //!
 //! The word list follows the playhead in its own view (`WordList`), drawn cached at
@@ -9,8 +9,8 @@ use crate::captions::{PRESETS, SCENE, color, sample};
 use crate::editor::state::Playhead;
 use crate::theme::{ActiveTokens, Tokens};
 use crate::ui::{self, Btn, Truncate, TypeScale, u};
-use clipward_core::clip_engine::render::project::Project;
-use clipward_core::timeline::{EditedWord, is_emphasized, set_word, toggle_emphasis};
+use clipperstudio_core::clip_engine::render::project::Project;
+use clipperstudio_core::timeline::{EditedWord, is_emphasized, set_word, toggle_emphasis};
 use gpui_kit::component::input::{Input, InputEvent};
 use gpui_kit::component::{Sizable, Size};
 use gpui_kit::prelude::FluentBuilder;

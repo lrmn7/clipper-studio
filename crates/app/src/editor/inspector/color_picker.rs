@@ -1,11 +1,11 @@
-//! A compact copy of the Settings accent picker (pages/settings/color_picker.rs) for
+﻿//! A compact copy of the Settings accent picker (pages/settings/color_picker.rs) for
 //! the whole-frame background colour: a saturation and brightness square, a hue strip
 //! and a hex field. Drags report `drag: true` and end with `ColorReleased`, so the
 //! inspector can make a drag one undo step. Ported from MonoCode's ColorPickerPopover
 //! (MIT, see THIRD_PARTY_NOTICES.md).
 use crate::theme::ActiveTokens;
 use crate::ui::{TypeScale, u};
-use clipward_core::color::{Hsv, hex_to_hsv, hsv_to_hex, normalize_hex};
+use clipperstudio_core::color::{Hsv, hex_to_hsv, hsv_to_hex, normalize_hex};
 use gpui_kit::component::input::{Input, InputEvent, InputState};
 use gpui_kit::component::{Sizable, Size};
 use gpui_kit::*;

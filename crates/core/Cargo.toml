@@ -1,9 +1,9 @@
 [package]
-name = "clipward_core"
+name = "clipperstudio_core"
 version = "0.2.8"
 edition = "2021"
 license = "MIT"
-description = "Clipper Studio app logic (settings, jobs, library, editor previews), shared by the desktop shells."
+description = "ClipperStudio app logic (settings, jobs, library, editor previews), shared by the desktop shells."
 
 [dependencies]
 clip_engine = { path = "../engine" }

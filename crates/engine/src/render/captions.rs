@@ -499,7 +499,7 @@ impl<'a> CaptionGenerator<'a> {
             s.outline_width,
         );
         format!(
-            "[Script Info]\nTitle: Clipward Captions\nScriptType: v4.00+\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\
+            "[Script Info]\nTitle: ClipperStudio Captions\nScriptType: v4.00+\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\
              YCbCr Matrix: TV.709\nPlayResX: {width}\nPlayResY: {height}\n\n[V4+ Styles]\n\
              Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, \
              Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, \

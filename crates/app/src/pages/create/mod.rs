@@ -1,4 +1,4 @@
-//! Create: the setup card (until the AI provider, or for manual clips just Whisper,
+﻿//! Create: the setup card (until the AI provider, or for manual clips just Whisper,
 //! is ready) and the clipping wizard. Runs go to the core's queue and are followed
 //! on the Jobs page, so this page is always ready for the next video. Ports
 //! ClipPage.tsx, JobForm.tsx and use-draft-store.ts; the step bodies are in
@@ -15,7 +15,7 @@ use crate::state;
 use crate::theme::ActiveTokens;
 use crate::ui::{self, u};
 use crate::workspace::{self, Page};
-use clipward_core::job_form::{self, ClipDraft, ClipMode, FormCheck, StartedJob, WizardStep};
+use clipperstudio_core::job_form::{self, ClipDraft, ClipMode, FormCheck, StartedJob, WizardStep};
 use gpui_kit::component::input::{Enter, InputEvent, InputState, TextareaState};
 use gpui_kit::prelude::FluentBuilder as _;
 use gpui_kit::*;

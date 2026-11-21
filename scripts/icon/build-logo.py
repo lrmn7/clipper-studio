@@ -1,10 +1,10 @@
-"""Builds every Clipward logo SVG from one geometry: a clip (a wide rounded
+"""Builds every ClipperStudio logo SVG from one geometry: a clip (a wide rounded
 block) cut on a slant, its two halves slid apart. One colour throughout.
 
-  resources/clipward-icon.svg        app icon master (vector, 1024 x 1024)
-  resources/clipward-mark.svg        the emblem alone, for dark backgrounds
-  resources/clipward-logo.svg        emblem + wordmark, for dark backgrounds
-  resources/clipward-logo-light.svg  emblem + wordmark, for light backgrounds
+  resources/clipperstudio-icon.svg        app icon master (vector, 1024 x 1024)
+  resources/clipperstudio-mark.svg        the emblem alone, for dark backgrounds
+  resources/clipperstudio-logo.svg        emblem + wordmark, for dark backgrounds
+  resources/clipperstudio-logo-light.svg  emblem + wordmark, for light backgrounds
 
 The wordmark is Geist SemiBold converted to outlines, so the SVGs render the
 same everywhere without the font installed. Rasterize the app icons as
@@ -51,8 +51,8 @@ def emblem(ink: str, prefix: str) -> str:
 
 
 def icon() -> str:
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Clipward">
-  <title>Clipward</title>
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="ClipperStudio">
+  <title>ClipperStudio</title>
   <defs>
     <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#1B1C21"/><stop offset="1" stop-color="#0C0D10"/>
@@ -94,28 +94,28 @@ def outline(text: str):
 
 
 def main():
-    (ROOT / 'resources/clipward-icon.svg').write_text(icon())
-    print('wrote resources/clipward-icon.svg')
+    (ROOT / 'resources/clipperstudio-icon.svg').write_text(icon())
+    print('wrote resources/clipperstudio-icon.svg')
 
     # The emblem's visible extent inside its 1024 box (the clip plus the slide either way).
     left, top, right, bottom = X0, Y0 - SLIDE, X1, Y1 + SLIDE
     box_w, box_h = right - left, bottom - top
     view = f'{left} {top} {box_w} {box_h}'
-    (ROOT / 'resources/clipward-mark.svg').write_text(
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{view}" role="img" aria-label="Clipward">\n'
-        f'  <title>Clipward</title>\n  {emblem("#FAFAFA", "mark")}\n</svg>\n')
-    print('wrote resources/clipward-mark.svg')
+    (ROOT / 'resources/clipperstudio-mark.svg').write_text(
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{view}" role="img" aria-label="ClipperStudio">\n'
+        f'  <title>ClipperStudio</title>\n  {emblem("#FAFAFA", "mark")}\n</svg>\n')
+    print('wrote resources/clipperstudio-mark.svg')
 
-    text_d, text_width, cap_height = outline('Clipward')
+    text_d, text_width, cap_height = outline('ClipperStudio')
     height = 100
     mark_w = height * box_w / box_h
     scale = height * CAP_RATIO / cap_height
     text_x = mark_w + height * MARK_GAP
     baseline = height / 2 + height * CAP_RATIO / 2
     width = text_x + text_width * scale
-    for filename, color in {'clipward-logo.svg': '#FAFAFA', 'clipward-logo-light.svg': '#09090B'}.items():
-        svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width:.2f} {height}" role="img" aria-label="Clipward">
-  <title>Clipward</title>
+    for filename, color in {'clipperstudio-logo.svg': '#FAFAFA', 'clipperstudio-logo-light.svg': '#09090B'}.items():
+        svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width:.2f} {height}" role="img" aria-label="ClipperStudio">
+  <title>ClipperStudio</title>
   <svg width="{mark_w:.2f}" height="{height}" viewBox="{view}">
   {emblem(color, 'lockup')}
   </svg>

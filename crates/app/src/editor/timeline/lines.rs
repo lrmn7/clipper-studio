@@ -1,10 +1,10 @@
-//! The playhead and the hover line (Timeline.tsx `Timeline`). They move every frame
+﻿//! The playhead and the hover line (Timeline.tsx `Timeline`). They move every frame
 //! while playing, so they are their own small view following the `Playhead`: the
 //! tracks under them re-render on edits alone.
 use super::tracks::{DEFAULT_ZOOM, Target, Tracks};
 use crate::editor::state::{EditorState, Playhead};
 use crate::theme::ActiveTokens;
-use clipward_core::timeline_view as view;
+use clipperstudio_core::timeline_view as view;
 use gpui_kit::prelude::FluentBuilder as _;
 use gpui_kit::*;
 

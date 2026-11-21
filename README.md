@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="resources/clipper-studio-logo.png" alt="Clipper Studio" height="120" />
+  <img src="resources/clipper-studio-logo.png" alt="ClipperStudio" height="120" />
 </p>
 
 <h3 align="center">Clips for content-reward campaigns, made on your own computer.</h3>
 
 <p align="center">
   Paste a YouTube, Twitch or other video link, or upload a file, add the campaign's clip requirements,
-  and Clipper Studio finds the moments that fit the brief, cuts them to 9:16 or 16:9, and burns in word-by-word captions.
+  and ClipperStudio finds the moments that fit the brief, cuts them to 9:16 or 16:9, and burns in word-by-word captions.
   Transcription runs offline with Whisper; clip picking uses the AI CLI you're already logged in to, or your own API key.
 </p>
 
@@ -17,13 +17,13 @@
 
 ---
 
-## Why Clipper Studio?
+## Why ClipperStudio?
 
 - **Built for clippers.** Paste the campaign brief (brand to mention, topics, tone, banned content) and every clip must follow it. Clips that break a rule are left out, not padded in.
 - **Offline transcription.** Whisper (whisper.cpp) runs on your computer. Download a model once; your audio never leaves the machine.
-- **Use the AI you already pay for.** Clipper Studio detects Claude Code, Codex, Antigravity, Grok, Cursor, OpenCode and Gemini CLI and plans clips with your logged-in plan. You can also use your own OpenRouter, Anthropic or OpenAI key.
-- **Or run it fully offline.** Point Clipper Studio at your own model server (Ollama, LM Studio, llama.cpp server, vLLM or any OpenAI-compatible server) and clip planning never leaves your computer or network. Nothing is billed.
-- **No Clipper Studio account or backend.** Your videos and keys never pass through a Clipper Studio server.
+- **Use the AI you already pay for.** ClipperStudio detects Claude Code, Codex, Antigravity, Grok, Cursor, OpenCode and Gemini CLI and plans clips with your logged-in plan. You can also use your own OpenRouter, Anthropic or OpenAI key.
+- **Or run it fully offline.** Point ClipperStudio at your own model server (Ollama, LM Studio, llama.cpp server, vLLM or any OpenAI-compatible server) and clip planning never leaves your computer or network. Nothing is billed.
+- **No ClipperStudio account or backend.** Your videos and keys never pass through a ClipperStudio server.
 - **Captions that look native.** Nine styles (Viral, Hormozi, Bold, Clean, Minimal, Fire, Glow, Neon, Karaoke), each with a live preview before you render.
 - **MIT licensed.** Fork it, change it, ship it.
 
@@ -38,7 +38,7 @@
 
 Create is a short wizard: **Video** (link or file, optional trim) → **Brief** (campaign requirements) → **Format** → **Clips** (lengths and count) → **Captions** → **Review**. The brief stays filled in for the next video, since you usually cut several videos for one campaign.
 
-Already know the moments? In the **Clips** step, choose **I'll choose the moments** and type each clip's start and end (seconds, `m:ss` or `h:mm:ss`) with an optional title: up to 50 clips of 3 seconds to 15 minutes, overlaps allowed. For a local file, a preview player can set a clip's start or end from its current position. Clipper Studio skips the brief and the AI planner, transcribes only the span your clips cover, and frames, captions and renders each one at exactly the times you typed. Manual mode needs no AI provider, only the Whisper model.
+Already know the moments? In the **Clips** step, choose **I'll choose the moments** and type each clip's start and end (seconds, `m:ss` or `h:mm:ss`) with an optional title: up to 50 clips of 3 seconds to 15 minutes, overlaps allowed. For a local file, a preview player can set a clip's start or end from its current position. ClipperStudio skips the brief and the AI planner, transcribes only the span your clips cover, and frames, captions and renders each one at exactly the times you typed. Manual mode needs no AI provider, only the Whisper model.
 
 Every run gets its own folder. The **Library** shows completed clips with virality scores, timecodes and tags. **Jobs** shows what is running or queued (up to two runs at once; more wait in a queue) and every earlier run. See [transcription and AI providers](docs/transcription.md).
 
@@ -46,7 +46,7 @@ In **Create → Format → Video speed**, choose **1×** (normal), **1.1×**, **
 
 ## Download
 
-Get the latest version from [Releases](https://github.com/lrmn7/clipper-studio/releases): a DMG for Apple silicon Macs, a zip for Windows (x64) and a tarball for Linux (x64). Each bundles FFmpeg and yt-dlp. The builds aren't code-signed yet, so macOS and Windows warn on first launch; the release page has the steps to open them. After that, Clipper Studio updates itself: it checks when it opens, and **Settings → Help & about → Update and restart** installs the new version.
+Get the latest version from [Releases](https://github.com/lrmn7/clipper-studio/releases): a DMG for Apple silicon Macs, a zip for Windows (x64) and a tarball for Linux (x64). Each bundles FFmpeg and yt-dlp. The builds aren't code-signed yet, so macOS and Windows warn on first launch; the release page has the steps to open them. After that, ClipperStudio updates itself: it checks when it opens, and **Settings → Help & about → Update and restart** installs the new version.
 
 On first launch, the setup card on Create asks for two things:
 
@@ -59,19 +59,19 @@ Keys are stored in your operating system's keychain, and only the selected provi
 
 For a link, the app downloads the source using your network connection. Audio never leaves your computer: Whisper transcribes it locally. The transcript text and your campaign brief go to the AI provider you chose, through its CLI or its API. With an API-key provider and Smart framing's AI vision check on, a few video frames also go to that provider. CLI providers are text only. With **Local AI**, planning requests go only to the server URL you entered (usually on this computer or your local network) and nowhere else; frames are sent to it only if you turn on **Model accepts images**. With a local video file and Local AI on this computer, transcription, planning and rendering need no internet connection after the one-time downloads. The one-time Whisper model download comes from Hugging Face. Provider accounts, charges, retention and data policies are governed by those services.
 
-Downloads and intermediate media are held in a private `work/` directory under Clipper Studio's per-user application data folder. Clipper Studio removes job work on completion, failure, and cancellation, and clears stale work when it next starts after a forced shutdown. A local video you selected stays where it was. Rendered clips, the transcript, plan and `result.json` remain in a run folder under your chosen **Output folder** (by default, `~/Clipward`). Delete the run folder to remove those local outputs. Settings, downloaded Whisper models and diagnostic logs live in the per-user application data and logs folders.
+Downloads and intermediate media are held in a private `work/` directory under ClipperStudio's per-user application data folder. ClipperStudio removes job work on completion, failure, and cancellation, and clears stale work when it next starts after a forced shutdown. A local video you selected stays where it was. Rendered clips, the transcript, plan and `result.json` remain in a run folder under your chosen **Output folder** (by default, `~/ClipperStudio`). Delete the run folder to remove those local outputs. Settings, downloaded Whisper models and diagnostic logs live in the per-user application data and logs folders.
 
 Only download or clip material you have permission to use, and follow each campaign's rules. Remote sites may limit downloads or change their access rules.
 
 ### Clip a Twitch VOD
 
-Paste a public, completed Twitch video link such as `https://www.twitch.tv/videos/1234567890` into Create, then choose your clip settings and generate. Clipper Studio downloads the saved video and uses the same transcription, AI moment selection and rendering flow as other sources. Links on `twitch.tv`, `www.twitch.tv`, `m.twitch.tv` and `go.twitch.tv` are accepted and normalized to the canonical video URL.
+Paste a public, completed Twitch video link such as `https://www.twitch.tv/videos/1234567890` into Create, then choose your clip settings and generate. ClipperStudio downloads the saved video and uses the same transcription, AI moment selection and rendering flow as other sources. Links on `twitch.tv`, `www.twitch.tv`, `m.twitch.tv` and `go.twitch.tv` are accepted and normalized to the canonical video URL.
 
-Live channels, Twitch clips, collections, subscriber-only videos and deleted or expired VODs are not supported. No Twitch login or cookies are used. The original source must be at most six hours and 20 GB. Clipper Studio downloads the full source before applying the optional start and end times; a link's timestamp or tracking parameters are ignored. Typed clips from a YouTube link are the exception: Clipper Studio downloads the audio and only the video around each clip (ten seconds either side), so the editor can trim a clip within that much. **Settings → Output → Download quality** caps the resolution fetched from YouTube and Twitch (up to 4K by default); a lower one downloads faster on a slow connection. For a longer source, trim a downloaded file before adding it. Downloads also stop after four hours or when less than 1 GB of free space would remain.
+Live channels, Twitch clips, collections, subscriber-only videos and deleted or expired VODs are not supported. No Twitch login or cookies are used. The original source must be at most six hours and 20 GB. ClipperStudio downloads the full source before applying the optional start and end times; a link's timestamp or tracking parameters are ignored. Typed clips from a YouTube link are the exception: ClipperStudio downloads the audio and only the video around each clip (ten seconds either side), so the editor can trim a clip within that much. **Settings → Output → Download quality** caps the resolution fetched from YouTube and Twitch (up to 4K by default); a lower one downloads faster on a slow connection. For a longer source, trim a downloaded file before adding it. Downloads also stop after four hours or when less than 1 GB of free space would remain.
 
 ## Develop
 
-Clipper Studio is a Rust app: a [GPUI](https://www.gpui.rs) desktop shell over a clipping engine.
+ClipperStudio is a Rust app: a [GPUI](https://www.gpui.rs) desktop shell over a clipping engine.
 
 **Prerequisites:**
 - A stable Rust toolchain (`rustup`).
@@ -79,19 +79,19 @@ Clipper Studio is a Rust app: a [GPUI](https://www.gpui.rs) desktop shell over a
 - FFmpeg with the libass-backed `ass` filter for captions.
 - yt-dlp for link sources.
 
-Clipper Studio uses FFmpeg and yt-dlp from `engine-bin/` when that folder exists, and otherwise from your `PATH`. Provider keys are only needed for live jobs, not for tests.
+ClipperStudio uses FFmpeg and yt-dlp from `engine-bin/` when that folder exists, and otherwise from your `PATH`. Provider keys are only needed for live jobs, not for tests.
 
 ```bash
 git clone https://github.com/lrmn7/clipper-studio
 cd clipper-studio
-cargo run -p clipward_app
+cargo run -p clipperstudio_app
 ```
 
 **Settings → System check** shows the FFmpeg, FFprobe, yt-dlp, smart framing and engine checks. The engine's fonts and face detection model are in `crates/engine/assets/` and are bundled with the app.
 
 To check that FFmpeg has the caption filter: `ffmpeg -hide_banner -filters | grep -E '[[:space:]]ass[[:space:]]'`. On macOS, `brew install ffmpeg-full` includes libass; on Arch, `sudo pacman -S ffmpeg yt-dlp`.
 
-`scripts/bundle-macos.sh` builds `target/bundle/Clipward.app` (`--dmg` for a disk image). Distributable macOS builds also need signing credentials; see [the release guide](docs/RELEASING.md).
+`scripts/bundle-macos.sh` builds `target/bundle/ClipperStudio.app` (`--dmg` for a disk image). Distributable macOS builds also need signing credentials; see [the release guide](docs/RELEASING.md).
 
 ### First run and troubleshooting
 
@@ -102,10 +102,10 @@ To check that FFmpeg has the caption filter: `ffmpeg -hide_banner -filters | gre
 
 | Command | What it does |
 | --- | --- |
-| `cargo run -p clipward_app` | Run the app |
+| `cargo run -p clipperstudio_app` | Run the app |
 | `scripts/check.sh` | Build every target and run the tests (GitHub only builds releases). Engine tests that need FFmpeg skip when it isn't installed |
 | `cargo clippy --workspace --tests` | Lint |
-| `scripts/bundle-macos.sh` | Build and bundle `Clipward.app` (see [the release guide](docs/RELEASING.md)) |
+| `scripts/bundle-macos.sh` | Build and bundle `ClipperStudio.app` (see [the release guide](docs/RELEASING.md)) |
 
 ### Project layout
 
@@ -127,10 +127,10 @@ Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) fo
 
 ## License
 
-[MIT](LICENSE) (c) Clipward
+[MIT](LICENSE) (c) ClipperStudio
 
 ## Original Project
 
-Clipper Studio is based on the original Clipward project:
+ClipperStudio is based on the original project:
 
 https://github.com/ultramenid/clipward

@@ -1306,7 +1306,7 @@ impl Renderer {
         let mut scripts = Vec::new();
         for &i in &long_graphs {
             let mut builder = tempfile::Builder::new();
-            builder.prefix("clipward-filter-").suffix(".ffgraph");
+            builder.prefix("clipperstudio-filter-").suffix(".ffgraph");
             let file = match &self.temp_dir {
                 Some(dir) => builder.tempfile_in(dir),
                 None => builder.tempfile(),

@@ -95,7 +95,7 @@ async fn main() {
         layout_style: std::env::var("BENCH_STYLE").unwrap_or("auto".into()),
         title_text: Some("Getting the most out of the new model".into()),
         banner_platform: Some("youtube".into()),
-        banner_channel_url: Some(std::env::var("BENCH_LINK").unwrap_or("youtube.com/@clipward".into())),
+        banner_channel_url: Some(std::env::var("BENCH_LINK").unwrap_or("youtube.com/@clipperstudio".into())),
         logos: std::env::var("BENCH_LOGOS")
             .map(|v| {
                 v.split(',')

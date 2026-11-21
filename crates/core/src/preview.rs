@@ -655,7 +655,7 @@ mod tests {
 
     #[test]
     fn prune_keeps_the_newest_chunks_and_ones_being_written() {
-        let dir = std::env::temp_dir().join(format!("clipward-prune-{}", uuid::Uuid::new_v4()));
+        let dir = std::env::temp_dir().join(format!("clipperstudio-prune-{}", uuid::Uuid::new_v4()));
         std::fs::create_dir_all(&dir).unwrap();
         let t = |secs| std::time::SystemTime::UNIX_EPOCH + std::time::Duration::from_secs(secs);
         for (name, secs) in [
@@ -690,13 +690,13 @@ mod tests {
             .ancestors()
             .nth(2)?
             .to_path_buf();
-        let fixture = std::env::var_os("CLIPWARD_EDIT_FIXTURE").map(PathBuf::from)?;
+        let fixture = std::env::var_os("CLIPPERSTUDIO_EDIT_FIXTURE").map(PathBuf::from)?;
         if !root.join("engine-bin/ffmpeg").is_file()
             || !fixture.join("clip_00.project.json").is_file()
         {
             return None;
         }
-        let base = std::env::temp_dir().join(format!("clipward-preview-{}", uuid::Uuid::new_v4()));
+        let base = std::env::temp_dir().join(format!("clipperstudio-preview-{}", uuid::Uuid::new_v4()));
         let run = base
             .join("lib")
             .join("0b7c2a52-6a0e-4a57-9d33-2f3a1c0e7d11");
@@ -733,7 +733,7 @@ mod tests {
             eprintln!("skipped: engine-bin/ffmpeg missing");
             return;
         }
-        let base = std::env::temp_dir().join(format!("clipward-strip-{}", uuid::Uuid::new_v4()));
+        let base = std::env::temp_dir().join(format!("clipperstudio-strip-{}", uuid::Uuid::new_v4()));
         let run = base.join("lib").join("run");
         std::fs::create_dir_all(&run).unwrap();
         // 65 s of 16:9: block 1 is a 5 s tail, padded.
@@ -795,11 +795,11 @@ mod tests {
         let _ = std::fs::remove_dir_all(&base);
     }
 
-    /// Set CLIPWARD_EDIT_FIXTURE to a finished run folder (with source and project) to run.
+    /// Set CLIPPERSTUDIO_EDIT_FIXTURE to a finished run folder (with source and project) to run.
     #[test]
     fn chunks_and_export_render_a_real_run() {
         let Some((lib, run, paths)) = library_with_run() else {
-            eprintln!("skipped: set CLIPWARD_EDIT_FIXTURE to a finished run folder");
+            eprintln!("skipped: set CLIPPERSTUDIO_EDIT_FIXTURE to a finished run folder");
             return;
         };
         let (previews, media) = (Previews::new(), MediaRegistry::default());
@@ -1090,8 +1090,8 @@ mod tests {
         assert!(!run.join(".clip_00.exporting.mp4").exists());
         assert_eq!(saved.texts.len(), 1);
         assert_eq!(saved.audio.len(), 1);
-        // To look at the result: CLIPWARD_EDIT_KEEP=<path.mp4>.
-        if let Ok(keep) = std::env::var("CLIPWARD_EDIT_KEEP") {
+        // To look at the result: CLIPPERSTUDIO_EDIT_KEEP=<path.mp4>.
+        if let Ok(keep) = std::env::var("CLIPPERSTUDIO_EDIT_KEEP") {
             std::fs::copy(run.join("clip_00.mp4"), keep).unwrap();
         }
         let _ = std::fs::remove_dir_all(lib.parent().unwrap());

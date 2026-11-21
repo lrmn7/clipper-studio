@@ -23,14 +23,14 @@ static SENSITIVE_VALUE: LazyLock<Regex> = LazyLock::new(|| {
 
 pub fn init(logs_dir: &Path) {
     let _ = std::fs::create_dir_all(logs_dir);
-    let _ = LOG_FILE.set(logs_dir.join("clipward.log"));
+    let _ = LOG_FILE.set(logs_dir.join("clipperstudio.log"));
 }
 
 pub fn log_file_path() -> PathBuf {
     LOG_FILE
         .get()
         .cloned()
-        .unwrap_or_else(|| std::env::temp_dir().join("clipward.log"))
+        .unwrap_or_else(|| std::env::temp_dir().join("clipperstudio.log"))
 }
 
 fn sanitize(context: Value) -> Map<String, Value> {

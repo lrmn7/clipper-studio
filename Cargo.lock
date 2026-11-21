@@ -1066,11 +1066,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "clipward_app"
+name = "clipperstudio_app"
 version = "0.2.8"
 dependencies = [
  "block2 0.6.2",
- "clipward_core",
+ "clipperstudio_core",
  "core-foundation 0.10.1",
  "core-video",
  "gpui-kit",
@@ -1090,7 +1090,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "clipward_core"
+name = "clipperstudio_core"
 version = "0.2.8"
 dependencies = [
  "chrono",

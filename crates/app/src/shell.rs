@@ -2,7 +2,7 @@
 //! filters, and opening or revealing files and links. Every path still goes through
 //! the core's checks.
 use crate::state;
-use clipward_core::{logger, security};
+use clipperstudio_core::{logger, security};
 use gpui_kit::App;
 use serde_json::json;
 use std::path::PathBuf;
@@ -49,7 +49,7 @@ pub async fn pick_folder(title: &str) -> Option<PathBuf> {
 /// Pick a source video: authorized for this session, as `dialog_select_video` did.
 pub async fn pick_video(cx: &gpui_kit::AsyncApp) -> Result<Option<String>, String> {
     let filters = [
-        Filter("Video Files", clipward_core::shared::VIDEO_EXTENSIONS),
+        Filter("Video Files", clipperstudio_core::shared::VIDEO_EXTENSIONS),
         Filter("All Files", &["*"]),
     ];
     let Some(path) = pick_file("Choose a Video", &filters).await else {
@@ -60,13 +60,13 @@ pub async fn pick_video(cx: &gpui_kit::AsyncApp) -> Result<Option<String>, Strin
 
 /// Pick up to MAX_LOGOS logo images, each authorized for this session.
 pub async fn pick_logos(cx: &gpui_kit::AsyncApp) -> Result<Vec<String>, String> {
-    let filters = [Filter("Images", clipward_core::shared::LOGO_EXTENSIONS)];
+    let filters = [Filter("Images", clipperstudio_core::shared::LOGO_EXTENSIONS)];
     let paths = pick_files("Choose Logos", &filters).await;
     cx.update(|cx| {
         let core = state::core(cx);
         paths
             .iter()
-            .take(clipward_core::shared::MAX_LOGOS)
+            .take(clipperstudio_core::shared::MAX_LOGOS)
             .map(|path| core.authorize_picked(path))
             .collect()
     })
@@ -74,7 +74,7 @@ pub async fn pick_logos(cx: &gpui_kit::AsyncApp) -> Result<Vec<String>, String> 
 
 /// Development-only: scripted end-to-end runs must never open the developer's browser.
 fn external_links_blocked() -> bool {
-    cfg!(debug_assertions) && std::env::var("CLIPWARD_E2E").as_deref() == Ok("1")
+    cfg!(debug_assertions) && std::env::var("CLIPPERSTUDIO_E2E").as_deref() == Ok("1")
 }
 
 /// Open a trusted web link (GitHub, the issue tracker, provider key pages).
