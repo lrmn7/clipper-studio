@@ -1196,7 +1196,7 @@ impl CreatePage {
                     .child(if started.queued {
                         format!("Up to {MAX_PARALLEL_JOBS} jobs run at once. This one starts as soon as a slot frees up.")
                     } else {
-                        "It keeps running while you queue more videos or use the rest of Clipward.".into()
+                        "It keeps running while you queue more videos or use the rest of Clipper Studio.".into()
                     }),
             )
             .child(

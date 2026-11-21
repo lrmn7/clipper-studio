@@ -124,7 +124,7 @@ impl SetupCard {
                                     if manual {
                                         "You’re choosing the moments yourself, so no AI provider is needed. Download the speech model that transcribes offline for captions and pacing."
                                     } else {
-                                        "Clipward has no account and no server. Pick the AI that chooses your clips, and download the speech model that transcribes offline."
+                                        "Clipper Studio has no account and no server. Pick the AI that chooses your clips, and download the speech model that transcribes offline."
                                     },
                                 )),
                         ),
@@ -142,7 +142,7 @@ impl SetupCard {
                         (!s.ffmpeg, "FFmpeg"),
                         (!s.ffprobe, "FFprobe"),
                         (!s.ytdlp, "yt-dlp"),
-                        (!s.engine, "Clipward clipping engine"),
+                        (!s.engine, "Clipper Studio clipping engine"),
                     ]
                     .into_iter()
                     .filter_map(|(missing, name)| missing.then_some(name))

@@ -1,6 +1,6 @@
-# Clipward Design System: Workbench
+# Clipper Studio Design System: Workbench
 
-Clipward is a desktop tool people keep open for hours, so it looks like one: a neutral grey base, dense controls, hairline borders and one blue accent. Surfaces are flat. Colour comes from the footage, the one primary action, a chosen option and status. The visual language (palette, tint strengths, radii, control sizes, motion timings, overlay title bar) is adapted from the [MonoCode](https://github.com/hardbeat920/monocode) desktop app (MIT, see `THIRD_PARTY_NOTICES.md`). Clipward keeps its own name, logo and brand artwork.
+Clipper Studio is a desktop tool people keep open for hours, so it looks like one: a neutral grey base, dense controls, hairline borders and one blue accent. Surfaces are flat. Colour comes from the footage, the one primary action, a chosen option and status. The visual language (palette, tint strengths, radii, control sizes, motion timings, overlay title bar) is adapted from the [MonoCode](https://github.com/hardbeat920/monocode) desktop app (MIT, see `THIRD_PARTY_NOTICES.md`). Clipper Studio keeps its own name, logo and brand artwork.
 
 Tokens live in `crates/app/src/theme.rs` (`Tokens`, computed from Settings → Appearance and the colour scheme, and projected onto gpui-kit's theme). Reusable pieces live in `crates/app/src/ui.rs`. Use them before styling by hand. The class and component names below come from the original React UI (`src/renderer/` on `master`); the GPUI primitives keep the same recipes (see `docs/GPUI_PORT.md`, Porting a page).
 

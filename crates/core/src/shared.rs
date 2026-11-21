@@ -63,8 +63,8 @@ pub fn is_active_job_status(status: &str) -> bool {
 }
 
 /// src/shared/brand.ts — the only external links the app opens.
-pub const REPO_URL: &str = "https://github.com/ultramenid/clipward";
-pub const ISSUES_URL: &str = "https://github.com/ultramenid/clipward/issues";
+pub const REPO_URL: &str = "https://github.com/lrmn7/clipper-studio";
+pub const ISSUES_URL: &str = "https://github.com/lrmn7/clipper-studio/issues";
 pub const TRUSTED_EXTERNAL_URLS: &[&str] = &[
     "https://www.clipward.ai",
     "https://www.clipward.ai/discord",

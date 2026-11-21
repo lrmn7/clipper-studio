@@ -1,14 +1,14 @@
 ## Install
 
-Clipward isn't code-signed yet, so macOS and Windows warn the first time you open it. The app is safe to run. Here's how to get past the warning.
+Clipper Studio isn't code-signed yet, so macOS and Windows warn the first time you open it. The app is safe to run. Here's how to get past the warning.
 
 ### macOS (Apple silicon)
 
 1. Open `Clipward_<version>_aarch64.dmg` and drag **Clipward** into **Applications**.
 2. Open Clipward. macOS says it can't verify the app: click **Done**.
-3. Go to **System Settings → Privacy & Security**, scroll down to the message about Clipward, and click **Open Anyway**. Confirm with your password.
+3. Go to **System Settings → Privacy & Security**, scroll down to the message about Clipper Studio, and click **Open Anyway**. Confirm with your password.
 
-If macOS says the app "is damaged and can't be opened", or there's no **Open Anyway** button, run this in Terminal, then open Clipward again:
+If macOS says the app "is damaged and can't be opened", or there's no **Open Anyway** button, run this in Terminal, then open Clipper Studio again:
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/Clipward.app
@@ -33,4 +33,4 @@ Keep the `resources` folder next to `clipward`. Needs a desktop with Vulkan grap
 ### Known limits
 
 - Recording a voiceover in the editor works on macOS only for now.
-- Clipward updates itself from here on: it checks when it opens, and **Settings → Help & about → Update and restart** installs the new version (no install warning this time). If that fails, download the new version from its release page.
+- Clipper Studio updates itself from here on: it checks when it opens, and **Settings → Help & about → Update and restart** installs the new version (no install warning this time). If that fails, download the new version from its release page.

@@ -758,7 +758,7 @@ impl SettingsPage {
             .child(ui::panel_header(
                 Some(ui::icon_tile("cpu", if checked && missing > 0 { Hue::Danger } else { Hue::Neutral }, 24., &t)),
                 "App tools",
-                Some("What Clipward uses to download, transcribe and cut video.".into()),
+                Some("What Clipper Studio uses to download, transcribe and cut video.".into()),
                 Some(
                     refresh_button("recheck", "Check again", checking, false, &t)
                         .when(!checking, |b| {
@@ -787,7 +787,7 @@ impl SettingsPage {
                                         .child(if missing > 0 {
                                             format!("{missing} required tool{} missing", if missing == 1 { "" } else { "s" })
                                         } else {
-                                            format!("Everything Clipward needs is ready ({found} tools)")
+                                            format!("Everything Clipper Studio needs is ready ({found} tools)")
                                         }),
                                 )
                                 .when(missing == 0, |row| {
@@ -937,7 +937,7 @@ impl SettingsPage {
                     )
                     .when_some(failed, |d, message| d.child(caption(message, t.danger)))
                     .when(installable && jobs_busy, |d| {
-                        d.child(caption("Finish or cancel your jobs first; updating restarts Clipward.".into(), t.ink_secondary))
+                        d.child(caption("Finish or cancel your jobs first; updating restarts Clipper Studio.".into(), t.ink_secondary))
                     });
                 let action = if installable {
                     let updater = updater.clone();
@@ -1236,7 +1236,7 @@ fn tool_rows(status: Option<&ToolStatus>) -> Vec<ToolRow> {
             optional: false,
         },
         ToolRow {
-            name: "Clipward clipping engine",
+            name: "Clipper Studio clipping engine",
             ok: ok(|s| s.engine),
             detail: status.map(|s| s.engine_path.clone()).filter(|p| !p.is_empty()),
             optional: false,

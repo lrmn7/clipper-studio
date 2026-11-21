@@ -350,7 +350,7 @@ impl Render for CreatePage {
             .child(ui::page_header(
                 "Create clips",
                 Some(
-                    "Add a long video and tell the AI what you want. Clipward cuts captioned clips that follow it."
+                    "Add a long video and tell the AI what you want. Clipper Studio cuts captioned clips that follow it."
                         .into(),
                 ),
                 None,

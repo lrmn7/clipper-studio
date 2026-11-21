@@ -150,10 +150,10 @@ mod tests {
         assert!(!is_web_url("https://user:pw@example.com"));
         assert!(!is_web_url("file:///etc/passwd"));
         assert!(is_trusted_external_url(
-            "https://github.com/ultramenid/clipward"
+            "https://github.com/lrmn7/clipper-studio"
         ));
         assert!(!is_trusted_external_url(
-            "https://github.com/ultramenid/clipward/evil"
+            "https://github.com/lrmn7/clipper-studio/evil"
         ));
     }
 

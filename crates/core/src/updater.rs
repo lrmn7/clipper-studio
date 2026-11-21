@@ -88,7 +88,7 @@ fn client(timeout: Option<Duration>) -> Result<reqwest::Client, String> {
     let mut builder = reqwest::Client::builder()
         .connect_timeout(Duration::from_secs(30))
         // GitHub's API refuses requests without one.
-        .user_agent(concat!("Clipward/", env!("CARGO_PKG_VERSION")));
+        .user_agent(concat!("ClipperStudio/", env!("CARGO_PKG_VERSION")));
     if let Some(timeout) = timeout {
         builder = builder.timeout(timeout);
     }
@@ -362,7 +362,7 @@ mod tests {
         let name = format!("Clipward_0.3.0{}", asset_suffix());
         let release = json!({
             "tag_name": "v0.3.0",
-            "html_url": "https://github.com/clipward/clipward/releases/tag/v0.3.0",
+            "html_url": "https://github.com/lrmn7/clipper-studio/releases/tag/v0.3.0",
             "assets": [
                 { "name": "Clipward_0.3.0_other.bin", "browser_download_url": "https://x/other", "size": 1 },
                 { "name": name, "browser_download_url": "https://x/pkg", "size": 42 },

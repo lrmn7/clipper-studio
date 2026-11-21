@@ -3,7 +3,7 @@
 //! SettingsPage.tsx), for the GPUI shell.
 use crate::shared::AI_CLIS;
 
-pub const APP_NAME: &str = "Clipward";
+pub const APP_NAME: &str = "Clipper Studio";
 pub const LICENSE_NAME: &str = "MIT";
 pub const CLIPWARD_URL: &str = "https://www.clipward.ai";
 

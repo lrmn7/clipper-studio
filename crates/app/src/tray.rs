@@ -148,7 +148,7 @@ fn run_tray_loop() {
                         let _ = GetCursorPos(&mut pt);
                         let _ = SetForegroundWindow(hwnd);
                         if let Ok(menu) = CreatePopupMenu() {
-                            let _ = AppendMenuW(menu, MF_STRING, IDM_OPEN, w!("Open Clipward"));
+                            let _ = AppendMenuW(menu, MF_STRING, IDM_OPEN, w!("Open Clipper Studio"));
                             let on_top = ALWAYS_ON_TOP.load(Ordering::SeqCst);
                             let top_flag = if on_top { MF_CHECKED } else { MF_UNCHECKED };
                             let _ = AppendMenuW(
@@ -158,7 +158,7 @@ fn run_tray_loop() {
                                 w!("Always on Top"),
                             );
                             let _ = AppendMenuW(menu, MF_SEPARATOR, 0, PCWSTR::null());
-                            let _ = AppendMenuW(menu, MF_STRING, IDM_QUIT, w!("Quit Clipward"));
+                            let _ = AppendMenuW(menu, MF_STRING, IDM_QUIT, w!("Quit Clipper Studio"));
 
                             let _ = TrackPopupMenu(
                                 menu,
@@ -249,7 +249,7 @@ fn run_tray_loop() {
             hIcon: icon,
             ..Default::default()
         };
-        let tip: Vec<u16> = "Clipward\0".encode_utf16().collect();
+        let tip: Vec<u16> = "Clipper Studio\0".encode_utf16().collect();
         let len = tip.len().min(nid.szTip.len());
         nid.szTip[..len].copy_from_slice(&tip[..len]);
 

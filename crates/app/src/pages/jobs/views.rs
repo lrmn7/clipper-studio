@@ -237,7 +237,7 @@ impl JobsPage {
                             .when(!compact, |row| row.child(div().max_w(u(432.)).text_caption().text_color(t.ink_secondary).child(if queued {
                                 "Starts automatically when a running job finishes."
                             } else {
-                                "Long videos can take a while. Keep using Clipward or queue more videos; progress shows in the sidebar."
+                                "Long videos can take a while. Keep using Clipper Studio or queue more videos; progress shows in the sidebar."
                             })))
                             .child(
                                 Btn::new("cancel-focused")

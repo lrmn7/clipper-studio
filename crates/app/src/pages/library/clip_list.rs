@@ -243,7 +243,7 @@ impl ClipList {
                         .spawn(async move { core.export_clips(picked, dest).await });
                     job.await
                         .unwrap_or_else(|_| {
-                            Err("Clipward hit an internal error. Retry the action.".into())
+                            Err("Clipper Studio hit an internal error. Retry the action.".into())
                         })
                         .map(Some)
                 }

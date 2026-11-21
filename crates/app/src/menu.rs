@@ -67,16 +67,16 @@ pub fn init(cx: &mut App) {
 
     let mut menus = Vec::new();
     if cfg!(target_os = "macos") {
-        menus.push(Menu::new("Clipward").items([
-            MenuItem::action("About Clipward", About),
+        menus.push(Menu::new("Clipper Studio").items([
+            MenuItem::action("About Clipper Studio", About),
             MenuItem::separator(),
             MenuItem::os_submenu("Services", SystemMenuType::Services),
             MenuItem::separator(),
-            MenuItem::action("Hide Clipward", Hide),
+            MenuItem::action("Hide Clipper Studio", Hide),
             MenuItem::action("Hide Others", HideOthers),
             MenuItem::action("Show All", ShowAll),
             MenuItem::separator(),
-            MenuItem::action("Quit Clipward", Quit),
+            MenuItem::action("Quit Clipper Studio", Quit),
         ]));
         menus.push(Menu::new("File").items([MenuItem::action("Close Window", CloseWindow)]));
     } else {
@@ -102,7 +102,7 @@ pub fn init(cx: &mut App) {
     }
     menus.push(Menu::new("View").items(view));
     menus.push(Menu::new("Help").items([
-        MenuItem::action("Clipward on GitHub", OpenGitHub),
+        MenuItem::action("Clipper Studio on GitHub", OpenGitHub),
         MenuItem::action("Report an Issue…", ReportIssue),
         MenuItem::separator(),
         MenuItem::action("Show Logs", ShowLogs),

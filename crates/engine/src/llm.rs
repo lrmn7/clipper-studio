@@ -316,9 +316,9 @@ pub async fn chat(
                 ("Authorization", format!("Bearer {key}")),
                 (
                     "HTTP-Referer",
-                    "https://github.com/ultramenid/clipward".to_string(),
+                    "https://github.com/lrmn7/clipper-studio".to_string(),
                 ),
-                ("X-Title", "Clipward AI Clipping Agent".to_string()),
+                ("X-Title", "Clipper Studio AI Clipping Agent".to_string()),
             ];
             let mut payload = openrouter_payload(req);
             if let Some(effort) = effort(ai) {

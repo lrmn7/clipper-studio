@@ -137,7 +137,7 @@ impl Render for AppRoot {
                 div()
                     .text_heading()
                     .text_color(t.ink_secondary)
-                    .child("Clipward")
+                    .child("Clipper Studio")
                     .into_any_element()
             })
             .into_any_element()
@@ -216,7 +216,7 @@ fn main() {
                 window_bounds: Some(WindowBounds::centered(size(px(1280.), px(800.)), cx)),
                 window_min_size: Some(size(px(720.), px(520.))),
                 titlebar: Some(TitlebarOptions {
-                    title: Some("Clipward".into()),
+                    title: Some("Clipper Studio".into()),
                     appears_transparent: true,
                     traffic_light_position: Some(point(px(16.), px(14.))),
                 }),

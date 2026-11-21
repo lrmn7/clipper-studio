@@ -96,7 +96,7 @@ impl SliderKind {
     }
 }
 
-/// Clipward's own accent in each scheme (globals.css `--accent`).
+/// Clipper Studio's own accent in each scheme (globals.css `--accent`).
 fn default_accent(light: bool) -> Hsla {
     let v = if light { 46. / 255. } else { 235. / 255. };
     Rgba { r: v, g: v, b: v, a: 1.0 }.into()
@@ -367,7 +367,7 @@ impl SettingsPage {
         } else if !glass_on {
             "Turn on window transparency to adjust these. Your values are preserved."
         } else {
-            "How much of the desktop shows through Clipward. Blur costs more to composite the higher it goes."
+            "How much of the desktop shows through Clipper Studio. Blur costs more to composite the higher it goes."
         };
         let group = |title: &'static str, description: Option<&'static str>, rows: Vec<AnyElement>| {
             div()
@@ -457,7 +457,7 @@ impl SettingsPage {
             .child(ui::panel_header(
                 Some(ui::icon_tile("app-window", Hue::Neutral, 24., t)),
                 "Look",
-                Some("How Clipward looks on this computer.".into()),
+                Some("How Clipper Studio looks on this computer.".into()),
                 Some(
                     Btn::new("reset-appearance")
                         .small()
@@ -521,12 +521,12 @@ impl SettingsPage {
                 vec![
                     row(
                         "Always on top",
-                        "Keep the Clipward window pinned above other application windows.".into(),
+                        "Keep the Clipper Studio window pinned above other application windows.".into(),
                         always_on_top_switch.into_any_element(),
                     ),
                     row(
                         "Run in background",
-                        "Keep Clipward active in the system tray notification area when closed.".into(),
+                        "Keep Clipper Studio active in the system tray notification area when closed.".into(),
                         run_in_bg_switch.into_any_element(),
                     ),
                 ],

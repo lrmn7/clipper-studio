@@ -1,6 +1,6 @@
-# Contributing to Clipward
+# Contributing to Clipper Studio
 
-Thanks for helping improve Clipward. For a substantial change, open an issue first to discuss the user problem and proposed behavior.
+Thanks for helping improve Clipper Studio. For a substantial change, open an issue first to discuss the user problem and proposed behavior.
 
 ## Set up
 
