@@ -131,6 +131,16 @@ impl Settings {
         self.take(result, cx)
     }
 
+    pub fn set_always_on_top(&mut self, enabled: bool, cx: &mut Context<Self>) -> bool {
+        let result = state::core(cx).set_always_on_top(enabled);
+        self.take(result, cx)
+    }
+
+    pub fn set_run_in_background(&mut self, enabled: bool, cx: &mut Context<Self>) -> bool {
+        let result = state::core(cx).set_run_in_background(enabled);
+        self.take(result, cx)
+    }
+
     pub fn set_appearance(&mut self, appearance: Appearance, cx: &mut Context<Self>) -> bool {
         let result = state::core(cx).set_appearance(appearance);
         self.take(result, cx)
@@ -231,6 +241,8 @@ pub fn editable(s: &PublicSettings) -> EditableSettings {
         local_base_url: Some(s.local_base_url.clone()),
         local_model: Some(s.local_model.clone()),
         local_images: Some(s.local_images),
+        always_on_top: Some(s.always_on_top),
+        run_in_background: Some(s.run_in_background),
     }
 }
 

@@ -13,6 +13,7 @@ mod shell;
 mod snapshot;
 mod state;
 mod theme;
+pub mod tray;
 mod ui;
 // Windows and Linux play through ffmpeg; `--features portable-video` tries that on macOS.
 #[cfg_attr(any(not(target_os = "macos"), feature = "portable-video"), path = "video_ffmpeg.rs")]
@@ -228,12 +229,32 @@ fn main() {
             let (handle, _) =
                 gpui_kit::open_window(options, cx, |window, cx| cx.new(|cx| AppRoot::new(window, cx)))
                     .expect("open the main window");
+            tray::init_tray();
             // The UI kit's root fills the window with the theme's opaque background,
             // which would hide window glass. The workspace paints its own backdrop
             // (translucent over glass), so the root stays clear.
             let _ = handle.update(cx, |_, window, cx| {
                 base::Root::update(window, cx, |root, _, _| {
                     root.style().background = Some(transparent_black().into());
+                });
+                let settings = Settings::global(cx);
+                if let Some(s) = settings.read(cx).value.as_ref() {
+                    tray::update_window_state(window, s.always_on_top, s.run_in_background);
+                }
+                window.on_window_should_close(cx, |window, cx| {
+                    let settings = Settings::global(cx);
+                    let run_in_bg = settings
+                        .read(cx)
+                        .value
+                        .as_ref()
+                        .map(|s| s.run_in_background)
+                        .unwrap_or(true);
+                    if run_in_bg {
+                        tray::hide_window(window);
+                        false
+                    } else {
+                        true
+                    }
                 });
             });
             if !snapshotting() {

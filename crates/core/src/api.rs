@@ -124,6 +124,16 @@ impl Core {
         self.settings.set_max_source_height(height)
     }
 
+    /// Keep the window above other windows.
+    pub fn set_always_on_top(&self, enabled: bool) -> CmdResult<PublicSettings> {
+        self.settings.set_always_on_top(enabled)
+    }
+
+    /// Keep the app running in the system tray when closed.
+    pub fn set_run_in_background(&self, enabled: bool) -> CmdResult<PublicSettings> {
+        self.settings.set_run_in_background(enabled)
+    }
+
     /// How long runs keep their source video for re-editing; None keeps it until the run is deleted.
     pub fn set_source_retention(&self, days: Option<u32>) -> CmdResult<PublicSettings> {
         let saved = self.settings.set_source_retention(days)?;

@@ -422,6 +422,33 @@ impl SettingsPage {
             },
             t,
         );
+        let weak_top = cx.weak_entity();
+        let always_on_top_switch = ui::switch(
+            "always-on-top",
+            s.always_on_top,
+            false,
+            move |on, window, cx| {
+                crate::tray::set_always_on_top(window, on);
+                let _ = weak_top.update(cx, |this, cx| {
+                    let ok = this.settings.update(cx, |s, cx| s.set_always_on_top(on, cx));
+                    this.saved_result(ok, "Could not change always on top setting", cx);
+                });
+            },
+            t,
+        );
+        let weak_bg = cx.weak_entity();
+        let run_in_bg_switch = ui::switch(
+            "run-in-background",
+            s.run_in_background,
+            false,
+            move |on, _, cx| {
+                let _ = weak_bg.update(cx, |this, cx| {
+                    let ok = this.settings.update(cx, |s, cx| s.set_run_in_background(on, cx));
+                    this.saved_result(ok, "Could not change background running setting", cx);
+                });
+            },
+            t,
+        );
         let row = |title: &'static str, description: String, control: AnyElement| {
             ui::setting_row(title, Some(description.into()), control, false, t).into_any_element()
         };
@@ -485,6 +512,22 @@ impl SettingsPage {
                         "Extend the translucent treatment to the pages beside the sidebar.".into(),
                         ui::switch("main-pane-glass", a.main_pane_glass, glass_off, toggle(|a, on| a.main_pane_glass = on), t)
                             .into_any_element(),
+                    ),
+                ],
+            ))
+            .child(group(
+                "Window behavior",
+                Some("Configure window display and background execution."),
+                vec![
+                    row(
+                        "Always on top",
+                        "Keep the Clipward window pinned above other application windows.".into(),
+                        always_on_top_switch.into_any_element(),
+                    ),
+                    row(
+                        "Run in background",
+                        "Keep Clipward active in the system tray notification area when closed.".into(),
+                        run_in_bg_switch.into_any_element(),
                     ),
                 ],
             ))

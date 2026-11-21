@@ -72,6 +72,10 @@ pub struct AppSettings {
     pub source_retention_days: Option<u32>,
     /// Tallest YouTube or Twitch stream to download (`clip_engine::download::SOURCE_HEIGHTS`).
     pub max_source_height: u32,
+    /// Keep the window above other windows.
+    pub always_on_top: bool,
+    /// Keep running in system tray when the window is closed.
+    pub run_in_background: bool,
 }
 
 impl AppSettings {
@@ -163,6 +167,8 @@ pub struct PublicSettings {
     pub window_blur_supported: bool,
     pub source_retention_days: Option<u32>,
     pub max_source_height: u32,
+    pub always_on_top: bool,
+    pub run_in_background: bool,
 }
 
 /// The fields the renderer may change with settings:save.
@@ -184,6 +190,10 @@ pub struct EditableSettings {
     pub local_model: Option<String>,
     #[serde(default)]
     pub local_images: Option<bool>,
+    #[serde(default)]
+    pub always_on_top: Option<bool>,
+    #[serde(default)]
+    pub run_in_background: Option<bool>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Default)]
@@ -222,6 +232,14 @@ struct PersistedSettings {
     /// Missing in files written before the Download quality setting.
     #[serde(default = "default_max_source_height")]
     max_source_height: u32,
+    #[serde(default)]
+    always_on_top: bool,
+    #[serde(default = "default_run_in_background")]
+    run_in_background: bool,
+}
+
+fn default_run_in_background() -> bool {
+    true
 }
 
 fn default_max_source_height() -> u32 {
@@ -264,6 +282,8 @@ pub fn public_settings(settings: &AppSettings) -> PublicSettings {
         window_blur_supported: crate::window_glass::BLUR_SUPPORTED,
         source_retention_days: settings.source_retention_days,
         max_source_height: settings.max_source_height,
+        always_on_top: settings.always_on_top,
+        run_in_background: settings.run_in_background,
     }
 }
 
@@ -323,6 +343,8 @@ impl SettingsStore {
                 local_images: false,
                 source_retention_days: default_source_retention_days(),
                 max_source_height: default_max_source_height(),
+                always_on_top: false,
+                run_in_background: default_run_in_background(),
             },
             cache: Mutex::new(None),
         }
@@ -397,6 +419,8 @@ impl SettingsStore {
             } else {
                 default_max_source_height()
             },
+            always_on_top: settings.always_on_top,
+            run_in_background: settings.run_in_background,
         };
         if !Path::new(&normalized.output_directory).is_absolute() {
             return Err("Settings folders must be absolute paths".into());
@@ -457,6 +481,8 @@ impl SettingsStore {
             local_images: persisted.local_images,
             source_retention_days: persisted.source_retention_days,
             max_source_height: persisted.max_source_height,
+            always_on_top: persisted.always_on_top,
+            run_in_background: persisted.run_in_background,
             ..self.defaults.clone()
         };
         for key in SECRET_KEYS {
@@ -532,6 +558,8 @@ impl SettingsStore {
             local_images: settings.local_images,
             source_retention_days: settings.source_retention_days,
             max_source_height: settings.max_source_height,
+            always_on_top: settings.always_on_top,
+            run_in_background: settings.run_in_background,
             stored_keys: SECRET_KEYS
                 .iter()
                 .filter(|key| !settings.secret(key).is_empty())
@@ -573,9 +601,29 @@ impl SettingsStore {
                 .local_model
                 .unwrap_or_else(|| current.local_model.clone()),
             local_images: update.local_images.unwrap_or(current.local_images),
+            always_on_top: update.always_on_top.unwrap_or(current.always_on_top),
+            run_in_background: update.run_in_background.unwrap_or(current.run_in_background),
             ..current
         })?;
         Ok(public_settings(&saved))
+    }
+
+    /// Set whether the window should stay on top of other windows.
+    pub fn set_always_on_top(&self, enabled: bool) -> Result<PublicSettings, String> {
+        let current = self.load()?;
+        Ok(public_settings(&self.save(AppSettings {
+            always_on_top: enabled,
+            ..current
+        })?))
+    }
+
+    /// Set whether the app keeps running in the system tray when closed.
+    pub fn set_run_in_background(&self, enabled: bool) -> Result<PublicSettings, String> {
+        let current = self.load()?;
+        Ok(public_settings(&self.save(AppSettings {
+            run_in_background: enabled,
+            ..current
+        })?))
     }
 
     /// How long runs keep their source video; None keeps it until the run is deleted.
@@ -783,6 +831,8 @@ mod tests {
                 local_base_url: base.map(str::to_string),
                 local_model: model.map(str::to_string),
                 local_images: images,
+                always_on_top: None,
+                run_in_background: None,
             };
         let saved = store
             .save_public(edit(
@@ -870,6 +920,8 @@ mod tests {
             local_base_url: None,
             local_model: None,
             local_images: None,
+            always_on_top: None,
+            run_in_background: None,
         };
         assert_eq!(store.save_public(edit(Some("low"))).unwrap().ai_effort, "low");
         // Absent keeps it; anything outside the fixed levels is Default.

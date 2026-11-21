@@ -8,8 +8,14 @@ use crate::theme::{self, ActiveTokens, Tokens};
 use crate::ui::{self, Tone, TypeScale, Truncate, u};
 use clipward_core::jobs::JobSnapshot;
 use gpui_kit::component::button::{Button, ButtonVariants};
+use gpui_kit::component::tooltip::Tooltip;
 use gpui_kit::prelude::FluentBuilder as _;
 use gpui_kit::*;
+
+fn tip(text: impl Into<SharedString>) -> impl Fn(&mut Window, &mut App) -> AnyView + 'static {
+    let text = text.into();
+    move |window, cx| Tooltip::new(text.clone()).build(window, cx)
+}
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Page {
@@ -435,7 +441,14 @@ impl Workspace {
             })
     }
 
-    fn render_title_bar(&self, rail: bool, wide: bool, t: &Tokens, cx: &mut Context<Self>) -> impl IntoElement {
+    fn render_title_bar(
+        &self,
+        rail: bool,
+        wide: bool,
+        window: &mut Window,
+        t: &Tokens,
+        cx: &mut Context<Self>,
+    ) -> impl IntoElement {
         let item = NAV_ITEMS.iter().find(|n| n.page == self.page).unwrap_or(&NAV_ITEMS[0]);
         // In the rail the traffic lights spill past the sidebar's edge.
         let inset = if cfg!(target_os = "macos") && rail {
@@ -444,6 +457,15 @@ impl Workspace {
             0.
         };
         let toggle_label = if rail { "Expand sidebar" } else { "Collapse sidebar" };
+        let on_top = self
+            .settings
+            .read(cx)
+            .value
+            .as_ref()
+            .map(|s| s.always_on_top)
+            .unwrap_or(false);
+        let is_maximized = window.is_maximized();
+
         drag_strip()
             .flex()
             .flex_shrink_0()
@@ -452,7 +474,7 @@ impl Workspace {
             .gap(u(4.))
             .border_b_1()
             .border_color(t.stroke)
-            .pr(u(12.))
+            .pr(u(6.))
             .pl(u(6. + inset))
             .when(wide, |bar| {
                 bar.child(
@@ -481,6 +503,109 @@ impl Workspace {
                     )
                     .child(div().text_color(t.tint(0.25)).child("›"))
                     .child(div().min_w_0().one_line().text_color(t.ink).child(item.label)),
+            )
+            .child(div().flex_1().h_full())
+            .child(
+                div()
+                    .flex()
+                    .items_center()
+                    .gap(u(2.))
+                    .child(
+                        div()
+                            .id("btn-always-on-top")
+                            .flex()
+                            .items_center()
+                            .justify_center()
+                            .size(u(28.))
+                            .rounded(u(6.))
+                            .cursor_pointer()
+                            .map(|d| {
+                                if on_top {
+                                    d.bg(t.accent.opacity(0.18)).text_color(t.accent)
+                                } else {
+                                    d.text_color(t.ink_secondary)
+                                        .hover(|s| s.bg(t.tint(0.1)).text_color(t.ink))
+                                }
+                            })
+                            .tooltip(if on_top { tip("Always on top (Pinned)") } else { tip("Pin on top") })
+                            .child(ui::icon("pin").size(u(13.)))
+                            .on_click(cx.listener(|this, _, window, cx| {
+                                let current = this
+                                    .settings
+                                    .read(cx)
+                                    .value
+                                    .as_ref()
+                                    .map(|s| s.always_on_top)
+                                    .unwrap_or(false);
+                                let new_val = !current;
+                                crate::tray::set_always_on_top(window, new_val);
+                                this.settings.update(cx, |settings, cx| {
+                                    settings.set_always_on_top(new_val, cx);
+                                });
+                            })),
+                    )
+                    .child(
+                        div()
+                            .id("btn-window-minimize")
+                            .flex()
+                            .items_center()
+                            .justify_center()
+                            .size(u(28.))
+                            .rounded(u(6.))
+                            .cursor_pointer()
+                            .text_color(t.ink_secondary)
+                            .hover(|s| s.bg(t.tint(0.1)).text_color(t.ink))
+                            .tooltip(tip("Minimize"))
+                            .child(ui::icon("minus").size(u(13.)))
+                            .on_click(|_, window, _| {
+                                window.minimize_window();
+                            }),
+                    )
+                    .child(
+                        div()
+                            .id("btn-window-maximize")
+                            .flex()
+                            .items_center()
+                            .justify_center()
+                            .size(u(28.))
+                            .rounded(u(6.))
+                            .cursor_pointer()
+                            .text_color(t.ink_secondary)
+                            .hover(|s| s.bg(t.tint(0.1)).text_color(t.ink))
+                            .tooltip(if is_maximized { tip("Restore") } else { tip("Maximize") })
+                            .child(ui::icon(if is_maximized { "copy" } else { "square" }).size(u(12.)))
+                            .on_click(|_, window, _| {
+                                window.zoom_window();
+                            }),
+                    )
+                    .child(
+                        div()
+                            .id("btn-window-close")
+                            .flex()
+                            .items_center()
+                            .justify_center()
+                            .size(u(28.))
+                            .rounded(u(6.))
+                            .cursor_pointer()
+                            .text_color(t.ink_secondary)
+                            .hover(|s| s.bg(t.danger).text_color(white()))
+                            .tooltip(tip("Close"))
+                            .child(ui::icon("x").size(u(13.)))
+                            .on_click(cx.listener(|this, _, window, cx| {
+                                let run_in_bg = this
+                                    .settings
+                                    .read(cx)
+                                    .value
+                                    .as_ref()
+                                    .map(|s| s.run_in_background)
+                                    .unwrap_or(true);
+                                if run_in_bg {
+                                    crate::tray::hide_window(window);
+                                } else {
+                                    cx.quit();
+                                }
+                            })),
+                    ),
             )
     }
 }
@@ -515,6 +640,8 @@ pub fn apply_appearance(settings: &Entity<Settings>, window: &mut Window, cx: &m
     if blurred {
         crate::glass::set_blur(window, crate::glass::blur_radius(appearance.blur_radius));
     }
+    // Update window state (Always On Top, Background running in tray)
+    crate::tray::update_window_state(window, value.always_on_top, value.run_in_background);
     // Tokens::install hands the rem (16 × interface scale) to the UI kit's theme,
     // whose root applies it to the window every frame.
     Tokens::new(appearance, dark, glass).install(cx);
@@ -549,7 +676,7 @@ impl Render for Workspace {
                     .flex_1()
                     .min_w_0()
                     .bg(t.bg.opacity(t.glass_window))
-                    .child(self.render_title_bar(rail, wide, &t, cx))
+                    .child(self.render_title_bar(rail, wide, window, &t, cx))
                     .child(div().flex_1().min_h_0().child(self.content.clone())),
             )
     }
