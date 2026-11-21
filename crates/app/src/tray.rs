@@ -101,18 +101,14 @@ pub fn toggle_maximize(window: &Window) {
     #[cfg(target_os = "windows")]
     {
         use windows::Win32::Foundation::HWND;
-        use windows::Win32::UI::WindowsAndMessaging::{
-            IsZoomed, ShowWindow, SW_MAXIMIZE, SW_RESTORE,
-        };
+        use windows::Win32::UI::WindowsAndMessaging::{IsZoomed, ShowWindowAsync, SW_RESTORE};
         if let Some(hwnd_raw) = get_hwnd(window) {
             unsafe {
                 let hwnd = HWND(hwnd_raw as _);
                 if IsZoomed(hwnd).as_bool() {
-                    let _ = ShowWindow(hwnd, SW_RESTORE);
-                } else {
-                    let _ = ShowWindow(hwnd, SW_MAXIMIZE);
+                    let _ = ShowWindowAsync(hwnd, SW_RESTORE);
+                    return;
                 }
-                return;
             }
         }
     }

@@ -45,7 +45,7 @@ const TRAFFIC_LIGHT_INSET: f32 = 78.;
 const SIDEBAR_EXPANDED: f32 = 220.;
 const SIDEBAR_RAIL: f32 = 52.;
 /// Below this window width (CSS px) the sidebar is always the rail.
-const WIDE_MIN: f32 = 1024.;
+const WIDE_MIN: f32 = 720.;
 
 actions!(
     workspace,
@@ -476,17 +476,15 @@ impl Workspace {
             .border_color(t.stroke)
             .pr(u(6.))
             .pl(u(6. + inset))
-            .when(wide, |bar| {
-                bar.child(
-                    Button::new("toggle-sidebar")
-                        .ghost()
-                        .icon(ui::icon("panel-left"))
-                        .tooltip(format!("{toggle_label} ({}\\)", ui::MOD_KEY))
-                        .on_click(cx.listener(|this, _, window, cx| {
-                            this.toggle_sidebar(&ToggleSidebar, window, cx)
-                        })),
-                )
-            })
+            .child(
+                Button::new("toggle-sidebar")
+                    .ghost()
+                    .icon(ui::icon("panel-left"))
+                    .tooltip(format!("{toggle_label} ({}\\)", ui::MOD_KEY))
+                    .on_click(cx.listener(|this, _, window, cx| {
+                        this.toggle_sidebar(&ToggleSidebar, window, cx)
+                    })),
+            )
             .child(
                 div()
                     .flex()
