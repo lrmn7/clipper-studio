@@ -1,6 +1,6 @@
 [package]
 name = "clipperstudio_app"
-version = "0.2.8"
+version = "0.2.9"
 edition = "2024"
 license = "MIT"
 description = "ClipperStudio desktop app, drawn with GPUI."
@@ -18,7 +18,9 @@ tokio.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 # Editor sound off macOS (video_ffmpeg.rs); optional here for `portable-video`.
-rodio = { version = "0.22", default-features = false, features = ["playback"], optional = true }
+rodio = { version = "0.22", default-features = false, features = [
+    "playback",
+], optional = true }
 
 raw-window-handle = "0.6"
 
@@ -39,12 +41,26 @@ rodio = { version = "0.22", default-features = false, features = ["playback"] }
 objc2 = "0.6"
 # Editor playback (video.rs): AVFoundation decodes, GPUI's surface draws the
 # CoreVideo buffers. Versions match what GPUI already links.
-objc2-av-foundation = { version = "0.3", features = ["objc2-core-media", "objc2-core-video", "objc2-core-foundation", "block2"] }
+objc2-av-foundation = { version = "0.3", features = [
+    "objc2-core-media",
+    "objc2-core-video",
+    "objc2-core-foundation",
+    "block2",
+] }
 objc2-core-media = "0.3"
 # Voiceover takes (recorder.rs): AVAudioRecorder writes the AAC .m4a. Already
 # linked through objc2-av-foundation, which doesn't re-export it.
-objc2-avf-audio = { version = "0.3", default-features = false, features = ["std", "AVAudioRecorder", "AVAudioSettings"] }
-objc2-foundation = { version = "0.3", features = ["NSDictionary", "NSValue", "NSString", "NSURL"] }
+objc2-avf-audio = { version = "0.3", default-features = false, features = [
+    "std",
+    "AVAudioRecorder",
+    "AVAudioSettings",
+] }
+objc2-foundation = { version = "0.3", features = [
+    "NSDictionary",
+    "NSValue",
+    "NSString",
+    "NSURL",
+] }
 block2 = "0.6"
 core-video = "0.5.2"
 core-foundation = "0.10"
@@ -70,4 +86,12 @@ page-talking-head = ["page-settings"]
 # The editor's timeline and side panel (being ported; see editor/mod.rs).
 editor-timeline = []
 editor-inspector = []
-all-pages = ["page-create", "page-jobs", "page-library", "page-settings", "page-talking-head", "editor-inspector", "editor-timeline"]
+all-pages = [
+    "page-create",
+    "page-jobs",
+    "page-library",
+    "page-settings",
+    "page-talking-head",
+    "editor-inspector",
+    "editor-timeline",
+]

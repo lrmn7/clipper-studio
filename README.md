@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="resources/clipper-studio-logo.png" alt="ClipperStudio" height="120" />
-</p>
-
 <h3 align="center">All-in-one desktop studio for video clipping and autonomous talking-head creation.</h3>
 
 <p align="center">
@@ -13,6 +9,16 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License" /></a>
   <a href="https://github.com/lrmn7/clipper-studio/releases"><img src="https://img.shields.io/github/v/release/lrmn7/clipper-studio?label=download" alt="Latest release" /></a>
 </p>
+
+<details align="center">
+  <summary><b>🎬 Watch Showcase / Demo Videos (Click to Expand)</b></summary>
+  <br />
+  <p align="center">
+    <video src=".github/assets/1.mp4" width="260" controls></video>
+    <video src=".github/assets/2.mp4" width="260" controls></video>
+    <video src=".github/assets/3.mp4" width="260" controls></video>
+  </p>
+</details>
 
 ---
 
