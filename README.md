@@ -14,9 +14,14 @@
   <summary><b>🎬 Watch Showcase / Demo Videos (Click to Expand)</b></summary>
   <br />
   <p align="center">
-    <video src=".github/assets/1.mp4" width="260" controls></video>
-    <video src=".github/assets/2.mp4" width="260" controls></video>
-    <video src=".github/assets/3.mp4" width="260" controls></video>
+    <a href=".github/assets/1.mp4"><img src=".github/assets/demo1.gif" width="250" alt="Demo 1 - Talking Head Reel" /></a>
+    <a href=".github/assets/2.mp4"><img src=".github/assets/demo2.gif" width="250" alt="Demo 2 - Autonomous Motion Graphics" /></a>
+    <a href=".github/assets/3.mp4"><img src=".github/assets/demo3.gif" width="250" alt="Demo 3 - Dynamic Typography" /></a>
+  </p>
+  <p align="center">
+    <a href=".github/assets/1.mp4"><b>▶️ Watch Full Video 1 (1:41)</b></a> &nbsp;•&nbsp;
+    <a href=".github/assets/2.mp4"><b>▶️ Watch Full Video 2 (0:58)</b></a> &nbsp;•&nbsp;
+    <a href=".github/assets/3.mp4"><b>▶️ Watch Full Video 3 (1:03)</b></a>
   </p>
 </details>
 
