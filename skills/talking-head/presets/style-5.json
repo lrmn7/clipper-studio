@@ -1,0 +1,118 @@
+{
+  "effects": [
+    {
+      "fx": "moody",
+      "start": 0.0,
+      "end": 3.3,
+      "grade": "pop"
+    },
+    {
+      "fx": "pop-word",
+      "start": 0.2,
+      "end": 3.2,
+      "text": "BI RATE",
+      "size": "big",
+      "color": "#FFD60A"
+    },
+    {
+      "fx": "pop-word",
+      "start": 3.8,
+      "end": 6.4,
+      "text": "NAIK 6%!",
+      "size": "big",
+      "color": "#FF2D55"
+    },
+    {
+      "fx": "tape-label",
+      "start": 7.0,
+      "end": 10.5,
+      "text": "5,75% ke 6,00% (+25 BPS)"
+    },
+    {
+      "fx": "lineup",
+      "start": 12.8,
+      "end": 16.8,
+      "text": "BI Rate|Inflasi|Rupiah|Dolar|Kredit|Makro"
+    },
+    {
+      "fx": "lean-in",
+      "start": 20.5,
+      "end": 24.2,
+      "zoom": 1.32
+    },
+    {
+      "fx": "tape-label",
+      "start": 20.5,
+      "end": 24.2,
+      "text": "1. INFLASI + 2. MATA UANG"
+    },
+    {
+      "fx": "pop-word",
+      "start": 24.8,
+      "end": 27.9,
+      "text": "JADI REM",
+      "size": "big",
+      "color": "#FFD60A"
+    },
+    {
+      "fx": "orbit",
+      "start": 29.5,
+      "end": 35.2,
+      "count": 6,
+      "speed": 1.6,
+      "size": 0.2
+    },
+    {
+      "fx": "shortcut-rain",
+      "start": 36.8,
+      "end": 39.8,
+      "text": "USD|IDR|6%|+25|BI|FX|$$$",
+      "count": 24
+    },
+    {
+      "fx": "scribble",
+      "start": 41.8,
+      "end": 44.8,
+      "text": "CEK DATA!",
+      "color": "#34D36E"
+    },
+    {
+      "fx": "apple-toggles",
+      "start": 46.4,
+      "end": 53.0,
+      "pos": "below",
+      "text": "Inflasi?|Mata Uang?|Faktor Lain?",
+      "ticks": "2.7|4.2|6.0",
+      "color": "#FF2D55"
+    },
+    {
+      "fx": "glitter-spotlight",
+      "start": 55.6,
+      "end": 59.5,
+      "text": "AMAN",
+      "color": "#34D36E"
+    },
+    {
+      "fx": "tier-list",
+      "start": 60.5,
+      "end": 65.4,
+      "title": "biang kerok BI Rate?",
+      "item": "Mata Uang",
+      "others": "Inflasi|Kredit|Global|Rumor"
+    },
+    {
+      "fx": "comment-box",
+      "start": 65.2,
+      "end": 67.4,
+      "look": "bar",
+      "text": "PART 2"
+    },
+    {
+      "fx": "captions",
+      "style": "grey",
+      "y": 0.74,
+      "hide": "46.4-53.0",
+      "keywords": "bank|indonesia|suku|bunga|5,75%|6%|25|bps|pemerintah|simpel|dua|alasan|inflasi|mata|uang|rem|melemah|daya|tarik|dolar|breakdown|data|2026|aman|batas|wajar|bukan|problem"
+    }
+  ]
+}

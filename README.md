@@ -2,12 +2,11 @@
   <img src="resources/clipper-studio-logo.png" alt="ClipperStudio" height="120" />
 </p>
 
-<h3 align="center">Clips for content-reward campaigns, made on your own computer.</h3>
+<h3 align="center">All-in-one desktop studio for video clipping and autonomous talking-head creation.</h3>
 
 <p align="center">
-  Paste a YouTube, Twitch or other video link, or upload a file, add the campaign's clip requirements,
-  and ClipperStudio finds the moments that fit the brief, cuts them to 9:16 or 16:9, and burns in word-by-word captions.
-  Transcription runs offline with Whisper; clip picking uses the AI CLI you're already logged in to, or your own API key.
+  Cut viral clips from long-form streams or turn raw talking-head footage into polished, broadcast-grade vertical reels on your own computer.
+  Transcription runs offline with Whisper; editorial planning uses the AI CLI you're already logged in to, local models (Ollama / LM Studio), or your own API key.
 </p>
 
 <p align="center">
@@ -17,120 +16,170 @@
 
 ---
 
+## Two Dedicated Studios in One Desktop App
+
+ClipperStudio combines two production-grade workflows into a single fast, native desktop app:
+
+1. **Video Clipper Studio**: Paste a YouTube, Twitch, or local video link, add campaign brief requirements (target topics, hook style, banned words), and ClipperStudio finds the best viral moments, crops them to 9:16 or 16:9, and burns in synchronized, animated word-by-word captions.
+2. **Talking Head Director Studio**: Import raw single-take or multi-take talking-head footage. The Autonomous AI Director trims dead air, tracks facial framing with YuNet, generates contextual motion graphics (hook cards, data comparisons, headlines, checklists, liquid glass graphs), layers elements behind the speaker with MediaPipe segmentation, and enforces social safe zones for TikTok, Instagram Reels, and YouTube Shorts.
+
+---
+
 ## Why ClipperStudio?
 
-- **Built for clippers.** Paste the campaign brief (brand to mention, topics, tone, banned content) and every clip must follow it. Clips that break a rule are left out, not padded in.
-- **Offline transcription.** Whisper (whisper.cpp) runs on your computer. Download a model once; your audio never leaves the machine.
-- **Use the AI you already pay for.** ClipperStudio detects Claude Code, Codex, Antigravity, Grok, Cursor, OpenCode and Gemini CLI and plans clips with your logged-in plan. You can also use your own OpenRouter, Anthropic or OpenAI key.
-- **Or run it fully offline.** Point ClipperStudio at your own model server (Ollama, LM Studio, llama.cpp server, vLLM or any OpenAI-compatible server) and clip planning never leaves your computer or network. Nothing is billed.
-- **No ClipperStudio account or backend.** Your videos and keys never pass through a ClipperStudio server.
-- **Captions that look native.** Nine styles (Viral, Hormozi, Bold, Clean, Minimal, Fire, Glow, Neon, Karaoke), each with a live preview before you render.
-- **MIT licensed.** Fork it, change it, ship it.
+- **Built for clippers and creator campaigns.** Paste campaign briefs (brand mentions, required talking points, tone, constraints) and ClipperStudio selects only compliant moments. Clips that break campaign rules are automatically excluded.
+- **Autonomous Talking Head Director.** Turn raw, unedited camera footage into high-retention short-form videos with zero manual timeline chopping. The AI director detects topic shifts, questions, data comparisons, and emphatic punchlines to place graphics with editorial restraint.
+- **Face Protection & Anti-Occlusion Engine.** Real-time YuNet face tracking and MediaPipe segmentation ensure cards, text, B-roll, and subtitles **never cover the speaker's face**. Overlay graphics automatically yield to the speaker's facial zone or tuck cleanly behind their head.
+- **Universal Social Safe Zone Compliance.** All titles, cards, and subtitles are anchored strictly within the universal safe zone (13.5% top margin, 77.2% bottom margin), ensuring no content is blocked by TikTok, Reels, or Shorts UI headers, usernames, or interaction buttons.
+- **13 Signature Editorial Styles.** Automatically selects or customizes the aesthetic based on your topic: Vox-Style Editorial Magazine, High-Retention Creator, Brutalist Documentary, Apple Glass Fintech, Kinetic Viral, Minimalist Wellness, Cyberpunk Tech, Dark Mode SaaS, and more.
+- **Preview-First Gate.** Inspect your talking-head video before rendering: generate an instant 540p proxy preview video and an 8-up keyframe contact sheet, then fine-tune segments and toggle 3D Behind-Head Depth Masking in the Part Editor.
+- **Offline transcription.** Whisper (`whisper.cpp`) runs locally on your CPU or GPU. Download a model once; your audio and footage never leave your machine.
+- **Use the AI you already pay for.** Automatically detects logged-in CLIs including Claude Code, Codex, Antigravity, Grok, Cursor, OpenCode, and Gemini CLI. You can also use your own OpenRouter, Anthropic, or OpenAI API keys.
+- **100% offline local AI support.** Point ClipperStudio to your own local LLM server (Ollama, LM Studio, llama.cpp, vLLM, or any OpenAI-compatible API). Planning never leaves your local network and incurs zero API costs.
+- **No accounts, telemetry, or cloud backend.** ClipperStudio does not run a server. Your footage, transcripts, and credentials stay strictly on your machine.
+- **Captions that look native.** 9 clip caption presets (Viral, Hormozi, Bold, Clean, Minimal, Fire, Glow, Neon, Karaoke) plus word-by-word animated talking-head typography (clean, bold, pill, grey).
+- **MIT licensed.** Open-source, hackable, and free forever.
 
-## How it works
+---
+
+## How It Works
+
+### Workflow 1: Long-Form Video Clipper
 
 ```
- Source video ──▶ Download ──▶ Transcribe ──▶ Find moments ──▶ Render
- (file or link)    yt-dlp      Whisper          your AI CLI      FFmpeg
-                               (offline,        or API key,      crop, captions,
-                               word timings)    follows brief    one file per clip
+ Source Video ──▶ Download ──▶ Transcribe ──▶ AI Moments ──▶ Smart Framing ──▶ Render
+ (URL or file)     yt-dlp       Whisper       your AI CLI     YuNet auto-crop    FFmpeg
+                                (local)       or local LLM    9:16 or 16:9       9 styles
 ```
 
-Create is a short wizard: **Video** (link or file, optional trim) → **Brief** (campaign requirements) → **Format** → **Clips** (lengths and count) → **Captions** → **Review**. The brief stays filled in for the next video, since you usually cut several videos for one campaign.
+- **Step 1: Video Source** — Input a YouTube URL, Twitch VOD, or local video file. Optionally set a trim range.
+- **Step 2: Campaign Brief** — Specify brand requirements, talking points, tone, and banned topics.
+- **Step 3: Format & Speed** — Choose 9:16 vertical (with smart speaker framing) or 16:9 landscape. Select playback speed (1×, 1.1×, 1.25×, 1.5×, 1.75×, 2×) with pitch-preserved audio.
+- **Step 4: Clip Selection** — Let the AI discover high-retention moments, or switch to manual timecodes (`m:ss`).
+- **Step 5: Captions & Review** — Choose from 9 animated caption presets with live preview before rendering.
 
-Already know the moments? In the **Clips** step, choose **I'll choose the moments** and type each clip's start and end (seconds, `m:ss` or `h:mm:ss`) with an optional title: up to 50 clips of 3 seconds to 15 minutes, overlaps allowed. For a local file, a preview player can set a clip's start or end from its current position. ClipperStudio skips the brief and the AI planner, transcribes only the span your clips cover, and frames, captions and renders each one at exactly the times you typed. Manual mode needs no AI provider, only the Whisper model.
+### Workflow 2: Talking Head Director
 
-Every run gets its own folder. The **Library** shows completed clips with virality scores, timecodes and tags. **Jobs** shows what is running or queued (up to two runs at once; more wait in a queue) and every earlier run. See [transcription and AI providers](docs/transcription.md).
+```
+ Raw Footage ──▶ YuNet Track ──▶ Transcribe ──▶ AI Director ──▶ Preview Gate ──▶ 1080x1920
+ (camera file)    & Segmentation  Whisper       editorial plan   540p proxy &     broadcast
+                                                & 3D layers      Part Editor      master
+```
 
-In **Create → Format → Video speed**, choose **1×** (normal), **1.1×**, **1.25×**, **1.5×**, **1.75×**, or **2×** for every clip in the job. Exports preserve voice pitch and keep captions synchronized. Speed works with **Cut dead air** and appears in Review and the saved results. Clip lengths and source trim times refer to the original footage: a 60-second clip at 1.5× exports in about 40 seconds, before any dead-air cuts. The choice stays selected when you clip another video in the same session. Existing exports stay as they are; generate a new job to change their speed.
+- **Step 1: Raw Footage Source** — Select a single video file or a multi-take recording folder.
+- **Step 2: Creative Direction** — Choose **Autonomous AI Director** (auto-analyzes speech, pacing, dead air, and matches aesthetic) or **Custom AI Prompt** (guided aesthetic direction). Optionally enable **Clean Audio (Zero-SFX Mode)**.
+- **Step 3: Preview-First Gate** — Review the plan:
+  - 🎬 **Play 540p Proxy Video**: Fast low-res preview rendering in seconds.
+  - 🖼️ **Open Keyframe Contact Sheet**: High-res composite sheet showing every graphic beat.
+  - 🛠️ **Part Editor**: Inspect each segment timestamp, edit headline/card copy, and toggle **Behind-Head 3D Depth Masking**.
+- **Step 4: Broadcast Master Render** — Click **Render Broadcast Master** to export the final 1080x1920 60/30fps vertical video with burned-in motion graphics, depth layers, and sound effects.
 
-## Download
+---
 
-Get the latest version from [Releases](https://github.com/lrmn7/clipper-studio/releases): a DMG for Apple silicon Macs, a zip for Windows (x64) and a tarball for Linux (x64). Each bundles FFmpeg and yt-dlp. The builds aren't code-signed yet, so macOS and Windows warn on first launch; the release page has the steps to open them. After that, ClipperStudio updates itself: it checks when it opens, and **Settings → Help & about → Update and restart** installs the new version.
+## App Navigation & Shortcuts
 
-On first launch, the setup card on Create asks for two things:
+| Page | Shortcut | Purpose |
+| --- | --- | --- |
+| **Create** | `Ctrl + 1` | Long-form video clipping wizard (Source → Brief → Format → Clips → Captions) |
+| **Library** | `Ctrl + 2` | Browse completed clips, view virality scores, timecodes, tags, and reveal files in Explorer/Finder |
+| **Jobs** | `Ctrl + 3` | Monitor active rendering tasks, background job queues, and export logs |
+| **Talking Head Editor** | `Ctrl + 4` | Autonomous AI director, raw footage reframing, 3D depth masking, and proxy review |
+| **Settings** | `Ctrl + ,` | AI providers, local server endpoints, Whisper model catalog, and system health checks |
 
-1. **The AI that picks the clips.** Choose a detected CLI you're logged in to (for example `claude` or `codex`), pick OpenRouter, Anthropic or OpenAI and paste a key, or choose **Local AI** and enter your server's URL and model (for Ollama: `ollama pull qwen2.5:14b`, keep Ollama open, and keep the default URL `http://localhost:11434/v1`). **Test connection** sends one tiny request to confirm it works.
-2. **A Whisper model.** Large v3 Turbo (compact, 574 MB) is recommended; Base and Small are faster, Medium and Large v3 Turbo are more accurate. Change it later in **Settings → Transcription**.
+---
 
-Keys are stored in your operating system's keychain, and only the selected provider's key is passed to the clipping engine. A local server needs no key; if yours asks for one, it is kept in the keychain too.
+## Download & Setup
 
-### What leaves your computer
+Download prebuilt binaries from [GitHub Releases](https://github.com/lrmn7/clipper-studio/releases):
+- **macOS**: DMG for Apple Silicon (M1/M2/M3/M4)
+- **Windows**: Zip package for Windows 10/11 (x64)
+- **Linux**: Tarball for Linux (x64)
 
-For a link, the app downloads the source using your network connection. Audio never leaves your computer: Whisper transcribes it locally. The transcript text and your campaign brief go to the AI provider you chose, through its CLI or its API. With an API-key provider and Smart framing's AI vision check on, a few video frames also go to that provider. CLI providers are text only. With **Local AI**, planning requests go only to the server URL you entered (usually on this computer or your local network) and nowhere else; frames are sent to it only if you turn on **Model accepts images**. With a local video file and Local AI on this computer, transcription, planning and rendering need no internet connection after the one-time downloads. The one-time Whisper model download comes from Hugging Face. Provider accounts, charges, retention and data policies are governed by those services.
+Each release bundles FFmpeg and yt-dlp.
 
-Downloads and intermediate media are held in a private `work/` directory under ClipperStudio's per-user application data folder. ClipperStudio removes job work on completion, failure, and cancellation, and clears stale work when it next starts after a forced shutdown. A local video you selected stays where it was. Rendered clips, the transcript, plan and `result.json` remain in a run folder under your chosen **Output folder** (by default, `~/ClipperStudio`). Delete the run folder to remove those local outputs. Settings, downloaded Whisper models and diagnostic logs live in the per-user application data and logs folders.
+### First-Launch Configuration
 
-Only download or clip material you have permission to use, and follow each campaign's rules. Remote sites may limit downloads or change their access rules.
+1. **Pick an AI Provider**:
+   - **Detected CLI**: If you use Claude Code (`claude`), Codex, Antigravity (`agy`), Grok, Cursor, or Gemini CLI, ClipperStudio uses your existing logged-in session.
+   - **Local AI**: Select Local AI and point to Ollama (`http://localhost:11434/v1` with model e.g. `qwen2.5:14b`), LM Studio, or vLLM for 100% offline operation.
+   - **API Key**: Enter an Anthropic, OpenAI, or OpenRouter API key (stored securely in your OS keychain).
+2. **Download a Whisper Model**:
+   - Go to **Settings → Transcription** and download a model. **Large v3 Turbo** (~574 MB) is recommended for best accuracy and speed.
 
-### Clip a Twitch VOD
+---
 
-Paste a public, completed Twitch video link such as `https://www.twitch.tv/videos/1234567890` into Create, then choose your clip settings and generate. ClipperStudio downloads the saved video and uses the same transcription, AI moment selection and rendering flow as other sources. Links on `twitch.tv`, `www.twitch.tv`, `m.twitch.tv` and `go.twitch.tv` are accepted and normalized to the canonical video URL.
+## Develop & Build from Source
 
-Live channels, Twitch clips, collections, subscriber-only videos and deleted or expired VODs are not supported. No Twitch login or cookies are used. The original source must be at most six hours and 20 GB. ClipperStudio downloads the full source before applying the optional start and end times; a link's timestamp or tracking parameters are ignored. Typed clips from a YouTube link are the exception: ClipperStudio downloads the audio and only the video around each clip (ten seconds either side), so the editor can trim a clip within that much. **Settings → Output → Download quality** caps the resolution fetched from YouTube and Twitch (up to 4K by default); a lower one downloads faster on a slow connection. For a longer source, trim a downloaded file before adding it. Downloads also stop after four hours or when less than 1 GB of free space would remain.
-
-## Develop
-
-ClipperStudio is a Rust app: a [GPUI](https://www.gpui.rs) desktop shell over a clipping engine.
+ClipperStudio is built in Rust using the [GPUI](https://www.gpui.rs) desktop framework with Python motion graphics extensions.
 
 **Prerequisites:**
-- A stable Rust toolchain (`rustup`).
-- A C/C++ toolchain and CMake, which whisper.cpp needs to build. On macOS the Xcode Command Line Tools are enough.
-- FFmpeg with the libass-backed `ass` filter for captions.
-- yt-dlp for link sources.
-
-ClipperStudio uses FFmpeg and yt-dlp from `engine-bin/` when that folder exists, and otherwise from your `PATH`. Provider keys are only needed for live jobs, not for tests.
+- Rust toolchain (`rustup`)
+- C/C++ compiler and CMake (for compiling whisper.cpp)
+- Python 3.10+ (for Talking Head motion graphics and segmentation)
+- FFmpeg with `libass` support (`brew install ffmpeg-full` on macOS, or prebuilt binaries on Windows/Linux)
+- yt-dlp (for downloading video URLs)
 
 ```bash
+# Clone repository
 git clone https://github.com/lrmn7/clipper-studio
 cd clipper-studio
+
+# Run desktop application
 cargo run -p clipperstudio_app
 ```
 
-**Settings → System check** shows the FFmpeg, FFprobe, yt-dlp, smart framing and engine checks. The engine's fonts and face detection model are in `crates/engine/assets/` and are bundled with the app.
+### System Health Check
+Open **Settings → System check** inside the app to verify:
+- FFmpeg & FFprobe readiness
+- FFmpeg caption filter (`ass`) support
+- yt-dlp availability
+- Smart framing model (`yunet.onnx`)
+- Talking Head AI engine & variable fonts
 
-To check that FFmpeg has the caption filter: `ffmpeg -hide_banner -filters | grep -E '[[:space:]]ass[[:space:]]'`. On macOS, `brew install ffmpeg-full` includes libass; on Arch, `sudo pacman -S ffmpeg yt-dlp`.
+### Common Commands
 
-`scripts/bundle-macos.sh` builds `target/bundle/ClipperStudio.app` (`--dmg` for a disk image). Distributable macOS builds also need signing credentials; see [the release guide](docs/RELEASING.md).
-
-### First run and troubleshooting
-
-1. In the setup card, pick an AI provider (a logged-in CLI, an API key or Local AI) and download a Whisper model. If a CLI isn't detected, run it once in a terminal to sign in, then choose **Detect again**.
-2. Run **Settings → System check**. Captions need an FFmpeg build with libass (`brew install ffmpeg-full` on macOS, or stage one in `engine-bin/`).
-3. Paste a video link or choose a file, paste the campaign brief, pick clip lengths, framing and caption style, then generate. Smart framing follows faces and arranges screen shares with facecams shot by shot. Completed runs appear in Library and in your output folder.
-4. If a link fails, check it in a signed-out browser, or download the video yourself and select the local file. If a run fails, start with the in-app error and System check. Logs intentionally leave out raw provider responses and private source details.
-
-| Command | What it does |
+| Command | Description |
 | --- | --- |
-| `cargo run -p clipperstudio_app` | Run the app |
-| `scripts/check.sh` | Build every target and run the tests (GitHub only builds releases). Engine tests that need FFmpeg skip when it isn't installed |
-| `cargo clippy --workspace --tests` | Lint |
-| `scripts/bundle-macos.sh` | Build and bundle `ClipperStudio.app` (see [the release guide](docs/RELEASING.md)) |
+| `cargo run -p clipperstudio_app` | Launch ClipperStudio desktop app |
+| `cargo check --workspace` | Verify compilation across all workspace crates |
+| `cargo test -p clipperstudio_core` | Run unit tests for core clipping and director logic |
+| `cargo test -p clipperstudio_app` | Run desktop UI tests |
+| `cargo clippy --workspace --tests` | Run Rust linter |
 
-### Project layout
+---
+
+## Project Structure
 
 ```
-crates/app/       GPUI desktop app: window, menu, pages (Create, Library, Jobs, Settings), editor
-crates/core/      App logic: settings, job queue, library, Whisper downloads, path checks
-crates/engine/    Rust clipping engine: download, transcribe, plan, layout, render, pipeline
-crates/engine/assets/  Caption fonts and the YuNet face detection model
-scripts/          Release helpers and icon/logo generators
+crates/
+├── app/                  # GPUI desktop shell: views, navigation, editor, modals, and theme
+├── core/                 # Core engine logic: jobs, library, readiness, settings, talking head pipeline
+└── engine/               # Rust clipping pipeline: transcription, framing, layout, and rendering
+    └── assets/           # Caption fonts and the YuNet face detection model
+skills/
+└── talking-head/         # Autonomous AI director & motion graphics engine
+    ├── scripts/          # director.py, fx.py, broll_gen.py, words.py, sfx.py, logos.py
+    ├── models/           # yunet.onnx face tracker and selfie_segmenter.tflite
+    ├── fonts/            # Variable font collection (Inter, Archivo Black, Playfair, etc.)
+    └── assets/           # Curated sound effects (SFX) and aesthetic textures
 ```
 
-The visual system (tokens, components and rules) is documented in [DESIGN.md](DESIGN.md).
-The desktop trust boundaries and the engine pipeline are described in [Architecture](docs/ARCHITECTURE.md).
-The [open-source readiness checklist](docs/OPEN_SOURCE_READINESS.md) tracks the remaining release gates and maintenance priorities.
+---
 
 ## Contributing
 
-Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for setup, review expectations and checks. Security reports should follow [SECURITY.md](SECURITY.md), not a public issue. The community guidelines are in [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+Contributions, feedback, and feature suggestions are welcome!
+- Please read [CONTRIBUTING.md](CONTRIBUTING.md) for code style guidelines and test requirements.
+- Submit bug reports and feature requests via [GitHub Issues](https://github.com/lrmn7/clipper-studio/issues).
+- For security disclosures, please follow [SECURITY.md](SECURITY.md).
+
+---
 
 ## License
 
-[MIT](LICENSE) (c) ClipperStudio
+[MIT](LICENSE) © ClipperStudio
 
-## Original Project
+### Attribution
 
-ClipperStudio is based on the original project:
-
-https://github.com/ultramenid/clipward
+ClipperStudio is built upon and inspired by the original work at:
+[https://github.com/ultramenid/clipward](https://github.com/ultramenid/clipward)

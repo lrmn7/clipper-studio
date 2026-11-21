@@ -1,0 +1,141 @@
+{
+  "sfx": false,
+  "effects": [
+    {
+      "fx": "one-big-slam",
+      "start": 0.1,
+      "end": 3.5,
+      "behind": true,
+      "spotlight": true,
+      "push": 1.07,
+      "text": "BI RATE",
+      "eyebrow": "RDG BANK INDONESIA \u00b7 NOV 2026",
+      "sub": "Naik 6,00% \u2014 ada apa sih?",
+      "color": "#F2C65C"
+    },
+    {
+      "fx": "splits",
+      "start": 3.8,
+      "end": 6.6,
+      "text": "KENAPA BI|naikkan suku bunga?",
+      "eyebrow": "PERTANYAAN UTAMA",
+      "color": "#F2C65C"
+    },
+    {
+      "fx": "heavy-landing",
+      "start": 6.9,
+      "end": 10.6,
+      "spotlight": true,
+      "spot_strength": 0.55,
+      "push": 1.05,
+      "text": "5,75% \u2192 6,00%",
+      "eyebrow": "+25 BASIS POINTS \u00b7 NAIK TIBA-TIBA",
+      "color": "#F2C65C"
+    },
+    {
+      "fx": "rollout",
+      "start": 13.0,
+      "end": 16.9,
+      "eyebrow": "KONSEP DASAR",
+      "text": "KENAPA PEMERINTAH|naikkan suku bunga?",
+      "color": "#60C4F8"
+    },
+    {
+      "fx": "dot-hop",
+      "start": 18.6,
+      "end": 21.8,
+      "eyebrow": "BIAR SIMPEL & GAMPANG",
+      "text": "SIMPEL|2 ALASAN",
+      "hops": "0.15|1.8",
+      "color": "#F2C65C"
+    },
+    {
+      "fx": "sticker-stack",
+      "start": 21.9,
+      "end": 24.3,
+      "text": "01 \u00b7 INFLASI|02 \u00b7 MATA UANG",
+      "delays": "0.55|1.15"
+    },
+    {
+      "fx": "slingshot",
+      "start": 24.7,
+      "end": 28.0,
+      "behind": true,
+      "text": "REM INFLASI",
+      "sub": "SAAT INFLASI LAGI TINGGI",
+      "color": "#E8404C"
+    },
+    {
+      "fx": "traced-outline",
+      "start": 29.5,
+      "end": 35.6,
+      "behind": true,
+      "spotlight": true,
+      "spot_strength": 0.72,
+      "push": 1.08,
+      "text": "RUPIAH",
+      "eyebrow": "ALASAN KEDUA",
+      "sub": "butuh daya tarik baru",
+      "color": "#F2C65C"
+    },
+    {
+      "fx": "plucked-string",
+      "start": 36.8,
+      "end": 39.8,
+      "text": "JAGA DOLAR",
+      "sub": "BIAR TIDAK KELUAR DARI INDONESIA",
+      "pluck_at": 0.45,
+      "color": "#60C4F8"
+    },
+    {
+      "fx": "tumbling-letter",
+      "start": 41.8,
+      "end": 45.2,
+      "text": "BREAKDOWN",
+      "sub": "data Indonesia tahun 2026",
+      "color": "#F2C65C"
+    },
+    {
+      "fx": "rollout",
+      "start": 46.4,
+      "end": 53.0,
+      "eyebrow": "CEK DATA 2026",
+      "text": "01 / INFLASI?|02 / MATA UANG?|03 / FAKTOR LAIN?",
+      "delays": "2.2|3.8|5.4",
+      "color": "#F2C65C"
+    },
+    {
+      "fx": "heavy-landing",
+      "start": 55.6,
+      "end": 59.5,
+      "behind": true,
+      "spotlight": true,
+      "spot_strength": 0.58,
+      "text": "AMAN",
+      "eyebrow": "HASIL CEK INFLASI",
+      "sub": "masih dalam batas wajar",
+      "color": "#3ED480"
+    },
+    {
+      "fx": "one-big-slam",
+      "start": 60.5,
+      "end": 62.9,
+      "behind": false,
+      "text": "BUKAN INFLASI",
+      "eyebrow": "KESIMPULAN PERTAMA",
+      "color": "#E8404C"
+    },
+    {
+      "fx": "splits",
+      "start": 63.2,
+      "end": 67.4,
+      "spotlight": true,
+      "spot_strength": 0.72,
+      "push": 1.09,
+      "behind_text": "RUPIAH",
+      "eyebrow": "TEMUAN AKHIR",
+      "text": "PROBLEM|sebenarnya.",
+      "color": "#F2C65C"
+    }
+  ]
+}

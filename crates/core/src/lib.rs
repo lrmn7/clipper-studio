@@ -35,6 +35,7 @@ pub mod shared;
 pub mod sources;
 pub mod timeline;
 pub mod timeline_view;
+pub mod talking_head;
 pub mod tools;
 pub mod updater;
 pub mod validation;

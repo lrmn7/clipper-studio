@@ -1,0 +1,125 @@
+{
+  "effects": [
+    {
+      "fx": "red-collage",
+      "start": 0.2,
+      "end": 3.5,
+      "text": "BI RATE",
+      "lines": "5,75% \u2192 6,00%.|+25 BPS.|ADA APA SIH?",
+      "tag": "REC  \u00b7  RDG BI NOV 2026"
+    },
+    {
+      "fx": "headline-box",
+      "start": 4.0,
+      "end": 6.8,
+      "text": "Kenapa BI naikkan|suku bunga tiba-tiba?",
+      "zoom": 1.22
+    },
+    {
+      "fx": "swipe",
+      "start": 7.0,
+      "end": 10.6,
+      "grade": "moody"
+    },
+    {
+      "fx": "timeline",
+      "look": "red",
+      "start": 12.8,
+      "end": 16.9,
+      "text": "BREAKING",
+      "sub": "kenapa pemerintah naikkan bunga",
+      "tc": "REC"
+    },
+    {
+      "fx": "moody",
+      "start": 20.6,
+      "end": 24.2,
+      "grade": "moody"
+    },
+    {
+      "fx": "locked-on",
+      "start": 20.6,
+      "end": 24.2,
+      "text": "2 ALASAN UTAMA",
+      "zoom": 1.3
+    },
+    {
+      "fx": "spotlight",
+      "start": 24.9,
+      "end": 28.0,
+      "text": "REM",
+      "color": "#FF3B30",
+      "font": "bold",
+      "push": 1.14
+    },
+    {
+      "fx": "match-cut",
+      "start": 29.5,
+      "end": 35.4,
+      "text": "MELEMAH",
+      "color": "#D62828"
+    },
+    {
+      "fx": "uninstall",
+      "start": 36.9,
+      "end": 39.8,
+      "text": "Mencegah Capital Outflow..."
+    },
+    {
+      "fx": "headline-box",
+      "start": 41.8,
+      "end": 45.0,
+      "text": "Breakdown data|tahun 2026.",
+      "zoom": 1.24
+    },
+    {
+      "fx": "moody",
+      "start": 46.4,
+      "end": 53.0,
+      "grade": "moody"
+    },
+    {
+      "fx": "checklist",
+      "start": 46.4,
+      "end": 53.0,
+      "title": "INVESTIGASI DATA 2026",
+      "text": "Cek Inflasi::2026|Cek Mata Uang::IDR/USD|Cek Faktor Lain::makro"
+    },
+    {
+      "fx": "moody",
+      "start": 55.6,
+      "end": 59.5,
+      "grade": "bw"
+    },
+    {
+      "fx": "pop-word",
+      "start": 55.6,
+      "end": 59.5,
+      "text": "AMAN",
+      "size": "big",
+      "color": "#34D36E"
+    },
+    {
+      "fx": "reject-stamp",
+      "start": 60.5,
+      "end": 63.0,
+      "text": "BUKAN INFLASI",
+      "color": "#EE2222",
+      "angle": 10
+    },
+    {
+      "fx": "red-collage",
+      "start": 63.3,
+      "end": 67.4,
+      "text": "RUPIAH",
+      "lines": "BUKAN INFLASI.|MATA UANG.|PROBLEM UTAMA.",
+      "tag": "REC  \u00b7  PART 2 SOON"
+    },
+    {
+      "fx": "captions",
+      "style": "bold",
+      "y": 0.75,
+      "keywords": "bank|indonesia|suku|bunga|5,75%|6%|25|bps|pemerintah|simpel|dua|alasan|inflasi|mata|uang|rem|melemah|daya|tarik|dolar|breakdown|data|2026|aman|batas|wajar|bukan|problem"
+    }
+  ]
+}

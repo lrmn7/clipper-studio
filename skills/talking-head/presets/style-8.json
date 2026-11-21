@@ -1,0 +1,121 @@
+{
+  "effects": [
+    {
+      "fx": "reel-frame",
+      "start": 0.2,
+      "end": 3.4,
+      "text": "@ekonomi.simpel"
+    },
+    {
+      "fx": "headline-wall",
+      "start": 3.8,
+      "end": 6.6,
+      "count": 8,
+      "gap": 0.12,
+      "handle": "@ekonomi.simpel",
+      "text": "BI Rate naik jadi 6,00%::RDG Nov 2026|Rupiah per dolar AS makin tertekan::kurs|Kredit konsumsi melambat::4,73%|Inflasi 2026 masih dalam batas wajar::data|Kenapa BI naikkan suku bunga?::explainer",
+      "total": "+25 bps",
+      "label": "kenaikan BI Rate"
+    },
+    {
+      "fx": "comment-box",
+      "start": 6.9,
+      "end": 10.6,
+      "text": "6%??",
+      "handle": "ekonomi.simpel",
+      "reply": "Naik 25 bps dari 5,75%",
+      "chip": "BI Rate"
+    },
+    {
+      "fx": "phone-fan",
+      "start": 12.8,
+      "end": 16.9,
+      "text": "Kenapa suku bunga|bisa naik?"
+    },
+    {
+      "fx": "fan-build",
+      "start": 18.8,
+      "end": 21.8,
+      "count": 11
+    },
+    {
+      "fx": "comment-box",
+      "start": 21.8,
+      "end": 24.4,
+      "look": "bar",
+      "text": "INFLASI & RUPIAH"
+    },
+    {
+      "fx": "scribble",
+      "start": 24.6,
+      "end": 27.9,
+      "text": "REM!",
+      "color": "#FF3040"
+    },
+    {
+      "fx": "place-in-grid",
+      "start": 29.5,
+      "end": 35.4,
+      "views": "Inflasi|Rupiah|Dolar|Kredit|BI Rate|Ekspor|Impor|Makro|6,00%"
+    },
+    {
+      "fx": "carousel-spin",
+      "start": 36.9,
+      "end": 39.9,
+      "turns": 1.0
+    },
+    {
+      "fx": "profile-wall",
+      "start": 41.8,
+      "end": 44.8,
+      "count": 2026,
+      "label": "breakdown",
+      "name": "ekonomi.simpel",
+      "sub": "data 2026"
+    },
+    {
+      "fx": "check-pills",
+      "start": 46.4,
+      "end": 53.0,
+      "text": "Inflasi?|Mata Uang?|Lainnya?",
+      "handle": "@ekonomi.simpel",
+      "board": "Riset Data  \u00b7  2026"
+    },
+    {
+      "fx": "comment-box",
+      "start": 55.6,
+      "end": 59.5,
+      "text": "AMAN",
+      "handle": "ekonomi.simpel",
+      "reply": "Inflasi masih batas wajar",
+      "chip": "data 2026"
+    },
+    {
+      "fx": "reject-stamp",
+      "start": 60.5,
+      "end": 62.9,
+      "text": "BUKAN INFLASI",
+      "color": "#FF3040"
+    },
+    {
+      "fx": "phone-fan",
+      "start": 63.2,
+      "end": 65.3,
+      "text": "Problem sebenarnya:|MATA UANG."
+    },
+    {
+      "fx": "tap",
+      "start": 65.3,
+      "end": 67.4,
+      "at": 66.2,
+      "x": 0.72,
+      "y": 0.6
+    },
+    {
+      "fx": "captions",
+      "style": "pill",
+      "y": 0.76,
+      "keywords": "bank|indonesia|suku|bunga|5,75%|6%|25|bps|pemerintah|simpel|dua|alasan|inflasi|mata|uang|rem|melemah|daya|tarik|dolar|breakdown|data|2026|aman|batas|wajar|bukan|problem"
+    }
+  ]
+}

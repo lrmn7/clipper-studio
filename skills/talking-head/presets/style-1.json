@@ -1,0 +1,108 @@
+{
+  "effects": [
+    {
+      "fx": "pop-word",
+      "start": 0.2,
+      "end": 3.3,
+      "text": "BI RATE",
+      "size": "big",
+      "color": "#FFD60A"
+    },
+    {
+      "fx": "glitter-spotlight",
+      "start": 3.9,
+      "end": 6.4,
+      "text": "SUKU BUNGA"
+    },
+    {
+      "fx": "liquid-glass-graph",
+      "start": 6.9,
+      "end": 10.6,
+      "text": "BI RATE 2026",
+      "from": "5.75%",
+      "to": "6.00%"
+    },
+    {
+      "fx": "locked-on",
+      "start": 13.2,
+      "end": 16.9,
+      "text": "KENAPA NAIK?",
+      "zoom": 1.32
+    },
+    {
+      "fx": "apple-toggles",
+      "start": 20.6,
+      "end": 24.1,
+      "pos": "below",
+      "text": "1. Inflasi|2. Mata Uang",
+      "ticks": "1.9|2.5"
+    },
+    {
+      "fx": "pop-word",
+      "start": 24.8,
+      "end": 27.9,
+      "text": "REM INFLASI",
+      "color": "#FF5252"
+    },
+    {
+      "fx": "halftone-paper",
+      "start": 29.5,
+      "end": 35.4,
+      "keywords": "mata|uang|melemah|pemerintah|negara|indonesia|daya|tarik"
+    },
+    {
+      "fx": "lean-in",
+      "start": 36.9,
+      "end": 39.6,
+      "zoom": 1.38
+    },
+    {
+      "fx": "tape-label",
+      "start": 41.8,
+      "end": 44.5,
+      "text": "BREAKDOWN 2026"
+    },
+    {
+      "fx": "checklist",
+      "start": 46.4,
+      "end": 53.0,
+      "title": "Breakdown Data 2026",
+      "text": "Cek Inflasi::2026|Cek Mata Uang::IDR/USD|Faktor Lain::makro"
+    },
+    {
+      "fx": "pop-word",
+      "start": 55.6,
+      "end": 59.5,
+      "text": "AMAN",
+      "size": "big",
+      "color": "#34D36E"
+    },
+    {
+      "fx": "reject-stamp",
+      "start": 60.6,
+      "end": 62.9,
+      "text": "BUKAN INFLASI"
+    },
+    {
+      "fx": "glitter-spotlight",
+      "start": 63.2,
+      "end": 65.4,
+      "text": "MATA UANG",
+      "color": "#FF9230"
+    },
+    {
+      "fx": "comment-box",
+      "start": 65.2,
+      "end": 67.4,
+      "look": "bar",
+      "text": "LANJUT"
+    },
+    {
+      "fx": "captions",
+      "style": "clean",
+      "y": 0.67,
+      "hide": "20.6-24.1",
+      "keywords": "bank|indonesia|suku|bunga|5,75%|6%|25|bps|pemerintah|simpel|dua|alasan|inflasi|mata|uang|rem|melemah|daya|tarik|dolar|breakdown|data|2026|aman|batas|wajar|bukan|problem"
+    }
+  ]
+}

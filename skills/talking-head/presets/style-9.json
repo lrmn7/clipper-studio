@@ -1,0 +1,163 @@
+{
+  "effects": [
+    {
+      "fx": "moody",
+      "start": 0.0,
+      "end": 67.5,
+      "grade": "bw"
+    },
+    {
+      "fx": "slow-push",
+      "start": 0.0,
+      "end": 3.4,
+      "zoom": 1.22,
+      "blur": 0.004
+    },
+    {
+      "fx": "backdrop-word",
+      "start": 0.3,
+      "end": 3.4,
+      "text": "BI RATE",
+      "font": "serif",
+      "color": "#F4E9D8"
+    },
+    {
+      "fx": "backdrop-word",
+      "start": 3.8,
+      "end": 6.6,
+      "text": "kenapa?",
+      "font": "serif",
+      "color": "#F4E9D8"
+    },
+    {
+      "fx": "huge-strike",
+      "start": 6.9,
+      "end": 8.6,
+      "text": "5,75%",
+      "at": 0.7
+    },
+    {
+      "fx": "backdrop-word",
+      "start": 8.6,
+      "end": 10.6,
+      "text": "6,00%",
+      "font": "serif",
+      "color": "#F4E9D8"
+    },
+    {
+      "fx": "slow-push",
+      "start": 12.8,
+      "end": 16.9,
+      "zoom": 1.5,
+      "blur": 0.006
+    },
+    {
+      "fx": "lean-in",
+      "start": 17.1,
+      "end": 18.6,
+      "zoom": 1.3
+    },
+    {
+      "fx": "backdrop-word",
+      "start": 19.8,
+      "end": 24.0,
+      "text": "dua alasan.",
+      "font": "serif",
+      "color": "#F4E9D8"
+    },
+    {
+      "fx": "spotlight",
+      "start": 24.5,
+      "end": 27.9,
+      "text": "rem.",
+      "color": "#F4E9D8",
+      "push": 1.12
+    },
+    {
+      "fx": "backdrop-word",
+      "start": 29.6,
+      "end": 32.4,
+      "text": "melemah.",
+      "font": "serif",
+      "color": "#F4E9D8"
+    },
+    {
+      "fx": "lean-in",
+      "start": 33.4,
+      "end": 36.0,
+      "zoom": 1.32
+    },
+    {
+      "fx": "backdrop-word",
+      "start": 36.9,
+      "end": 39.8,
+      "text": "dolar.",
+      "font": "serif",
+      "color": "#F4E9D8"
+    },
+    {
+      "fx": "slow-push",
+      "start": 41.8,
+      "end": 44.8,
+      "zoom": 1.35,
+      "blur": 0.005
+    },
+    {
+      "fx": "huge-strike",
+      "start": 47.8,
+      "end": 49.8,
+      "text": "INFLASI?",
+      "at": 99
+    },
+    {
+      "fx": "huge-strike",
+      "start": 49.8,
+      "end": 51.4,
+      "text": "RUPIAH?",
+      "at": 99
+    },
+    {
+      "fx": "huge-strike",
+      "start": 51.4,
+      "end": 53.0,
+      "text": "LAINNYA?",
+      "at": 99
+    },
+    {
+      "fx": "backdrop-word",
+      "start": 55.6,
+      "end": 59.5,
+      "text": "aman.",
+      "font": "serif",
+      "color": "#F4E9D8"
+    },
+    {
+      "fx": "huge-strike",
+      "start": 60.5,
+      "end": 62.9,
+      "text": "INFLASI",
+      "at": 1.9
+    },
+    {
+      "fx": "slow-push",
+      "start": 63.2,
+      "end": 67.4,
+      "zoom": 1.45,
+      "blur": 0.006
+    },
+    {
+      "fx": "backdrop-word",
+      "start": 64.0,
+      "end": 67.4,
+      "text": "mata uang.",
+      "font": "serif",
+      "color": "#F4E9D8"
+    },
+    {
+      "fx": "captions",
+      "style": "clean",
+      "y": 0.72,
+      "keywords": "suku|bunga|6%|inflasi|uang|rem|melemah|dolar|2026|aman|wajar|bukan|problem"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-﻿//! The main window: sidebar on the left; on the right a 40px title bar over the
+//! The main window: sidebar on the left; on the right a 40px title bar over the
 //! page, which scrolls on its own. Ports App.tsx, Layout.tsx and Sidebar.tsx.
 //!
 //! The window has a transparent title bar, so both top strips drag the window and
@@ -22,7 +22,15 @@ pub enum Page {
     Create,
     Library,
     Jobs,
+    TalkingHead,
     Settings,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum NavGroup {
+    Studio,
+    TalkingHead,
+    App,
 }
 
 struct NavItem {
@@ -30,14 +38,15 @@ struct NavItem {
     label: &'static str,
     icon: &'static str,
     shortcut: &'static str,
-    studio: bool,
+    group: NavGroup,
 }
 
-const NAV_ITEMS: [NavItem; 4] = [
-    NavItem { page: Page::Create, label: "Create", icon: "wand-sparkles", shortcut: "1", studio: true },
-    NavItem { page: Page::Library, label: "Library", icon: "film", shortcut: "2", studio: true },
-    NavItem { page: Page::Jobs, label: "Jobs", icon: "layers", shortcut: "3", studio: true },
-    NavItem { page: Page::Settings, label: "Settings", icon: "settings", shortcut: ",", studio: false },
+const NAV_ITEMS: [NavItem; 5] = [
+    NavItem { page: Page::Create, label: "Create", icon: "wand-sparkles", shortcut: "1", group: NavGroup::Studio },
+    NavItem { page: Page::Library, label: "Library", icon: "film", shortcut: "2", group: NavGroup::Studio },
+    NavItem { page: Page::Jobs, label: "Jobs", icon: "layers", shortcut: "3", group: NavGroup::Studio },
+    NavItem { page: Page::TalkingHead, label: "Talking Head Editor", icon: "video", shortcut: "4", group: NavGroup::TalkingHead },
+    NavItem { page: Page::Settings, label: "Settings", icon: "settings", shortcut: ",", group: NavGroup::App },
 ];
 
 /// Width of the traffic-light inset on macOS (overlay title bar).
@@ -49,15 +58,16 @@ const WIDE_MIN: f32 = 720.;
 
 actions!(
     workspace,
-    [GoCreate, GoLibrary, GoJobs, GoSettings, ToggleSidebar]
+    [GoCreate, GoLibrary, GoJobs, GoTalkingHead, GoSettings, ToggleSidebar]
 );
 
-/// ⌘1 Create, ⌘2 Library, ⌘3 Jobs, ⌘, Settings, ⌘\ sidebar (Ctrl elsewhere).
+/// ⌘1 Create, ⌘2 Library, ⌘3 Jobs, ⌘4 Talking Head, ⌘, Settings, ⌘\ sidebar (Ctrl elsewhere).
 pub fn bind_keys(cx: &mut App) {
     cx.bind_keys([
         KeyBinding::new("secondary-1", GoCreate, None),
         KeyBinding::new("secondary-2", GoLibrary, None),
         KeyBinding::new("secondary-3", GoJobs, None),
+        KeyBinding::new("secondary-4", GoTalkingHead, None),
         KeyBinding::new("secondary-,", GoSettings, None),
         KeyBinding::new("secondary-\\", ToggleSidebar, None),
     ]);
@@ -69,6 +79,7 @@ pub fn go(page: Page, window: &mut Window, cx: &mut App) {
         Page::Create => Box::new(GoCreate),
         Page::Library => Box::new(GoLibrary),
         Page::Jobs => Box::new(GoJobs),
+        Page::TalkingHead => Box::new(GoTalkingHead),
         Page::Settings => Box::new(GoSettings),
     };
     window.dispatch_action(action, cx);
@@ -200,7 +211,7 @@ impl Workspace {
                         })
                 })
         };
-        let group = |label: &'static str, studio: bool, cx: &mut Context<Self>| {
+        let group = |label: &'static str, nav_group: NavGroup, cx: &mut Context<Self>| {
             div()
                 .flex()
                 .flex_col()
@@ -216,7 +227,7 @@ impl Workspace {
                                 .text_color(t.ink_tertiary)
                                 .child(label),
                         )
-                    } else if !studio {
+                    } else if nav_group != NavGroup::Studio {
                         // In the rail, a hairline replaces the label to separate groups.
                         group.child(div().mx(u(8.)).mb(u(4.)).h(px(1.)).bg(t.stroke))
                     } else {
@@ -226,13 +237,14 @@ impl Workspace {
                 .children(
                     NAV_ITEMS
                         .iter()
-                        .filter(|item| item.studio == studio)
+                        .filter(|item| item.group == nav_group)
                         .map(|item| nav_button(item, cx))
                         .collect::<Vec<_>>(),
                 )
         };
-        let studio = group("Studio", true, cx);
-        let app = group("App", false, cx);
+        let studio = group("Studio", NavGroup::Studio, cx);
+        let talking_head = group("Talking Head", NavGroup::TalkingHead, cx);
+        let app = group("App", NavGroup::App, cx);
 
         div()
             .id("sidebar")
@@ -259,6 +271,7 @@ impl Workspace {
                     .px(u(8.))
                     .py(u(12.))
                     .child(studio)
+                    .child(talking_head)
                     .child(app),
             )
             .child(
@@ -497,7 +510,11 @@ impl Workspace {
                         div()
                             .flex_shrink_0()
                             .text_color(t.ink_secondary)
-                            .child(if item.studio { "Studio" } else { "App" }),
+                            .child(match item.group {
+                                NavGroup::Studio => "Studio",
+                                NavGroup::TalkingHead => "Talking Head",
+                                NavGroup::App => "App",
+                            }),
                     )
                     .child(div().text_color(t.tint(0.25)).child("›"))
                     .child(div().min_w_0().one_line().text_color(t.ink).child(item.label)),
@@ -658,6 +675,7 @@ impl Render for Workspace {
             .on_action(cx.listener(|this, _: &GoCreate, w, cx| this.navigate(Page::Create, w, cx)))
             .on_action(cx.listener(|this, _: &GoLibrary, w, cx| this.navigate(Page::Library, w, cx)))
             .on_action(cx.listener(|this, _: &GoJobs, w, cx| this.navigate(Page::Jobs, w, cx)))
+            .on_action(cx.listener(|this, _: &GoTalkingHead, w, cx| this.navigate(Page::TalkingHead, w, cx)))
             .on_action(cx.listener(|this, _: &GoSettings, w, cx| this.navigate(Page::Settings, w, cx)))
             .on_action(cx.listener(Self::toggle_sidebar))
             .flex()

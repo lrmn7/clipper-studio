@@ -1,0 +1,103 @@
+{
+  "effects": [
+    {
+      "fx": "cover-star",
+      "start": 0.0,
+      "end": 3.4,
+      "text": "BI RATE",
+      "issue": "EDISI SPESIAL  \u00b7  NOV 2026",
+      "lines": "6,00%|naik 25 bps|dari 5,75%|ada apa?",
+      "color": "#E82434"
+    },
+    {
+      "fx": "crayon-write",
+      "start": 3.8,
+      "end": 6.6,
+      "text": "KENAPA?"
+    },
+    {
+      "fx": "broll-split",
+      "start": 6.9,
+      "end": 10.6,
+      "text": "5,75% \u2192 6,00%",
+      "pick": 1
+    },
+    {
+      "fx": "noise",
+      "start": 12.8,
+      "end": 16.9,
+      "size": 0.32
+    },
+    {
+      "fx": "card-drop",
+      "start": 19.0,
+      "end": 24.0,
+      "text": "Inflasi + Mata Uang"
+    },
+    {
+      "fx": "scribble",
+      "start": 24.5,
+      "end": 27.9,
+      "text": "REM!",
+      "color": "#E82434"
+    },
+    {
+      "fx": "fan-build",
+      "start": 29.5,
+      "end": 35.4,
+      "count": 13
+    },
+    {
+      "fx": "broll-split",
+      "start": 36.9,
+      "end": 39.8,
+      "text": "jaga dolar di RI",
+      "pick": 4
+    },
+    {
+      "fx": "cover-star",
+      "start": 41.8,
+      "end": 45.0,
+      "text": "DATA",
+      "issue": "BREAKDOWN  \u00b7  2026",
+      "lines": "cek satu-satu|inflasi?|rupiah?|faktor lain?",
+      "color": "#E82434"
+    },
+    {
+      "fx": "todo",
+      "start": 46.4,
+      "end": 53.0,
+      "title": "CEK DATA 2026",
+      "text": "Inflasi|Mata uang|Faktor lain",
+      "ticks": "49.2|50.8|52.4"
+    },
+    {
+      "fx": "card-drop",
+      "start": 55.6,
+      "end": 59.5,
+      "text": "Inflasi: AMAN"
+    },
+    {
+      "fx": "reject-stamp",
+      "start": 60.5,
+      "end": 62.9,
+      "text": "BUKAN INFLASI",
+      "color": "#E82434"
+    },
+    {
+      "fx": "cover-star",
+      "start": 63.2,
+      "end": 67.4,
+      "text": "RUPIAH",
+      "issue": "PART 2  \u00b7  MATA UANG",
+      "lines": "problem|sebenarnya|ada di|mata uang",
+      "color": "#E82434"
+    },
+    {
+      "fx": "captions",
+      "style": "grey",
+      "y": 0.72,
+      "keywords": "bank|indonesia|suku|bunga|5,75%|6%|25|bps|pemerintah|simpel|dua|alasan|inflasi|mata|uang|rem|melemah|daya|tarik|dolar|breakdown|data|2026|aman|batas|wajar|bukan|problem"
+    }
+  ]
+}

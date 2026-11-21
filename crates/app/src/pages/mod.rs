@@ -16,6 +16,8 @@ pub mod jobs;
 pub mod library;
 #[cfg(feature = "page-settings")]
 pub mod settings;
+#[cfg(feature = "page-talking-head")]
+pub mod talking_head;
 
 /// A fresh view for `page`; each visit starts at the top with fresh local state.
 pub fn open<V: 'static>(page: Page, window: &mut Window, cx: &mut Context<V>) -> AnyView {
@@ -27,6 +29,8 @@ pub fn open<V: 'static>(page: Page, window: &mut Window, cx: &mut Context<V>) ->
         Page::Library => cx.new(|cx| library::LibraryPage::new(window, cx)).into(),
         #[cfg(feature = "page-jobs")]
         Page::Jobs => cx.new(|cx| jobs::JobsPage::new(window, cx)).into(),
+        #[cfg(feature = "page-talking-head")]
+        Page::TalkingHead => cx.new(|cx| talking_head::TalkingHeadPage::new(window, cx)).into(),
         #[cfg(feature = "page-settings")]
         Page::Settings => cx.new(|cx| settings::SettingsPage::new(window, cx)).into(),
         #[allow(unreachable_patterns)]

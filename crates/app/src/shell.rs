@@ -113,6 +113,44 @@ pub fn reveal(path: &str, cx: &App) -> Result<bool, String> {
     Ok(true)
 }
 
+/// Open any file or folder directly with its default system app without library sandboxing.
+pub fn open_direct(path: &str, _cx: &App) -> bool {
+    let p = std::path::Path::new(path);
+    if !p.exists() {
+        return false;
+    }
+    #[cfg(windows)]
+    {
+        let _ = std::process::Command::new("cmd")
+            .args(["/C", "start", "", path])
+            .spawn();
+    }
+    #[cfg(not(windows))]
+    {
+        _cx.open_with_system(p);
+    }
+    true
+}
+
+/// Reveal any file or folder directly in the system file manager (Explorer / Finder).
+pub fn reveal_direct(path: &str, _cx: &App) -> bool {
+    let p = std::path::Path::new(path);
+    if !p.exists() {
+        return false;
+    }
+    #[cfg(windows)]
+    {
+        let _ = std::process::Command::new("explorer")
+            .args(["/select,", path])
+            .spawn();
+    }
+    #[cfg(not(windows))]
+    {
+        _cx.reveal_path(p);
+    }
+    true
+}
+
 /// Show the log file in Finder (Help → Show Logs, Settings → About).
 pub fn show_log_file(cx: &App) -> bool {
     let log = logger::log_file_path();

@@ -1,0 +1,135 @@
+{
+  "effects": [
+    {
+      "fx": "moody",
+      "start": 0.0,
+      "end": 67.5,
+      "grade": "cool"
+    },
+    {
+      "fx": "pop-word",
+      "start": 0.2,
+      "end": 3.2,
+      "text": "BI RATE",
+      "size": "big",
+      "color": "#00E5FF"
+    },
+    {
+      "fx": "led-sign",
+      "start": 3.8,
+      "end": 6.4,
+      "text": "SUKU BUNGA",
+      "color": "#00E5FF"
+    },
+    {
+      "fx": "backdrop-word",
+      "start": 6.9,
+      "end": 10.6,
+      "text": "6,00%",
+      "font": "bold",
+      "color": "#FF2BD6"
+    },
+    {
+      "fx": "rabbit-hole",
+      "start": 12.8,
+      "end": 16.9,
+      "speed": 0.7,
+      "spin": 9
+    },
+    {
+      "fx": "led-sign",
+      "start": 18.6,
+      "end": 21.9,
+      "text": "2 ALASAN",
+      "color": "#B6FF00"
+    },
+    {
+      "fx": "lean-in",
+      "start": 21.9,
+      "end": 24.0,
+      "zoom": 1.3
+    },
+    {
+      "fx": "backdrop-word",
+      "start": 24.4,
+      "end": 27.9,
+      "text": "REM",
+      "font": "bold",
+      "color": "#FF2BD6"
+    },
+    {
+      "fx": "led-sign",
+      "start": 29.5,
+      "end": 32.4,
+      "text": "RUPIAH|MELEMAH",
+      "color": "#FF9230"
+    },
+    {
+      "fx": "select-resize",
+      "start": 33.0,
+      "end": 35.8,
+      "text": "USD"
+    },
+    {
+      "fx": "backdrop-word",
+      "start": 36.9,
+      "end": 39.8,
+      "text": "DOLAR",
+      "font": "bold",
+      "color": "#00E5FF"
+    },
+    {
+      "fx": "pop-word",
+      "start": 42.0,
+      "end": 45.0,
+      "text": "DATA 2026",
+      "size": "big",
+      "color": "#B6FF00"
+    },
+    {
+      "fx": "led-sign",
+      "start": 46.6,
+      "end": 52.8,
+      "text": "INFLASI?|RUPIAH?|LAINNYA?",
+      "color": "#B6FF00"
+    },
+    {
+      "fx": "backdrop-word",
+      "start": 55.6,
+      "end": 59.5,
+      "text": "AMAN",
+      "font": "bold",
+      "color": "#B6FF00"
+    },
+    {
+      "fx": "reject-stamp",
+      "start": 60.5,
+      "end": 62.9,
+      "text": "BUKAN INFLASI",
+      "color": "#FF2BD6",
+      "angle": -8
+    },
+    {
+      "fx": "led-sign",
+      "start": 63.2,
+      "end": 65.2,
+      "text": "PROBLEM|SEBENARNYA",
+      "color": "#FF2BD6"
+    },
+    {
+      "fx": "comment-box",
+      "start": 65.2,
+      "end": 67.4,
+      "text": "PART 2",
+      "handle": "ekonomi.simpel",
+      "reply": "Mata uang, bahas besok",
+      "chip": "part 2"
+    },
+    {
+      "fx": "captions",
+      "style": "bold",
+      "y": 0.76,
+      "keywords": "bank|indonesia|suku|bunga|5,75%|6%|25|bps|pemerintah|simpel|dua|alasan|inflasi|mata|uang|rem|melemah|daya|tarik|dolar|breakdown|data|2026|aman|batas|wajar|bukan|problem"
+    }
+  ]
+}

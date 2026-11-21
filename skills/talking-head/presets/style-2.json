@@ -1,0 +1,111 @@
+{
+  "effects": [
+    {
+      "fx": "cover-star",
+      "look": "editorial",
+      "start": 0.2,
+      "end": 3.4,
+      "text": "BI RATE",
+      "issue": "EDISI EKONOMI  \u00b7  NOV 2026",
+      "lines": "Suku Bunga|Naik 6%.|ANALISIS MAKRO",
+      "right": "ada apa|sebenarnya?",
+      "color": "#F5ECE0",
+      "accent": "#FF6B81",
+      "lines_y": 0.58,
+      "right_y": 0.72
+    },
+    {
+      "fx": "split-headline",
+      "start": 3.9,
+      "end": 6.7,
+      "text": "Kenapa BI|naikkan|suku bunga?",
+      "hl": "naikkan",
+      "pill": "5,75% \u2192 6,00%",
+      "color": "#A8465E"
+    },
+    {
+      "fx": "match-cut",
+      "start": 7.0,
+      "end": 10.6,
+      "text": "6,00%",
+      "color": "#A8465E"
+    },
+    {
+      "fx": "slow-push",
+      "start": 13.0,
+      "end": 16.9,
+      "zoom": 1.42,
+      "blur": 0.005
+    },
+    {
+      "fx": "the-bill",
+      "start": 20.5,
+      "end": 24.3,
+      "text": "2 ALASAN UTAMA|1. INFLASI TINGGI|2. MATA UANG LEMAH|RATE: 6,00% (+25 BPS)|AUDIT DATA 2026"
+    },
+    {
+      "fx": "pop-word",
+      "start": 25.2,
+      "end": 27.9,
+      "text": "REM INFLASI",
+      "color": "#F5ECE0"
+    },
+    {
+      "fx": "halftone-paper",
+      "start": 29.5,
+      "end": 35.4,
+      "keywords": "mata|uang|melemah|pemerintah|negara|indonesia|daya|tarik"
+    },
+    {
+      "fx": "scribble",
+      "start": 36.9,
+      "end": 39.8,
+      "text": "DOLAR!",
+      "color": "#FFD60A"
+    },
+    {
+      "fx": "todo",
+      "start": 46.2,
+      "end": 53.0,
+      "title": "AUDIT DATA 2026",
+      "text": "Cek Inflasi|Cek Mata Uang|Cek Faktor Lain",
+      "ticks": "49.1|50.6|52.4"
+    },
+    {
+      "fx": "split-headline",
+      "start": 55.6,
+      "end": 59.5,
+      "text": "Angka inflasi|relatif|aman.",
+      "hl": "aman",
+      "pill": "batas wajar",
+      "color": "#22C55E"
+    },
+    {
+      "fx": "reject-stamp",
+      "start": 60.5,
+      "end": 63.0,
+      "text": "BUKAN INFLASI",
+      "color": "#A8465E"
+    },
+    {
+      "fx": "cover-star",
+      "look": "editorial",
+      "start": 63.3,
+      "end": 67.4,
+      "text": "RUPIAH",
+      "issue": "PART 2  \u00b7  MATA UANG",
+      "lines": "Problem|Sebenarnya.|MATA UANG KITA",
+      "right": "lanjut di|part berikutnya",
+      "color": "#F5ECE0",
+      "accent": "#FF6B81",
+      "lines_y": 0.58,
+      "right_y": 0.72
+    },
+    {
+      "fx": "captions",
+      "style": "clean",
+      "y": 0.68,
+      "keywords": "bank|indonesia|suku|bunga|5,75%|6%|25|bps|pemerintah|simpel|dua|alasan|inflasi|mata|uang|rem|melemah|daya|tarik|dolar|breakdown|data|2026|aman|batas|wajar|bukan|problem"
+    }
+  ]
+}
