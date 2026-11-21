@@ -1,0 +1,119 @@
+{
+  "effects": [
+    {
+      "fx": "lean-in",
+      "start": 0.0,
+      "end": 3.8,
+      "zoom": 1.2
+    },
+    {
+      "fx": "pop-word",
+      "start": 0.5,
+      "end": 3.8,
+      "text": "GURU: 3 JUTA",
+      "color": "#FFFFFF"
+    },
+    {
+      "fx": "pop-word",
+      "start": 4.5,
+      "end": 9.2,
+      "text": "ARTIS: 30 JUTA",
+      "color": "#E82434",
+      "size": "big"
+    },
+    {
+      "fx": "tape-label",
+      "start": 7.5,
+      "end": 9.5,
+      "text": "10X Lipat Lebih Mahal"
+    },
+    {
+      "fx": "spotlight",
+      "start": 9.8,
+      "end": 14.8,
+      "push": 1.08
+    },
+    {
+      "fx": "tape-label",
+      "start": 10.5,
+      "end": 14.5,
+      "text": "Secara Moral: Lebih Berguna?"
+    },
+    {
+      "fx": "slow-push",
+      "start": 15.5,
+      "end": 22.0,
+      "push": 1.15
+    },
+    {
+      "fx": "pop-word",
+      "start": 16.5,
+      "end": 22.0,
+      "text": "PERAWAT: 3 JUTA",
+      "color": "#60C4F8"
+    },
+    {
+      "fx": "lean-in",
+      "start": 22.8,
+      "end": 26.5,
+      "zoom": 1.25
+    },
+    {
+      "fx": "pop-word",
+      "start": 23.0,
+      "end": 26.5,
+      "text": "ARTIS: 300 JT",
+      "color": "#FFD166",
+      "size": "big"
+    },
+    {
+      "fx": "reject-stamp",
+      "start": 26.8,
+      "end": 29.8,
+      "text": "BUKAN MORAL"
+    },
+    {
+      "fx": "spotlight",
+      "start": 30.5,
+      "end": 35.0,
+      "push": 1.06
+    },
+    {
+      "fx": "liquid-glass-graph",
+      "start": 36.0,
+      "end": 43.0,
+      "text": "GAP VALUASI PASAR",
+      "from": "3",
+      "to": "300",
+      "color": "#E82434"
+    },
+    {
+      "fx": "lean-in",
+      "start": 44.5,
+      "end": 49.0,
+      "zoom": 1.25
+    },
+    {
+      "fx": "pop-word",
+      "start": 45.0,
+      "end": 49.0,
+      "text": "MARKET GAPUNYA HATI",
+      "color": "#E82434",
+      "size": "big"
+    },
+    {
+      "fx": "checklist",
+      "start": 49.8,
+      "end": 54.3,
+      "title": "Hukum Mesin Pasar",
+      "color": "#34D399",
+      "text": "1. Permintaan::Demand|2. Penawaran::Supply|3. Kelangkaan::Scarcity"
+    },
+    {
+      "fx": "captions",
+      "style": "bold",
+      "y": 0.72,
+      "hide": "36.0-43.0|49.8-54.3"
+    }
+  ]
+}
