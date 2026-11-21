@@ -1,0 +1,26 @@
+[workspace]
+resolver = "2"
+members = ["crates/engine", "crates/core", "crates/app"]
+
+[workspace.dependencies]
+tokio = { version = "1", features = ["full"] }
+tokio-util = "0.7"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tracing = "0.1"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json", "stream"] }
+
+# Dev builds are unoptimized; tract-onnx face detection runs ~9x slower
+# that way (~1s vs ~115ms per frame). Optimize third-party crates only, so our
+# own crates still rebuild fast.
+[profile.dev.package."*"]
+opt-level = 3
+
+# tract-core 0.23.8 plus a vectorised 3x3 depthwise path for YuNet, with
+# bit-identical outputs. See vendor/tract-core/CLIPWARD_PATCH.md.
+[patch.crates-io]
+tract-core = { path = "vendor/tract-core" }
+# whisper-rs-sys 0.15.0 rebuilt on the latest whisper.cpp release; crates.io lags
+# upstream. Refresh with scripts/update-whisper-cpp.sh. See vendor/whisper-rs-sys/CLIPWARD_PATCH.md.
+whisper-rs-sys = { path = "vendor/whisper-rs-sys" }

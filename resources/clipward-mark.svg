@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="300 362 424 300" role="img" aria-label="Clipward">
+  <title>Clipward</title>
+  <defs>
+    <clipPath id="mark-left"><polygon points="0,0 542,0 446,1024 0,1024"/></clipPath>
+    <clipPath id="mark-right"><polygon points="578,0 1024,0 1024,1024 482,1024"/></clipPath>
+  </defs>
+  <g transform="translate(0 30)"><rect x="300" y="392" width="424" height="240" rx="56" fill="#FAFAFA" clip-path="url(#mark-left)"/></g>
+  <g transform="translate(0 -30)"><rect x="300" y="392" width="424" height="240" rx="56" fill="#FAFAFA" clip-path="url(#mark-right)"/></g>
+</svg>

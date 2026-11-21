@@ -1,0 +1,16 @@
+.env
+.env.local
+.env.*
+!.env.example
+*.pem
+*.p8
+*.p12
+*.key
+*.log
+.DS_Store
+engine-bin/
+
+__pycache__/
+*.py[cod]
+target/
+test-media/
